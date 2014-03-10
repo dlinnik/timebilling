@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -39,6 +39,10 @@
             <button type="submit" class="btn btn-success">Выход</button>
           </form>
         	<ul class="nav navbar-nav navbar-right">
+        		<li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+<!-- 				<li> -->
+        			<a href="#" th:text="${@userSessionComponent.getCurrentUser().getUsername()}">Bob</a>
+        		</li>      		
 	            <li><a href="#" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a></li>
           	</ul>
         </div><!--/.navbar-collapse -->
