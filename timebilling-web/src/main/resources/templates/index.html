@@ -51,7 +51,9 @@
               </thead>
 				<tbody>
                     <tr th:each="projectItem : ${projects}">
-                        <td th:text="${projectItem.name}">Проект 1</td>
+                        <td th:text="${projectItem.name}">
+                        	<a href="projectDetails.html" th:href="@{|/owners/${projectItem.id}|}"
+               				th:text="${projectItem.name}">Проект 1</a></td>
                         <td th:text="${projectItem.description}">Описание проекта 1</td>
                     </tr>
 				</tbody>
