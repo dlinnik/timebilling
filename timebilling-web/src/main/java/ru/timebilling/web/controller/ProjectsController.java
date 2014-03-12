@@ -1,14 +1,19 @@
 package ru.timebilling.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
-import ru.timebilling.core.domain.ProjectDetails;
+import javax.validation.Valid;
+
+
+
 import ru.timebilling.persistance.domain.Project;
 import ru.timebilling.persistance.repository.ProjectRepository;
 
@@ -21,15 +26,58 @@ public class ProjectsController {
     @RequestMapping("/")
     public String projects(Model model) {
     	
-    	Iterable<Project> projects = projectsRepository.findAll();
-    	List<ProjectDetails> pds = new ArrayList<ProjectDetails>();
-    	for(Project p : projects){
-    		pds.add(p.toProjectDetails());
-    	}
+    	Iterable<Project> projects = projectsRepository.findAll();    	
     	
-    	
-        model.addAttribute("projects", pds);
+        model.addAttribute("projects", projects);
         return "index";
     }
+    
+    @RequestMapping(value="/projects/{projectId}", method = RequestMethod.GET)
+    public String projectDetails(Model model, 
+    		@PathVariable("projectId") Long id){
+    	model.addAttribute("project", projectsRepository.findOne(id));
+    	return "projectDetails";
+    }
+    
+    @RequestMapping(value = "/projects/new", method = RequestMethod.GET)
+    public String initCreationForm(Model model) {
+        Project project = new Project();
+        model.addAttribute("project", project);
+        return "projectDetails";
+    }
+    
+    @RequestMapping(value = "/projects/new", method = RequestMethod.POST)
+    public String createProject(@Valid Project project, BindingResult result, SessionStatus status) {
+        return createOrUpdateProject(project, result, status);
+    }
+    
+    @RequestMapping(value = "/projects/{projectId}", method = RequestMethod.PUT)
+    public String updateProject(@Valid Project project, @PathVariable("projectId") Long id, 
+    		BindingResult result, SessionStatus status) {
+    	project.setId(id);
+        return createOrUpdateProject(project, result, status);
+    	
+    }
+
+    @RequestMapping(value="/deleteProject/{projectId}", method = RequestMethod.GET)
+    public String deleteProject(Model model, 
+        		@PathVariable("projectId") Long id){
+    	projectsRepository.delete(id);
+        return "redirect:/";
+    }
+
+	private String createOrUpdateProject(Project project, BindingResult result,
+			SessionStatus status) {
+		if (result.hasErrors()) {
+            return "projectDetails";
+        } else {
+            projectsRepository.save(project);
+            status.setComplete();
+            return "redirect:/";
+        }
+	}
+
+
+
 
 }

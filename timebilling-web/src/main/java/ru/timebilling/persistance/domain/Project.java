@@ -8,12 +8,8 @@ import javax.persistence.Id;
 import ru.timebilling.core.domain.ProjectDetails;
 
 @Entity
-public class Project {
+public class Project extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-    
 	private String name;
 	private String description;
 	
@@ -22,20 +18,40 @@ public class Project {
 		super();
 	}
 
-	public Project(String name, String description) {
+	public Project(Long id, String name, String description) {
 		super();
+		this.id = id;
 		this.name = name;
+		this.description = description;
+	}
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	public ProjectDetails toProjectDetails(){
-		return new ProjectDetails(name, description);				
+		return new ProjectDetails(id, name, description);				
 	}
 	
 	public static Project fromProjectDetails(ProjectDetails d){
 		Project p = new Project();
 		p.name = d.getName();
 		p.description = d.getDescription();
+		p.id = d.getId();
 		return p;
 	}
 	

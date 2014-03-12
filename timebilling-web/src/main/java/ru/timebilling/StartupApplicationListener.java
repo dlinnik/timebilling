@@ -19,11 +19,11 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
 		//TODO: remove me
 		//persist initial data
 		ProjectRepository repo = event.getApplicationContext().getBean(ProjectRepository.class);
-		repo.save(new Project("pr1", "project 1"));
-		repo.save(new Project("pr2", "project 2"));
-		repo.save(new Project("pr3", "project 3"));
-		repo.save(new Project("pr4", "project 4"));
-		repo.save(new Project("pr5", "project 5"));
+		repo.save(new Project(null, "pr1", "project 1"));
+		repo.save(new Project(null, "pr2", "project 2"));
+		repo.save(new Project(null, "pr3", "project 3"));
+		repo.save(new Project(null, "pr4", "project 4"));
+		repo.save(new Project(null, "pr5", "project 5"));
 		
 		UserRepository usersRepo = event.getApplicationContext().getBean(UserRepository.class);
 		

@@ -37,33 +37,46 @@
     <div th:substituteby="layout :: menuFragment" >
     </div>
 
-<div class="container">
-<div class="row">
-<div class="col-md-4">
-<h2 class="sub-header">Проекты:</h2>
-<a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" 
-	th:href="@{'/projects/new'}" href="projectDetails.html">Создать проект</a>
 
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Название</th>
-                  <th>Описание</th>
-                </tr>
-              </thead>
-				<tbody>
-                    <tr th:each="projectItem : ${projects}">
-                        <td>
-                        	<a href="projectDetails.html" th:href="@{|/projects/${projectItem.id}|}"
-               				th:text="${projectItem.name}">Проект 1</a></td>
-                        <td th:text="${projectItem.description}">Описание проекта 1</td>
-                    </tr>
-				</tbody>
-			</table>
-		</div>
+<div class="container">
+    <h2>
+        <span th:if="${project['new']}" th:remove="tag">Новый </span> Проект        
+    </h2>
+	
+<!-- 	<a th:unless="${project['new']} && ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Новый </span> Проект -->
+
+    <a th:if="${not project['new']} and ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="#" th:href="@{|/deleteProject/${project.id}|}">Удалить</a>            
+    
+    <form action="#" th:action="@{${#httpServletRequest.servletPath}}"
+    	th:object="${project}"     
+    	th:method="${project['new']} ? post : put" 
+    	class="form-horizontal">
+    	
+        <div class="control-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" th:field="*{name}" id="name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="description">Description</label>
+
+        <div class="controls">
+            <input type="text" th:field="*{description}" id="description"/>
+        </div>
+        
+                        <input type="hidden" th:field="*{id}" id="id"/>
+        
+        </div>
+        
+        <div class="form-actions" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <button th:if="${project['new']}" type="submit">Создать</button>
+            <button th:unless="${project['new']}" type="submit">Изменить</button>
+            
+        </div>
+    </form>
 </div>
-</div>		
-</div>
+
+
 </body>
 </html>
