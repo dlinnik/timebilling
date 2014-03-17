@@ -18,13 +18,13 @@
 
     <title>Timebilling webapp</title>
 
-<!--     Bootstrap core CSS -->
-    <link href="../public/css/bootstrap.min.css" 
-    	th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <!-- Bootstrap core CSS -->
+    <link href="../public/resources/css/bootstrap.min.css" 
+    	th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link>
     
-<!--         Custom styles for this template -->
-    <link href="../public/css/jumbotron.css" 
-    	th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
+        <!-- Custom styles for all pages that include this fragment -->
+    <link href="../public/resources/css/jumbotron.css" 
+    	th:href="@{/resources/css/jumbotron.css}" rel="stylesheet"></link>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,7 +42,7 @@
 <div class="col-md-4">
 <h2 class="sub-header">Проекты:</h2>
 <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" 
-	th:href="@{'/projects/new'}" href="projectDetails.html">Создать проект</a>
+	th:href="@{|/app/${@appId.getId()}/projects/new|}" href="projectDetails.html">Создать проект</a>
 
           <div class="table-responsive">
             <table class="table table-striped">
@@ -55,7 +55,7 @@
 				<tbody>
                     <tr th:each="projectItem : ${projects}">
                         <td>
-                        	<a href="projectDetails.html" th:href="@{|/projects/${projectItem.id}|}"
+                        	<a href="projectDetails.html" th:href="@{|/app/${@appId.getId()}/projects/${projectItem.id}|}"
                				th:text="${projectItem.name}">Проект 1</a></td>
                         <td th:text="${projectItem.description}">Описание проекта 1</td>
                     </tr>

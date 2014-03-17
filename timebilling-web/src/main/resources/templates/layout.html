@@ -12,12 +12,12 @@
     <title>Timebilling webapp</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../public/css/bootstrap.min.css" 
-    	th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <link href="../public/resources/css/bootstrap.min.css" 
+    	th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link>
     
         <!-- Custom styles for all pages that include this fragment -->
-    <link href="../public/css/jumbotron.css" 
-    	th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
+    <link href="../public/resources/css/jumbotron.css" 
+    	th:href="@{/resources/css/jumbotron.css}" rel="stylesheet"></link>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,7 +41,7 @@
         </div>
         <div class="navbar-collapse collapse">
         	<ul class="nav navbar-nav">
-        		<li><a href="#" th:href="@{/}">Проекты</a></li>
+        		<li><a href="#" th:href="@{|/app/${@appId.getId()}/|}">Проекты</a></li>
 <!--         		<li><a href="#about">About</a></li> -->
 <!--         		<li><a href="#contact">Contact</a></li> -->
 

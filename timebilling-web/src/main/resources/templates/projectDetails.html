@@ -18,13 +18,13 @@
 
     <title>Timebilling webapp</title>
 
-<!--     Bootstrap core CSS -->
-    <link href="../public/css/bootstrap.min.css" 
-    	th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <!-- Bootstrap core CSS -->
+    <link href="../public/resources/css/bootstrap.min.css" 
+    	th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"></link>
     
-<!--         Custom styles for this template -->
-    <link href="../public/css/jumbotron.css" 
-    	th:href="@{/css/jumbotron.css}" rel="stylesheet"></link>
+        <!-- Custom styles for all pages that include this fragment -->
+    <link href="../public/resources/css/jumbotron.css" 
+    	th:href="@{/resources/css/jumbotron.css}" rel="stylesheet"></link>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -45,8 +45,9 @@
 	
 <!-- 	<a th:unless="${project['new']} && ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Новый </span> Проект -->
 
-    <a th:if="${not project['new']} and ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="#" th:href="@{|/deleteProject/${project.id}|}">Удалить</a>            
+    <a th:if="${not project['new']} and ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="#" th:href="@{|/app/${@appId.getId()}/deleteProject/${project.id}|}">Удалить</a>            
     
+<!--     <form action="#" th:action="@{'/app/' + ${@appId.getId()} + ${#httpServletRequest.servletPath}}" -->
     <form action="#" th:action="@{${#httpServletRequest.servletPath}}"
     	th:object="${project}"     
     	th:method="${project['new']} ? post : put" 

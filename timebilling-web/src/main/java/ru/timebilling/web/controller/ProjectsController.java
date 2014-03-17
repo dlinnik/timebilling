@@ -18,12 +18,12 @@ import ru.timebilling.persistance.domain.Project;
 import ru.timebilling.persistance.repository.ProjectRepository;
 
 @Controller
-public class ProjectsController {
+public class ProjectsController extends AbstractController{
 
 	@Autowired
 	ProjectRepository projectsRepository;
 
-    @RequestMapping("/")
+    @RequestMapping("/app/{appId}/")
     public String projects(Model model) {
     	
     	Iterable<Project> projects = projectsRepository.findAll();    	
@@ -32,26 +32,26 @@ public class ProjectsController {
         return "index";
     }
     
-    @RequestMapping(value="/projects/{projectId}", method = RequestMethod.GET)
+    @RequestMapping(value="/app/{appId}/projects/{projectId}", method = RequestMethod.GET)
     public String projectDetails(Model model, 
     		@PathVariable("projectId") Long id){
     	model.addAttribute("project", projectsRepository.findOne(id));
     	return "projectDetails";
     }
     
-    @RequestMapping(value = "/projects/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/app/{appId}/projects/new", method = RequestMethod.GET)
     public String initCreationForm(Model model) {
         Project project = new Project();
         model.addAttribute("project", project);
         return "projectDetails";
     }
     
-    @RequestMapping(value = "/projects/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/app/{appId}/projects/new", method = RequestMethod.POST)
     public String createProject(@Valid Project project, BindingResult result, SessionStatus status) {
         return createOrUpdateProject(project, result, status);
     }
     
-    @RequestMapping(value = "/projects/{projectId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/app/{appId}/projects/{projectId}", method = RequestMethod.PUT)
     public String updateProject(@Valid Project project, @PathVariable("projectId") Long id, 
     		BindingResult result, SessionStatus status) {
     	project.setId(id);
@@ -59,11 +59,11 @@ public class ProjectsController {
     	
     }
 
-    @RequestMapping(value="/deleteProject/{projectId}", method = RequestMethod.GET)
+    @RequestMapping(value="/app/{appId}/deleteProject/{projectId}", method = RequestMethod.GET)
     public String deleteProject(Model model, 
         		@PathVariable("projectId") Long id){
     	projectsRepository.delete(id);
-        return "redirect:/";
+        return buildRedirectUrl("/");
     }
 
 	private String createOrUpdateProject(Project project, BindingResult result,
@@ -73,7 +73,7 @@ public class ProjectsController {
         } else {
             projectsRepository.save(project);
             status.setComplete();
-            return "redirect:/";
+            return buildRedirectUrl("/");
         }
 	}
 
