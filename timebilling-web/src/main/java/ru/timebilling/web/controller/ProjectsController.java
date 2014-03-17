@@ -23,7 +23,8 @@ public class ProjectsController extends AbstractController{
 	@Autowired
 	ProjectRepository projectsRepository;
 
-    @RequestMapping("/app/{appId}/")
+//    @RequestMapping("/app/{appId}/")
+	@RequestMapping("/")
     public String projects(Model model) {
     	
     	Iterable<Project> projects = projectsRepository.findAll();    	
@@ -32,26 +33,30 @@ public class ProjectsController extends AbstractController{
         return "index";
     }
     
-    @RequestMapping(value="/app/{appId}/projects/{projectId}", method = RequestMethod.GET)
-    public String projectDetails(Model model, 
+//    @RequestMapping(value="/app/{appId}/projects/{projectId}", method = RequestMethod.GET)
+    @RequestMapping(value="/projects/{projectId}", method = RequestMethod.GET)    
+	public String projectDetails(Model model, 
     		@PathVariable("projectId") Long id){
     	model.addAttribute("project", projectsRepository.findOne(id));
     	return "projectDetails";
     }
     
-    @RequestMapping(value = "/app/{appId}/projects/new", method = RequestMethod.GET)
+//    @RequestMapping(value = "/app/{appId}/projects/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/projects/new", method = RequestMethod.GET)    
     public String initCreationForm(Model model) {
         Project project = new Project();
         model.addAttribute("project", project);
         return "projectDetails";
     }
     
-    @RequestMapping(value = "/app/{appId}/projects/new", method = RequestMethod.POST)
+//    @RequestMapping(value = "/app/{appId}/projects/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/projects/new", method = RequestMethod.POST)    
     public String createProject(@Valid Project project, BindingResult result, SessionStatus status) {
         return createOrUpdateProject(project, result, status);
     }
     
-    @RequestMapping(value = "/app/{appId}/projects/{projectId}", method = RequestMethod.PUT)
+//    @RequestMapping(value = "/app/{appId}/projects/{projectId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/projects/{projectId}", method = RequestMethod.PUT)    
     public String updateProject(@Valid Project project, @PathVariable("projectId") Long id, 
     		BindingResult result, SessionStatus status) {
     	project.setId(id);
@@ -59,7 +64,8 @@ public class ProjectsController extends AbstractController{
     	
     }
 
-    @RequestMapping(value="/app/{appId}/deleteProject/{projectId}", method = RequestMethod.GET)
+//    @RequestMapping(value="/app/{appId}/deleteProject/{projectId}", method = RequestMethod.GET)
+    @RequestMapping(value="/deleteProject/{projectId}", method = RequestMethod.GET)    
     public String deleteProject(Model model, 
         		@PathVariable("projectId") Long id){
     	projectsRepository.delete(id);

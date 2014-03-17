@@ -45,7 +45,8 @@
 	
 <!-- 	<a th:unless="${project['new']} && ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Новый </span> Проект -->
 
-    <a th:if="${not project['new']} and ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" href="#" th:href="@{|/app/${@appId.getId()}/deleteProject/${project.id}|}">Удалить</a>            
+    <a th:if="${not project['new']} and ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" 
+    	href="#" th:href="@{|/deleteProject/${project.id}|}">Удалить</a>            
     
 <!--     <form action="#" th:action="@{'/app/' + ${@appId.getId()} + ${#httpServletRequest.servletPath}}" -->
     <form action="#" th:action="@{${#httpServletRequest.servletPath}}"

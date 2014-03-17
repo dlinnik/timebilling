@@ -15,13 +15,13 @@ public class AbstractController {
 	AppId appId;
 	
 	/**
-	 * собирает строку для редиректа учитывая appId
+	 * собирает строку для редиректа //учитывая appId
 	 * @param url
 	 * @return
 	 */
 	public String buildRedirectUrl(String url){		
-		return "redirect:" + "/app/" + appId.getId() + url;
-		
+//		return "redirect:" + "/app/" + appId.getId() + url;
+		return "redirect:" + url;
 	}
 
 }

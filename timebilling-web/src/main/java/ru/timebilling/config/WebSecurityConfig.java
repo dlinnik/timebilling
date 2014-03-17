@@ -30,6 +30,7 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import ru.timebilling.service.UserDetailsServiceImpl;
 import ru.timebilling.web.component.AppId;
 import ru.timebilling.web.filter.AppIdFilter;
+import ru.timebilling.web.filter.AppIdFromSubdomainFilter;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -44,26 +45,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	
-    	AppIdFilter appIdFilter = new AppIdFilter();
+    	AppIdFromSubdomainFilter appIdFilter = new AppIdFromSubdomainFilter();
     	appIdFilter.setAppId(appId);
     	
     	http.addFilterBefore(appIdFilter,  UsernamePasswordAuthenticationFilter.class);
     	
         http
             .authorizeRequests()
-                .antMatchers("/login", "/app/*/login", "/resources/**").permitAll()
+                .antMatchers("/login", 
+                		//"/app/*/login", 
+                		"/resources/**").permitAll()
                 .anyRequest().authenticated();
         http
             .formLogin()
-//                .loginPage("/app/*/login")                
-                .successHandler(getSuccessHandler())
-                .failureHandler(getAuthenticationFailureHandler())                
+                .loginPage("/login")                
+//                .successHandler(getSuccessHandler())
+//                .failureHandler(getAuthenticationFailureHandler())                
 //                .and().exceptionHandling().authenticationEntryPoint(getAuthEntryPointWithUseForward("/login"))
-                .and().exceptionHandling()
-                .authenticationEntryPoint(getAuthEntryPointWithRedirect("/app$/login"))
+//                .and().exceptionHandling()
+//                .authenticationEntryPoint(getAuthEntryPointWithRedirect("/app$/login"))
                 
-                .and()
-            .logout().logoutSuccessHandler(getLogoutSuccessHandler())
+//                .and()
+//            .logout().logoutSuccessHandler(getLogoutSuccessHandler())
                 .permitAll();
         
     }

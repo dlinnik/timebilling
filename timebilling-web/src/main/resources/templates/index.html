@@ -42,7 +42,8 @@
 <div class="col-md-4">
 <h2 class="sub-header">Проекты:</h2>
 <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" 
-	th:href="@{|/app/${@appId.getId()}/projects/new|}" href="projectDetails.html">Создать проект</a>
+	th:href="@{/projects/new}" 
+	href="projectDetails.html">Создать проект</a>
 
           <div class="table-responsive">
             <table class="table table-striped">
@@ -55,7 +56,7 @@
 				<tbody>
                     <tr th:each="projectItem : ${projects}">
                         <td>
-                        	<a href="projectDetails.html" th:href="@{|/app/${@appId.getId()}/projects/${projectItem.id}|}"
+                        	<a href="projectDetails.html" th:href="@{|/projects/${projectItem.id}|}"
                				th:text="${projectItem.name}">Проект 1</a></td>
                         <td th:text="${projectItem.description}">Описание проекта 1</td>
                     </tr>
