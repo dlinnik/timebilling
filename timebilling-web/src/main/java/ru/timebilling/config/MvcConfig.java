@@ -5,7 +5,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import ru.timebilling.web.interceptor.AppInterceptor;
 
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
@@ -17,9 +16,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
     }
     
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-    	registry.addInterceptor(new AppInterceptor());
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//    	registry.addInterceptor(new AppInterceptor());
+//    }
 
 }
