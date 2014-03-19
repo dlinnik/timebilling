@@ -10,10 +10,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import ru.timebilling.web.component.AppId;
+import ru.timebilling.service.AppService;
+import ru.timebilling.web.component.AppContext;
 
 /**
- * Фильтр, регистрируется в {@link HttpSecurity}. Определяет {@link AppId} на основе адресной строки
+ * Фильтр, регистрируется в {@link HttpSecurity}. Определяет {@link AppContext} на основе адресной строки
  * TODO: реализовать получение AppId из СУБД
  * 
  * @author vshmelev
@@ -21,20 +22,20 @@ import ru.timebilling.web.component.AppId;
  */
 public class AppIdFilter implements Filter{
 	
-	AppId appId;
-
+	AppService appService;
 	
 	
 	
-    public AppId getAppId() {
-		return appId;
+	public AppService getAppService() {
+		return appService;
 	}
 
 
-	public void setAppId(AppId appId) {
-		this.appId = appId;
+	public void setAppService(AppService appService) {
+		this.appService = appService;
 	}
-	
+
+
 	public String parseAppIdFromUrl(String requestURI){
 		String appId = null;
 		if (requestURI.startsWith("/app/")) {
@@ -65,7 +66,7 @@ public class AppIdFilter implements Filter{
         
         String appId = parseAppIdFromUrl(requestURI);
         if(appId!=null){
-        	this.appId.setId(appId);
+        	appService.getApplicationContext(appId);
         }
 
         

@@ -2,7 +2,7 @@ package ru.timebilling.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ru.timebilling.web.component.AppId;
+import ru.timebilling.web.component.AppContext;
 
 /**
  * Содержит базовые методы для контроллеров проекта
@@ -12,7 +12,7 @@ import ru.timebilling.web.component.AppId;
 public class AbstractController {
 	
 	@Autowired
-	AppId appId;
+	AppContext appId;
 	
 	/**
 	 * собирает строку для редиректа //учитывая appId

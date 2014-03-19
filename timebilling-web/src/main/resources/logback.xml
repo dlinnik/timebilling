@@ -5,6 +5,6 @@
  
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
  
-    <logger name="org.springframework.security.web.authentication" level="DEBUG"/>
+<!--     <logger name="org.springframework.security.web.authentication" level="DEBUG"/> -->
  
 </configuration> 

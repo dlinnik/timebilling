@@ -37,7 +37,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Таймбиллинг - учет времени и затрат для ваших клиентов</a>
+          <a class="navbar-brand" href="#" th:href="@{/}">Таймбиллинг
+          	<span th:if="${@appContext.getApplication()}" th:text="@{| для ${@appContext.getApplication().getScreenName()}|}"></span></a>
         </div>
         <div class="navbar-collapse collapse">
         	<ul class="nav navbar-nav">

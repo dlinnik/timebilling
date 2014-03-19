@@ -32,8 +32,9 @@
     <div class="container">
     
     
-	<div th:if="${@appId.getId()}" class="alert alert-info">
-	<span th:text="${@appId.getId()}">[@appId.getId()]</span>
+	<div th:if="${@appContext.getApplication()}" class="alert alert-info">
+	<span th:text="@{|Приложение ${@appContext.getApplication().getScreenName()}|}">[@appId.getId()]</span>
+	
 	</div>
 
 	<div th:if="${param.error}" class="alert alert-danger">
