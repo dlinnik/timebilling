@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import ru.timebilling.core.domain.ProjectDetails;
 
 @Entity
-public class Project extends BaseEntity{
+public class Project extends AppAwareBaseEntity{
 
 	private String name;
 	private String description;

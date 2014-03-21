@@ -1,16 +1,21 @@
 package ru.timebilling.web.controller;
 
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
+
+
 
 
 
@@ -28,7 +33,7 @@ public class ProjectsController extends AbstractController{
     public String projects(Model model) {
     	
     	Iterable<Project> projects = projectsRepository.findAll();    	
-    	
+//    	Iterable<Project> projects = projectsRepository.findAll(Arrays.asList(1L, 2L));
         model.addAttribute("projects", projects);
         return "index";
     }
@@ -57,10 +62,18 @@ public class ProjectsController extends AbstractController{
     
 //    @RequestMapping(value = "/app/{appId}/projects/{projectId}", method = RequestMethod.PUT)
     @RequestMapping(value = "/projects/{projectId}", method = RequestMethod.PUT)    
-    public String updateProject(@Valid Project project, @PathVariable("projectId") Long id, 
+    public String updateProject(
+    		@Valid
+    		@ModelAttribute("project")
+    		Project project, @PathVariable("projectId") Long id, 
     		BindingResult result, SessionStatus status) {
-    	project.setId(id);
-        return createOrUpdateProject(project, result, status);
+    	
+    	//TODO: refactor!
+    	Project updateableProject = projectsRepository.findOne(id);
+    	updateableProject.setName(project.getName());
+    	updateableProject.setDescription(project.getDescription());
+    	
+        return createOrUpdateProject(updateableProject, result, status);
     	
     }
 
@@ -82,8 +95,5 @@ public class ProjectsController extends AbstractController{
             return buildRedirectUrl("/");
         }
 	}
-
-
-
-
+	
 }
