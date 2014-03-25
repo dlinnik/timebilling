@@ -29,7 +29,7 @@ public class ProjectsController extends AbstractController{
 	ProjectRepository projectsRepository;
 
 //    @RequestMapping("/app/{appId}/")
-	@RequestMapping("/")
+	@RequestMapping("/projects")
     public String projects(Model model) {
     	
     	Iterable<Project> projects = projectsRepository.findAll();    	

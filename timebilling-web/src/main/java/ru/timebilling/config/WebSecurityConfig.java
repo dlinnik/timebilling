@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import ru.timebilling.service.AppService;
@@ -36,8 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .formLogin()
                 .loginPage("/login").permitAll()   
+                .successHandler(getSuccessHandler())
                 .and().exceptionHandling().accessDeniedPage("/403").and();
-//                .successHandler(getSuccessHandler())
 //                .failureHandler(getAuthenticationFailureHandler())                
 //                .and().exceptionHandling().authenticationEntryPoint(getAuthEntryPointWithUseForward("/login"))
 //                .and().exceptionHandling()
@@ -75,12 +77,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //
 //    
-//    protected AuthenticationSuccessHandler getSuccessHandler() {
-//    	SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
-//		handler.setDefaultTargetUrl("/app$/");
+    protected AuthenticationSuccessHandler getSuccessHandler() {
+    	SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
+		handler.setDefaultTargetUrl("/projects");
 //		handler.setRedirectStrategy(new AppIdRedirectionStrategy(appId));
-//		return handler;
-//	}
+		return handler;
+	}
 //
 //	protected AuthenticationEntryPoint getAuthEntryPointWithUseForward(String loginFormUrl){
 //    	LoginUrlAuthenticationEntryPoint l = new LoginUrlAuthenticationEntryPoint(loginFormUrl);    	

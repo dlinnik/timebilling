@@ -20,7 +20,7 @@ public class ProjectsRestController {
 	@Autowired
 	ProjectRepository projectsRepository;
 	  
-    @RequestMapping("/projects")
+    @RequestMapping("/projectsREST")
     @ResponseBody
     public List<ProjectDetails> projects() {
     	
