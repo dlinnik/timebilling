@@ -11,6 +11,7 @@
     <!-- ============================================================================ -->
     
     <meta charset="utf-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
@@ -52,7 +53,7 @@
     <form action="#" th:action="@{${#httpServletRequest.servletPath}}"
     	th:object="${project}"     
     	th:method="${project['new']} ? post : put" 
-    	class="form-horizontal">
+    	class="form-horizontal" accept-charset="UTF-8">
     	
         <div class="control-group">
             <label class="control-label" for="name">Name</label>

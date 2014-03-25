@@ -1,6 +1,7 @@
 package ru.timebilling.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,10 +10,12 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 import ru.timebilling.service.AppService;
 import ru.timebilling.service.UserDetailsServiceImpl;
 import ru.timebilling.web.filter.AppIdFromSubdomainFilter;
+import ru.timebilling.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -28,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	AppIdFromSubdomainFilter appIdFilter = new AppIdFromSubdomainFilter();
 //	appIdFilter.setAppService(appService);
 //	http.addFilterBefore(appIdFilter,  UsernamePasswordAuthenticationFilter.class);
+//    	http.addFilterBefore(new CharacterEncodingFilter(), SecurityContextPersistenceFilter.class);
     	
         http
             .authorizeRequests()
