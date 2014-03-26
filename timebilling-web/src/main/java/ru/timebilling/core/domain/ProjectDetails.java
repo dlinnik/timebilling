@@ -26,4 +26,3 @@ public class ProjectDetails {
 	}
 
 }
-//testing git
