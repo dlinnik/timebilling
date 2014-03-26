@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>time-billing</title>
+	<link rel="stylesheet" 
+		href="../public/resources/css/jquery-ui-1.10.4.custom.min.css" 
+		th:href="@{/resources/css/jquery-ui-1.10.4.custom.min.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/bootstrap.min.css" 
+		th:href="@{/resources/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/main.css" 
+		th:href="@{/resources/css/main.css}"/>
+	<script src="../public/resources/js/jquery-1.10.2.js"
+		th:src="@{/resources/js/jquery-1.10.2.js}"></script>
+	<script src="../public/resources/js/jquery-ui-1.10.4.custom.min.js"
+		th:src="@{/resources/js/jquery-ui-1.10.4.custom.min.js}"></script>
+	<script src="../public/resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script src="../public/resources/js/main.js"
+		th:src="@{/resources/js/main.js}"></script>
+</head>
+<body>
+	<header id="header">
+		<div class="holder">
+			<div id="logo">
+				<a href="#" title="time-billing">time-billing</a>
+				<span th:if="${@appContext.getApplication()}" th:text="@{|${@appContext.getApplication().getScreenName()}|}"></span>
+			</div>
+			<a href="#" class="title active">Проекты<sup th:text="${#lists.size(projects)}">4</sup></a>
+			<a href="#" class="title">Биллинг и отчеты</a>
+			<a href="#" class="user">
+				<div class="avatar"><img src="../public/resources/images/img1.gif" alt="#" width="50" height="50" /></div>
+				<dl>
+					<dd th:text="${@userSessionComponent.getCurrentUser().getUsername()}">Алиса Нестерова</dd>
+					<!-- TODO: implement -->
+					<dt>Администратор</dt>
+				</dl>
+			</a>
+		</div>
+	</header>
+	<div id="main">
+		<div class="button-panel">
+			<div class="switch">
+					<!-- TODO: implement -->
+				<a href="#" class="active">Активные проекты<sup>4</sup></a>
+				<a href="#">Архивные<sup>2</sup></a>
+			</div>
+			<a href="#" class="new-project" title="Добавить новый проект">Добавить новый проект</a>
+		</div>
+		
+		<!-- list of projects -->
+		<div class="project-items" th:unless="${#lists.isEmpty(projects)}">
+			<div class="item" th:each="projectItem : ${projects}">
+				<a href="#" th:href="|#${projectItem.id}|" class="name-project" th:text="${projectItem.name}">Дело Магницкого</a>
+				<div class="info-project">
+					<dl>
+						<dt class="people">people</dt>
+						<dd>3 чел.</dd>
+					</dl>
+					<dl>
+						<dt class="time">time</dt>
+						<dd>84,9 ч.</dd>
+					</dl>
+					<dl>
+						<dt class="cost">cost</dt>
+						<dd>30 500 Р</dd>
+					</dl>
+				</div>
+				<a href="#" class="setting-project" title="Настройка модуля">Настройка модуля</a>
+				<a href="#" class="sorting">сортировка</a>
+			</div>						
+		</div>
+		
+		<!-- no projects -->
+		<div class="project-items" th:if="${#lists.isEmpty(projects)}">
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="message-system">В этом разделе будут храниться проекты над которыми вы работаете</div>
+		</div>
+		
+	</div>
+</body>
+</html>

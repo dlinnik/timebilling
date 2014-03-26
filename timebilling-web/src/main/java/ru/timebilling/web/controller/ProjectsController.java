@@ -33,11 +33,18 @@ public class ProjectsController extends AbstractController{
     public String projects(Model model) {
     	
     	Iterable<Project> projects = projectsRepository.findAll();    	
-//    	Iterable<Project> projects = projectsRepository.findAll(Arrays.asList(1L, 2L));
+        model.addAttribute("projects", projects);
+        return "projects";
+    }
+
+	@RequestMapping("/projects-table")
+    public String projectsTable(Model model) {
+    	
+    	Iterable<Project> projects = projectsRepository.findAll();    	
         model.addAttribute("projects", projects);
         return "index";
     }
-    
+	
 //    @RequestMapping(value="/app/{appId}/projects/{projectId}", method = RequestMethod.GET)
     @RequestMapping(value="/projects/{projectId}", method = RequestMethod.GET)    
 	public String projectDetails(Model model, 

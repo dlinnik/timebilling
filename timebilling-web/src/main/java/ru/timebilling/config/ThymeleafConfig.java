@@ -28,7 +28,7 @@ public class ThymeleafConfig {
     	resolver.setResourceResolver(thymeleafResourceResolver());
     	resolver.setPrefix("classpath:/templates/");
     	resolver.setSuffix(".html");
-    	resolver.setTemplateMode("HTML5");
+    	resolver.setTemplateMode("LEGACYHTML5");
     	resolver.setCharacterEncoding("UTF-8");
     	resolver.setCacheable(true);
     	return resolver;    	

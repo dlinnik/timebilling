@@ -63,6 +63,13 @@
             <artifactId>thymeleaf-extras-springsecurity3</artifactId>
        	</dependency>       
 
+		<!-- Required for LEGACYHTML5 thymeleaf template mode -->
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.20</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

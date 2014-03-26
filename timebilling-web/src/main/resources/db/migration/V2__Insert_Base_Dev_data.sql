@@ -1,6 +1,8 @@
 /* applications */
 insert into application (id, name, screen_name) values (1,'app1','my first app');
 insert into application (id, name, screen_name) values (2,'app2','Смирнов и партнеры');
+insert into application (id, name, screen_name) values (3,'app10','Тест');
+
 
 /* project */
 insert into project (id, description, name, appname) values (1,'pr1','project 1', 'app1');
