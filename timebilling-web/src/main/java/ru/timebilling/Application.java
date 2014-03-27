@@ -27,10 +27,10 @@ public class Application {
 				Application.class, args);
 
 		String[] beanNames = ctx.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-		for (String beanName : beanNames) {
-			System.out.println(beanName);
-		}
+//		Arrays.sort(beanNames);
+//		for (String beanName : beanNames) {
+//			System.out.println(beanName);
+//		}
 	}
 
 //	@Bean

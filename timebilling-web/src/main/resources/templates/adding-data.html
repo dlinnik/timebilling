@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:substituteby="layout-main :: headerFragment">
+	<!-- ============================================================================ -->
+    <!-- This <head> is only used for static prototyping purposes (natural templates) -->
+    <!-- and is therefore entirely optionl, as this markup fragment will be included  -->
+    <!-- from "layout-main.html" at runtime.                                            -->
+    <!-- ============================================================================ -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>time-billing</title>
+	<link rel="stylesheet" 
+		href="../public/resources/css/jquery-ui-1.10.4.custom.min.css" 
+		th:href="@{/resources/css/jquery-ui-1.10.4.custom.min.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/bootstrap.min.css" 
+		th:href="@{/resources/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/bootstrap-glyphicons.css" 
+		th:href="@{/resources/css/bootstrap-glyphicons.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/main.css" 
+		th:href="@{/resources/css/main.css}"/>
+	<script src="../public/resources/js/jquery-1.10.2.js"
+		th:src="@{/resources/js/jquery-1.10.2.js}"></script>
+	<script src="../public/resources/js/jquery-ui-1.10.4.custom.min.js"
+		th:src="@{/resources/js/jquery-ui-1.10.4.custom.min.js}"></script>
+	<script src="../public/resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script src="../public/resources/js/main.js"
+		th:src="@{/resources/js/main.js}"></script>		
+</head>
+
+<body class="admin">
+	<header id="header" th:substituteby="layout-main :: menuFragment">
+	<!-- ============================================================================ -->
+    <!-- This <header> is only used for static prototyping purposes (natural templates) -->
+    <!-- and is therefore entirely optionl, as this markup fragment will be included  -->
+    <!-- from "layout-main.html" at runtime.                                            -->
+    <!-- ============================================================================ -->	
+		<div class="holder">
+			<div id="logo">
+				<a href="#" title="time-billing">time-billing</a>
+				<span>ООО «Кибернетика лимитед»</span>
+			</div>
+			<a href="#" class="project">Проекты<sup>4</sup></a>
+			<a href="#" class="title">Биллинг и отчеты</a>
+			<a href="#" class="user">
+				<div class="avatar"><img src="../public/resources/images/img1.gif" alt="#" width="50" height="50" /></div>
+				<dl>
+					<dd>Алиса Нестерова</dd>
+					<dt>Администратор</dt>
+				</dl>
+			</a>
+		</div>
+	</header>
+	
+	<div id="main">
+		<ul class="breadcrumbs">
+			<li><a href="#" th:href="@{/projects}">Проекты</a></li>
+			<li th:text="${project.name}">Развод семьи Путиных</li>
+		</ul>
+		<div class="page-title">
+			<h1 th:text="${project.description}">Развод семьи Путиных</h1>
+			<a href="#" class="change-project"><span class="glyphicon glyphicon-pencil"></span>Изменить</a>
+		</div>
+		<div class="information-panel">
+			<span class="payment-method">Почасовая оплата</span>
+			<span class="persons">Заняты 4 чел.</span>
+			<span class="reports"><a href="#">Сформировано 2 отчета</a></span>
+			<dl class="client">
+				<dt>Клиент:</dt>
+				<dd>Владимир Путин и его жена. <a href="#">Подробнее о клиенте</a></dd>
+			</dl>
+		</div>
+		
+		
+		<div id="tabs">
+			<div class="holder">
+				<a href="#" class="add-record" data-ref="tab-spent">Добавить запись</a>
+				<a href="#" class="add-record money hidden" data-ref="tab-cash-costs">Добавить запись</a>
+				<ul class="tab-list">
+					<li class="active"><a href="#tab-spent">Затраченное время</a></li>
+					<li><a href="#tab-cash-costs">Денежные затраты</a></li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				
+				<div class="tab-pane active" id="tab-spent">
+					<div class="posts">
+						<div class="post-title">
+							<span class="date">Дата</span>
+							<span class="time">Время, ч.</span>
+							<span class="comment">Комментарий</span>
+						</div>
+						<div class="post add-new-post">
+							<div class="row-form">
+								<div class="date">
+									<div class="calendar">
+										<input type="text" class="day"/>
+										<input type="text" class="month"/>
+										<input type="text" class="year"/>
+										<a href="#" class="icon-calendar">календарь</a>
+										<div class="calendar-holder">
+											
+										</div>
+									</div>
+								</div>
+									<div class="user-info">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								<div class="time-field">
+									<input type="text" />
+								</div>
+								<div class="comment">
+									<textarea cols="30" rows="10" placeholder="Напишите комментарий (обязательно)" onfocus="placeholder='';"></textarea>
+									<div class="buttom-box">
+										<a href="#" class="save">Добавить запись</a>
+										<a href="#" class="delete">Отменить</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="post authorized">
+							<div class="row-content">
+								<div class="icon"><a href="#" title="Редактировать"><span class="glyphicon glyphicon-pencil"></span>&nbsp;</a></div>
+								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div>
+								<div class="user-info">
+									<div class="holder">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								</div>
+								<div class="value">
+									<span class="time">20</span>
+									<span class="cost">1200P</span>
+								</div>
+								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
+							</div>
+							<div class="row-form">
+								<div class="date">
+									<div class="calendar">
+										<input type="text" class="day"/>
+										<input type="text" class="month"/>
+										<input type="text" class="year"/>
+										<a href="#" class="icon-calendar">календарь</a>
+										<div class="calendar-holder">
+											
+										</div>
+									</div>
+								</div>
+									<div class="user-info">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								<div class="time-field">
+									<input type="text" />
+								</div>
+								<div class="comment">
+									<textarea cols="30" rows="10"></textarea>
+									<div class="buttom-box">
+										<a href="#" class="save">Сохранить</a>
+										<a href="#" class="delete">Удалить запись</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="post disabled">
+							<div class="row-content">
+								<div class="icon"><span class="not-edit">не редактировать</span></div>
+								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div>
+								<div class="user-info">
+									<div class="holder">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								</div>
+								<div class="value">
+									<span class="time">20</span>
+									<span class="cost">1200P</span>
+								</div>
+								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
+							</div>
+						</div>
+
+						<span class="bg-posts">&nbsp;</span>
+					</div>
+					<a href="#" class="more-posts">Показать предыдущие записи</a>
+				</div>
+				<div id="tab-cash-costs" class="tab-pane">
+					<div class="posts">
+						<div class="post-title">
+							<span class="date">Дата</span>
+							<span class="time">Сумма, Р</span>
+							<span class="comment">Комментарий</span>
+						</div>
+						<div class="post add-new-post">
+							<div class="row-form">
+								<div class="date">
+									<div class="calendar">
+										<input type="text" class="day"/>
+										<input type="text" class="month"/>
+										<input type="text" class="year"/>
+										<a href="#" class="icon-calendar">календарь</a>
+										<div class="calendar-holder">
+											
+										</div>
+									</div>
+								</div>
+									<div class="user-info">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								<div class="time-field">
+									<input type="text" />
+								</div>
+								<div class="comment">
+									<textarea cols="30" rows="10" placeholder="Напишите комментарий (обязательно)" onfocus="placeholder='';"></textarea>
+									<div class="buttom-box">
+										<a href="#" class="save">Добавить запись</a>
+										<a href="#" class="delete">Отменить</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="post authorized">
+							<div class="row-content">
+								<div class="icon"><a href="#" title="Редактировать"><span class="glyphicon glyphicon-pencil"></span>&nbsp;</a></div>
+								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div>
+								<div class="user-info">
+									<div class="holder">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								</div>
+								<div class="value">
+									<span class="time">2000</span>
+								</div>
+								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
+							</div>
+							<div class="row-form">
+								<div class="date">
+									<div class="calendar">
+										<input type="text" class="day"/>
+										<input type="text" class="month"/>
+										<input type="text" class="year"/>
+										<a href="#" class="icon-calendar">календарь</a>
+										<div class="calendar-holder">
+											
+										</div>
+									</div>
+								</div>
+									<div class="user-info">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								<div class="time-field">
+									<input type="text" />
+								</div>
+								<div class="comment">
+									<textarea cols="30" rows="10"></textarea>
+									<div class="buttom-box">
+										<a href="#" class="save">Сохранить</a>
+										<a href="#" class="delete">Удалить запись</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="post disabled">
+							<div class="row-content">
+								<div class="icon"><span class="not-edit">не редактировать</span></div>
+								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div>
+								<div class="user-info">
+									<div class="holder">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">Константин Стаканов</span>
+									</div>
+								</div>
+								<div class="value">
+									<span class="time">2000</span>
+								</div>
+								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
+							</div>
+						</div>
+
+						<span class="bg-posts">&nbsp;</span>
+					</div>
+					<a href="#" class="more-posts">Показать предыдущие записи</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

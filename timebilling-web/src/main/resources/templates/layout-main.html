@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	
+<head th:fragment="headerFragment">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>time-billing</title>
+	<link rel="stylesheet" 
+		href="../public/resources/css/jquery-ui-1.10.4.custom.min.css" 
+		th:href="@{/resources/css/jquery-ui-1.10.4.custom.min.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/bootstrap.min.css" 
+		th:href="@{/resources/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/bootstrap-glyphicons.css" 
+		th:href="@{/resources/css/bootstrap-glyphicons.css}"/>
+	<link rel="stylesheet" 
+		href="../public/resources/css/main.css" 
+		th:href="@{/resources/css/main.css}"/>
+	<script src="../public/resources/js/jquery-1.10.2.js"
+		th:src="@{/resources/js/jquery-1.10.2.js}"></script>
+	<script src="../public/resources/js/jquery-ui-1.10.4.custom.min.js"
+		th:src="@{/resources/js/jquery-ui-1.10.4.custom.min.js}"></script>
+	<script src="../public/resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script src="../public/resources/js/main.js"
+		th:src="@{/resources/js/main.js}"></script>		
+</head>    
+
+<body>
+<!-- <div th:fragment="menuFragment"> -->
+	<header id="header" th:fragment="menuFragment">
+		<div class="holder">
+			<div id="logo">
+				<a href="#" title="time-billing">time-billing</a>
+				<span th:if="${@appContext.getApplication()}" th:text="@{|${@appContext.getApplication().getScreenName()}|}">Проект</span>
+			</div>
+			<a href="#" class="title active" th:unless="${projects} == null">Проекты<sup th:text="${#lists.size(projects)}">4</sup></a>
+			<a href="#" th:href="@{/projects}" class="project" th:if="${projects} == null">Проекты<sup>todo</sup></a>
+			<a href="#" class="title">Биллинг и отчеты</a>
+			<a href="#" class="user">
+				<div class="avatar"><img src="../public/resources/images/img1.gif" alt="#" width="50" height="50" /></div>
+				<dl>
+					<dd th:text="${@userSessionComponent.getCurrentUser().getUsername()}">Алиса Нестерова</dd>
+					<dt th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Администратор</dt>
+					<dt th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Пользователь</dt>
+				</dl>
+			</a>
+		</div>
+	</header>
+<!-- </div> -->
+    
+<div th:fragment="footerFragment">
+    <script src="../public/resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
+    <script src="../public/resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <script src="../public/resources/js/jquery-ui-1.10.3.custom.min.js"
+            th:src="@{/resources/js/jquery-ui-1.10.3.custom.min.js}"></script>
+</div>
+    
+
+</body>
+
+</html>    

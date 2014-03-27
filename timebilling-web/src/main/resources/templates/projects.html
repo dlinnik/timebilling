@@ -2,7 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	
-<head>
+<head th:substituteby="layout-main :: headerFragment">
+
+	<!-- ============================================================================ -->
+    <!-- This <head> is only used for static prototyping purposes (natural templates) -->
+    <!-- and is therefore entirely optionl, as this markup fragment will be included  -->
+    <!-- from "layout-main.html" at runtime.                                            -->
+    <!-- ============================================================================ -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>time-billing</title>
@@ -23,9 +29,16 @@
 		th:src="@{/resources/js/bootstrap.min.js}"></script>
 	<script src="../public/resources/js/main.js"
 		th:src="@{/resources/js/main.js}"></script>
+		
 </head>
+
 <body>
-	<header id="header">
+	<header id="header" th:substituteby="layout-main :: menuFragment">
+	<!-- ============================================================================ -->
+    <!-- This <header> is only used for static prototyping purposes (natural templates) -->
+    <!-- and is therefore entirely optionl, as this markup fragment will be included  -->
+    <!-- from "layout-main.html" at runtime.                                            -->
+    <!-- ============================================================================ -->	
 		<div class="holder">
 			<div id="logo">
 				<a href="#" title="time-billing">time-billing</a>
@@ -43,6 +56,7 @@
 			</a>
 		</div>
 	</header>
+	
 	<div id="main">
 		<div class="button-panel">
 			<div class="switch">
@@ -56,7 +70,7 @@
 		<!-- list of projects -->
 		<div class="project-items" th:unless="${#lists.isEmpty(projects)}">
 			<div class="item" th:each="projectItem : ${projects}">
-				<a href="#" th:href="|#${projectItem.id}|" class="name-project" th:text="${projectItem.name}">Дело Магницкого</a>
+				<a href="#" th:href="@{|/projects/data/${projectItem.id}|}" class="name-project" th:text="${projectItem.name}">Дело Магницкого</a>
 				<div class="info-project">
 					<dl>
 						<dt class="people">people</dt>

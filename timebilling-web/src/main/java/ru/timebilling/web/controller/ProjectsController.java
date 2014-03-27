@@ -28,14 +28,20 @@ public class ProjectsController extends AbstractController{
 	@Autowired
 	ProjectRepository projectsRepository;
 
-//    @RequestMapping("/app/{appId}/")
 	@RequestMapping("/projects")
-    public String projects(Model model) {
-    	
+    public String projects(Model model) {    	
     	Iterable<Project> projects = projectsRepository.findAll();    	
         model.addAttribute("projects", projects);
         return "projects";
     }
+	
+    @RequestMapping(value="/projects/data/{projectId}", method = RequestMethod.GET)    
+	public String projectAddData(Model model, 
+    		@PathVariable("projectId") Long id){
+    	model.addAttribute("project", projectsRepository.findOne(id));
+    	return "adding-data";
+    }
+
 
 	@RequestMapping("/projects-table")
     public String projectsTable(Model model) {
