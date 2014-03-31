@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,14 +14,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import ru.timebilling.persistance.AppNameSupplier;
 import ru.timebilling.persistance.domain.User;
 import ru.timebilling.persistance.domain.UserRoleEnum;
 import ru.timebilling.persistance.repository.UserRepository;
 import ru.timebilling.web.component.UserSessionComponent;
+import ru.timebilling.web.interceptor.AppInterceptor;
 
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
+
+	static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -27,12 +33,21 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired
     private UserSessionComponent userInSession;
     
+    @Autowired
+    private AppService appService;
     
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
-		
-		User domainUser = userRepository.findByEmail(userName);
+		User domainUser = null;
+		try{
+			//Workaround to set application to context
+			appService.getCurrentApplicationContext();
+			
+			domainUser = userRepository.findByEmail(userName);
+		}catch(Throwable e){
+			e.printStackTrace();
+		}
 		if(domainUser == null){
 			throw new UsernameNotFoundException("User not found");
 		}

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ru.timebilling.persistance.AppNameSupplier;
 
+//TODO: change to filter since MVC interceptor isn't supposed to handle all cases?
 @Component
 public class JPAFilterInterceptor extends HandlerInterceptorAdapter {
 	static final Logger logger = LoggerFactory.getLogger(JPAFilterInterceptor.class);

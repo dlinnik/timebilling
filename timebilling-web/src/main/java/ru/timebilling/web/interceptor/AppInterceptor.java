@@ -39,7 +39,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
         	response.sendRedirect("/403");
 */	        	return false;
         }
-
+        
 		return true;
 	  
 	  }

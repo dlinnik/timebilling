@@ -25,7 +25,7 @@ import ru.timebilling.persistance.AppNameSupplier;
 	@FilterDef(name = "tb_appNameFilter", parameters={@ParamDef( name="appNameFilterString", type="string" )} )
 	})
 @Filters({
-	@Filter(name="tb_appNameFilter", condition="appname = :appNameFilterString")
+	@Filter(name="tb_appNameFilter", condition="(appname = :appNameFilterString)")
 	})
 @MappedSuperclass
 public class AppAwareBaseEntity extends BaseEntity {

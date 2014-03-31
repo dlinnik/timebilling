@@ -1,5 +1,6 @@
 package ru.timebilling.persistance.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,9 @@ import ru.timebilling.core.domain.ProjectDetails;
 @Entity
 public class Project extends AppAwareBaseEntity{
 
+	@Column(name = "name", nullable = false, length = 256)
 	private String name;
+	@Column(name = "description", nullable = true, length = 1024)
 	private String description;
 	
 	

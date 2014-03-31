@@ -1,5 +1,7 @@
 package ru.timebilling.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,9 @@ import ru.timebilling.web.component.AppContext;
 
 @Service
 public class AppService {
+	
+	static final Logger logger = LoggerFactory.getLogger(AppService.class);
+
 	
     @Autowired
 	ApplicationRepository reposittory;
@@ -23,11 +28,26 @@ public class AppService {
     		appContext.setApplication(reposittory.findByName(appName));
     	}
     	if(appContext.getApplication()!=null){
+    		
+            logger.info("appcontext = " + appContext.getApplication().getName() + "]");
+
 	    	//всегда обновляем данные о приложении в статическом контексте (для multitentancy поддержки на уровне JPA)
 	    	AppNameSupplier.setAppName(appContext.getApplication().getName());
     	}
     	
     	return appContext;
+    }
+    
+    
+    public AppContext getCurrentApplicationContext(){    	
+    	if(appContext.getApplication()!=null){
+    		
+            logger.info("appcontext = [" + appContext.getApplication().getName() + "]");
+
+	    	//всегда обновляем данные о приложении в статическом контексте (для multitentancy поддержки на уровне JPA)
+	    	AppNameSupplier.setAppName(appContext.getApplication().getName());
+    	}    	
+    	return appContext;    	
     }
     
 

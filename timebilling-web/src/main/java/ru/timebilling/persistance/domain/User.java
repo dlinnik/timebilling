@@ -10,15 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity(name = "user")
-public class User extends BaseEntity {
-
+public class User extends AppAwareBaseEntity {
+	
+	@Column(name = "username", nullable = false, length = 256)
     private String username;
+	@Column(name = "password", nullable = false, length = 256)
     private String password;
-    @Column(unique = true)
+    @Column(unique = true, name = "email", nullable = false, length = 256)
     private String email;
 
+	@Column(name = "accountexpired")
     private boolean accountExpired;
+	@Column(name = "accountlocked")
     private boolean accountLocked;
+	@Column(name = "enabled")
     private boolean enabled;
 
     @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
