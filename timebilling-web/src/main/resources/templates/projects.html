@@ -57,7 +57,8 @@
 		</div>
 	</header>
 	
-	<div id="main">
+	<!-- projects -->
+	<div id="main" th:unless="${#lists.isEmpty(projects)}">
 		<div class="button-panel">
 			<div class="switch">
 					<!-- TODO: implement -->
@@ -68,7 +69,7 @@
 		</div>
 		
 		<!-- list of projects -->
-		<div class="project-items" th:unless="${#lists.isEmpty(projects)}">
+		<div class="project-items">
 			<div class="item" th:each="projectItem : ${projects}">
 				<a href="#" th:href="@{|/projects/data/${projectItem.id}|}" class="name-project" th:text="${projectItem.name}">Дело Магницкого</a>
 				<div class="info-project">
@@ -89,15 +90,21 @@
 				<a href="#" class="sorting">сортировка</a>
 			</div>						
 		</div>
+	</div>
 		
-		<!-- no projects -->
-		<div class="project-items" th:if="${#lists.isEmpty(projects)}">
+	<!-- no projects -->
+	<div id="main" class="no-projects" th:if="${#lists.isEmpty(projects)}">
+		<div class="button-panel">
+			<a href="#" class="new-project" title="Добавить новый проект">Добавить новый проект</a>
+		</div>
+		
+		<div class="project-items">
 			<div class="item"></div>
 			<div class="item"></div>
 			<div class="item"></div>
 			<div class="message-system">В этом разделе будут храниться проекты над которыми вы работаете</div>
 		</div>
-		
 	</div>
+		
 </body>
 </html>
