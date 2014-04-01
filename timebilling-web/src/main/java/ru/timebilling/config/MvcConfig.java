@@ -3,11 +3,13 @@ package ru.timebilling.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import ru.timebilling.service.conversion.DateFormatter;
 import ru.timebilling.web.interceptor.AppInterceptor;
 import ru.timebilling.web.interceptor.JPAFilterInterceptor;
 
@@ -22,6 +24,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Autowired
 	JPAFilterInterceptor filterInterceptor;
+	
+	@Autowired
+	DateFormatter dateFormatter;
 	
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -40,5 +45,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     	registry.addInterceptor(appInterceptor).addPathPatterns("/**").excludePathPatterns("/403");
     	registry.addInterceptor(filterInterceptor).addPathPatterns("/**");
     }
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addFormatter(dateFormatter);
+	}
+    
+    
 
 }

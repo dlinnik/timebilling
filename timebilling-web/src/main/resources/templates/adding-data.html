@@ -57,13 +57,14 @@
 		</div>
 	</header>
 	
+	<!-- project details section -->
 	<div id="main">
 		<ul class="breadcrumbs">
 			<li><a href="#" th:href="@{/projects}">Проекты</a></li>
-			<li th:text="${project.name}">Развод семьи Путиных</li>
+			<li th:text="${project.name}">Проект 1</li>
 		</ul>
 		<div class="page-title">
-			<h1 th:text="${project.description}">Развод семьи Путиных</h1>
+			<h1 th:text="${project.description}">Проект 1 Описание</h1>
 			<a href="#" class="change-project"><span class="glyphicon glyphicon-pencil"></span>Изменить</a>
 		</div>
 		<div class="information-panel">
@@ -77,6 +78,7 @@
 		</div>
 		
 		
+		<!-- time & expenses tabs -->
 		<div id="tabs">
 			<div class="holder">
 				<a href="#" class="add-record" data-ref="tab-spent">Добавить запись</a>
@@ -86,8 +88,8 @@
 					<li><a href="#tab-cash-costs">Денежные затраты</a></li>
 				</ul>
 			</div>
-			<div class="tab-content">
-				
+			
+			<div class="tab-content">				
 				<div class="tab-pane active" id="tab-spent">
 					<div class="posts">
 						<div class="post-title">
@@ -95,8 +97,14 @@
 							<span class="time">Время, ч.</span>
 							<span class="comment">Комментарий</span>
 						</div>
+						
+						<!-- add new record -->
 						<div class="post add-new-post">
-							<div class="row-form">
+						    <form action="#" th:action="@{${#httpServletRequest.servletPath}}"
+						    	th:object="${service}"     
+						    	th:method="post" 
+						    	class="row-form" accept-charset="UTF-8">						
+<!-- 							<div class="row-form"> -->
 								<div class="date">
 									<div class="calendar">
 										<input type="text" class="day"/>
@@ -110,37 +118,43 @@
 								</div>
 									<div class="user-info">
 										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
-										<span class="name">Константин Стаканов</span>
+										<!-- current user! -->
+										<span class="name" th:text="${@userSessionComponent.getCurrentUser().getUsername()}">Константин Стаканов</span>
 									</div>
 								<div class="time-field">
-									<input type="text" />
+									<input type="text" th:field="*{spentTime}" />
 								</div>
 								<div class="comment">
-									<textarea cols="30" rows="10" placeholder="Напишите комментарий (обязательно)" onfocus="placeholder='';"></textarea>
+									<textarea cols="30" rows="10" th:field="*{comment}" 
+										placeholder="Напишите комментарий (обязательно)" onfocus="placeholder='';"></textarea>
 									<div class="buttom-box">
-										<a href="#" class="save">Добавить запись</a>
+										<a href="#" class="save" onclick="$(this).closest('form').submit()">Добавить запись</a>
+<!-- 										<a href="#" class="save">Добавить запись</a> -->
 										<a href="#" class="delete">Отменить</a>
 									</div>
 								</div>
-							</div>
+<!-- 							</div> -->
+							</form>
 						</div>
 						
+						<th:block th:each="service : ${services}">						
 						<div class="post authorized">
 							<div class="row-content">
 								<div class="icon"><a href="#" title="Редактировать"><span class="glyphicon glyphicon-pencil"></span>&nbsp;</a></div>
-								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div>
+								<div class="date" th:text="${{service.date}}" th:attr="data-selected-date=${{service.date}}" data-selected-date="12/02/2014">12 февраля 2014</div>
 								<div class="user-info">
 									<div class="holder">
 										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
-										<span class="name">Константин Стаканов</span>
+										<span class="name" th:text="${service.employee.username}">Константин Стаканов</span>
 									</div>
 								</div>
 								<div class="value">
-									<span class="time">20</span>
+									<span class="time" th:text="${service.spentTime}">20</span>
 									<span class="cost">1200P</span>
 								</div>
-								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
+								<div class="comment" th:text="${service.comment}">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
 							</div>
+							
 							<div class="row-form">
 								<div class="date">
 									<div class="calendar">
@@ -148,14 +162,13 @@
 										<input type="text" class="month"/>
 										<input type="text" class="year"/>
 										<a href="#" class="icon-calendar">календарь</a>
-										<div class="calendar-holder">
-											
+										<div class="calendar-holder">											
 										</div>
 									</div>
 								</div>
 									<div class="user-info">
 										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
-										<span class="name">Константин Стаканов</span>
+										<span class="name" th:text="${service.employee.username}">Константин Стаканов</span>
 									</div>
 								<div class="time-field">
 									<input type="text" />
@@ -170,23 +183,23 @@
 							</div>
 						</div>
 						
-						<div class="post disabled">
-							<div class="row-content">
-								<div class="icon"><span class="not-edit">не редактировать</span></div>
-								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div>
-								<div class="user-info">
-									<div class="holder">
-										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
-										<span class="name">Константин Стаканов</span>
-									</div>
-								</div>
-								<div class="value">
-									<span class="time">20</span>
-									<span class="cost">1200P</span>
-								</div>
-								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div>
-							</div>
-						</div>
+<!-- 						<div class="post disabled"> -->
+<!-- 							<div class="row-content"> -->
+<!-- 								<div class="icon"><span class="not-edit">не редактировать</span></div> -->
+<!-- 								<div class="date" data-selected-date="12/02/2014">12 февраля 2014</div> -->
+<!-- 								<div class="user-info"> -->
+<!-- 									<div class="holder"> -->
+<!-- 										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div> -->
+<!-- 										<span class="name">Константин Стаканов</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="value"> -->
+<!-- 									<span class="time">20</span> -->
+<!-- 									<span class="cost">1200P</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 						<span class="bg-posts">&nbsp;</span>
 					</div>
