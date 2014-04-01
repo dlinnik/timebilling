@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="../public/resources/css/jquery-ui-1.10.4.custom.min.css"
+	th:href="@{/resources/css/jquery-ui-1.10.4.custom.min.css}" />
+<link rel="stylesheet" href="../public/resources/css/bootstrap.min.css"
+	th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="../public/resources/css/bootstrap-glyphicons.css"
+	th:href="@{/resources/css/bootstrap-glyphicons.css}" />
+<link rel="stylesheet" href="../public/resources/css/main.css"
+	th:href="@{/resources/css/main.css}" />
+</head>
+
+<body>
+
+	<!-- time & expenses tabs -->
+	<div id="tabs">
+		<div class="holder">
+			<a href="#" class="add-record" data-ref="tab-spent">Добавить
+				запись</a> <a href="#" class="add-record money hidden"
+				data-ref="tab-cash-costs">Добавить запись</a>
+			<ul class="tab-list">
+				<li class="active"><a href="#tab-spent">Затраченное время</a></li>
+				<li><a href="#tab-cash-costs">Денежные затраты</a></li>
+			</ul>
+		</div>
+
+		<div class="tab-content">
+			<div class="tab-pane active" id="tab-spent">
+				<div class="posts">
+					<div class="post-title">
+						<span class="date">Дата</span> <span class="time">Время, ч.</span>
+						<span class="comment">Комментарий</span>
+					</div>
+
+					<div th:fragment="servicesTableFragment">
+						<th:block th:each="service : ${services}">
+							<div class="post authorized">
+								<div class="row-content">
+									<div class="icon">
+										<a href="#" title="Редактировать"><span
+											class="glyphicon glyphicon-pencil"></span>&nbsp;</a>
+									</div>
+									<div class="date" th:text="${{service.date}}"
+										th:attr="data-selected-date=${{service.date}}"
+										data-selected-date="12/02/2014">12 февраля 2014</div>
+									<div class="user-info">
+										<div class="holder">
+											<div class="avatar">
+												<img src="../public/resources/images/img2.gif" alt="#"
+													width="30" height="30" />
+											</div>
+											<span class="name" th:text="${service.employee.username}">Константин
+												Стаканов</span>
+										</div>
+									</div>
+									<div class="value">
+										<span class="time" th:text="${service.spentTime}">20</span> <span
+											class="cost">1200P</span>
+									</div>
+									<div class="comment" th:text="${service.comment}">Просидел
+										в суде 4 часа, бился с этими кретинами из обвинения, гнали
+										пургу. Доки на дропе: (тут ссылка)</div>
+								</div>
+
+								<div class="row-form">
+									<div class="date">
+										<div class="calendar">
+											<input type="text" class="day" /> <input type="text"
+												class="month" /> <input type="text" class="year" /> <a
+												href="#" class="icon-calendar">календарь</a>
+											<div class="calendar-holder"></div>
+										</div>
+									</div>
+									<div class="user-info">
+										<div class="avatar">
+											<img src="../public/resources/images/img2.gif" alt="#"
+												width="30" height="30" />
+										</div>
+										<span class="name" th:text="${service.employee.username}">Константин
+											Стаканов</span>
+									</div>
+									<div class="time-field">
+										<input type="text" />
+									</div>
+									<div class="comment">
+										<textarea cols="30" rows="10"></textarea>
+										<div class="buttom-box">
+											<a href="#" class="save">Сохранить</a> <a href="#"
+												class="delete">Удалить запись</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>

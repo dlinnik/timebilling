@@ -1,11 +1,3 @@
-jQuery(function(){	
-	initDatepicker($('.calendar'));
-	initEdit($('.post:not(.add-new-post, .disabled)'));
-	initAddingNewPost();
-	initSortable();
-	initTabs();
-});
-
 function initSortable(){
 	$('.project-items').sortable({
 		handle: '.sorting'
@@ -161,4 +153,3 @@ function initDatepicker(els){
 		});
 	});
 }
-

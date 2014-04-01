@@ -33,6 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	http.addFilterBefore(appIdFilter,  UsernamePasswordAuthenticationFilter.class);
 //    	http.addFilterBefore(new CharacterEncodingFilter(), SecurityContextPersistenceFilter.class);
     	
+    	http.csrf().disable();
+    	
         http
             .authorizeRequests()
                 .antMatchers("/login", "/403",
@@ -43,7 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
                 .loginPage("/login").permitAll()   
                 .successHandler(getSuccessHandler())
-                .and().exceptionHandling().accessDeniedPage("/403").and();
+                //.and().exceptionHandling().accessDeniedPage("/403").and()
+                ;
 //                .failureHandler(getAuthenticationFailureHandler())                
 //                .and().exceptionHandling().authenticationEntryPoint(getAuthEntryPointWithUseForward("/login"))
 //                .and().exceptionHandling()
