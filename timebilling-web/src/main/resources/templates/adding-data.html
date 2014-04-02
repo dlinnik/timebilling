@@ -29,9 +29,10 @@
 		th:src="@{/resources/js/jquery-ui-1.10.4.custom.min.js}"></script>
 	<script src="../public/resources/js/bootstrap.min.js"
 		th:src="@{/resources/js/bootstrap.min.js}"></script>
-	<script src="../public/resources/js/main.js"
-		th:src="@{/resources/js/main.js}"></script>		
+<!-- 	<script src="../public/resources/js/main.js" -->
+<!-- 		th:src="@{/resources/js/main.js}"></script>		 -->
 </head>
+
 
 <body class="admin">
 	<header id="header" th:substituteby="layout-main :: menuFragment">
@@ -100,16 +101,16 @@
 						
 						<!-- add new record -->
 						<div class="post add-new-post">
-						    <form action="#" th:action="@{${#httpServletRequest.servletPath}}"
+						    <form id="newServiceForm" action="#" th:action="@{/services}"
 						    	th:object="${service}"     
 						    	th:method="post" 
 						    	class="row-form" accept-charset="UTF-8">						
 <!-- 							<div class="row-form"> -->
 								<div class="date">
 									<div class="calendar">
-										<input type="text" class="day"/>
-										<input type="text" class="month"/>
-										<input type="text" class="year"/>
+										<input type="text" class="day" id="day"/>
+										<input type="text" class="month" id="month"/>
+										<input type="text" class="year" id="year"/>
 										<a href="#" class="icon-calendar">календарь</a>
 										<div class="calendar-holder">
 											
@@ -137,6 +138,11 @@
 							</form>
 						</div>
 						
+						<div id="servicesTable"></div>
+
+<!--/* This code will be removed at thymeleaf parsing time! */-->
+<!--/*--> 
+						<div th:fragment="servicesTableFragment">
 						<th:block th:each="service : ${services}">						
 						<div class="post authorized">
 							<div class="row-content">
@@ -182,6 +188,8 @@
 								</div>
 							</div>
 						</div>
+						</th:block>
+						</div>
 						
 <!-- 						<div class="post disabled"> -->
 <!-- 							<div class="row-content"> -->
@@ -200,7 +208,7 @@
 <!-- 								<div class="comment">Просидел в суде 4 часа, бился с этими кретинами из обвинения, гнали пургу. Доки на дропе: (тут ссылка)</div> -->
 <!-- 							</div> -->
 <!-- 						</div> -->
-
+<!--*/-->
 						<span class="bg-posts">&nbsp;</span>
 					</div>
 					<a href="#" class="more-posts">Показать предыдущие записи</a>
@@ -308,5 +316,63 @@
 			</div>
 		</div>
 	</div>
+	
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var projectId = /*[[${project.id}]]*/ '1';
+	var userId = /*[[${@userSessionComponent.getCurrentUser().getId()}]]*/ '1';
+    
+    
+    jQuery(function(){	
+    		initDatepicker($('.calendar'));
+    		initEdit($('.post:not(.add-new-post, .disabled)'));
+    		initAddingNewPost();
+    		initSortable();
+    		initTabs();    		
+    		loadServices();
+    		
+    		 $('#newServiceForm').submit(function(event) {
+    			 var spentTime = $('#spentTime').val();
+    			 var comment = $('#comment').val();
+    			 var day = $('#day').val();
+    			 var month = $('#month').val();
+    			 var year = $('#year').val();
+    			 var json = {"spentTime" : spentTime, "comment" : comment, 
+    					 "day" : day, "month" : month, "year" : year,
+    					 "project" : projectId, "user" : userId};
+
+				 //hide add form
+				 $('#newServiceForm').find('.delete').trigger("click");
+
+    			 jQuery.ajax({
+    				 url: $("#newServiceForm").attr( "action"),
+    				 data: JSON.stringify(json),
+    				 type: "POST",
+    				 contentType: 'application/json',
+//     				 beforeSend: function(xhr) {
+//     					 xhr.setRequestHeader("Accept", "application/json");
+//     					 xhr.setRequestHeader("Content-Type", "application/json");
+//     				 },
+    				 success: function(createdService) {
+    					 loadServices();
+    					}
+    				 });
+				
+				
+				event.preventDefault();
+    		});
+    });
+
+    	function loadServices(){
+    		jQuery.get($("#newServiceForm").attr("action"), { project: projectId }, function(data){
+    			$("#servicesTable").html(data);
+    		});
+    	}
+    
+/*]]>*/
+</script>	
+		<script th:inline="javascript" src="../public/resources/js/main.js"
+		th:src="@{/resources/js/main.js}"></script>		
+	
 </body>
 </html>

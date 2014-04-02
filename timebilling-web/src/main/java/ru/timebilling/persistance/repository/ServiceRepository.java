@@ -10,5 +10,5 @@ public interface ServiceRepository extends CrudRepository<Service, Long>{
 
 	public Iterable<Service> findByEmployee(User user);
 	public Iterable<Service> findByProject(Project project);
-
+	public Iterable<Service> findByProjectOrderByDateDesc(Project project);
 }
