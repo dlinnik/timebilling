@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import ru.timebilling.core.domain.ServiceDetails;
 import ru.timebilling.persistance.repository.ProjectRepository;
+import ru.timebilling.persistance.repository.ServiceRepository;
 import ru.timebilling.persistance.repository.UserRepository;
 
 @Service
@@ -22,6 +23,8 @@ public class ServiceConverter {
 	@Autowired
 	ProjectRepository projectsRepository;
 	
+	@Autowired
+	ServiceRepository servicesRepository;
 	
 	
 	public ServiceDetails toServiceDetails(ru.timebilling.persistance.domain.Service service){
@@ -44,14 +47,25 @@ public class ServiceConverter {
         final SimpleDateFormat dateFormat = createDateFormat();
         final DecimalFormat dFormat = createDecimalFormat();
         
-		ru.timebilling.persistance.domain.Service service = new ru.timebilling.persistance.domain.Service();
-		service.setId(sd.getId());
-		service.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
-		service.setComment(sd.getComment());
-		service.setSpentTime(new BigDecimal(dFormat.parse(sd.getSpentTime()).doubleValue()));
+		ru.timebilling.persistance.domain.Service service = null;
 		
-		service.setEmployee(userRepository.findOne(sd.getUser()));
-		service.setProject(projectsRepository.findOne(sd.getProject()));
+		if(sd.getId()!=null){
+			//update
+			service = servicesRepository.findOne(sd.getId());
+			service.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
+			service.setComment(sd.getComment());
+			service.setSpentTime(new BigDecimal(dFormat.parse(sd.getSpentTime()).doubleValue()));
+		}else{
+			//create
+			service = new ru.timebilling.persistance.domain.Service();
+			service.setId(sd.getId());
+			service.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
+			service.setComment(sd.getComment());
+			service.setSpentTime(new BigDecimal(dFormat.parse(sd.getSpentTime()).doubleValue()));
+			
+			service.setEmployee(userRepository.findOne(sd.getUser()));
+			service.setProject(projectsRepository.findOne(sd.getProject()));
+		}
 		return service;
 	}
 	

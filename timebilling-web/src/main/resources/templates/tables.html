@@ -39,11 +39,12 @@
 					</div>
 
 					<div th:fragment="servicesTableFragment">
-						<th:block th:each="service : ${services}">
-							<div class="post authorized">
+						<th:block th:each="service : ${services}" 
+							th:with="editable = ${service.employee.id} == ${@userSessionComponent.getCurrentUser().getId()}">
+							<div th:class="${editable} ? 'post authorized' : 'post'">
 								<div class="row-content">
 									<div class="icon">
-										<a href="#" title="Редактировать"><span
+										<a th:if="${editable}" href="#" title="Редактировать"><span
 											class="glyphicon glyphicon-pencil"></span>&nbsp;</a>
 									</div>
 									<div class="date" th:text="${{service.date}}"
@@ -53,7 +54,7 @@
 										<div class="holder">
 											<div class="avatar">
 												<img src="../public/resources/images/img2.gif" alt="#"
-													width="30" height="30" />
+													th:src="@{/resources/images/img2.gif}" width="30" height="30" />
 											</div>
 											<span class="name" th:text="${service.employee.username}">Константин
 												Стаканов</span>
@@ -68,7 +69,9 @@
 										пургу. Доки на дропе: (тут ссылка)</div>
 								</div>
 
-								<div class="row-form">
+								<div th:if="${editable}" class="row-form">
+									<input type="hidden" th:value="${service.id}" />
+									
 									<div class="date">
 										<div class="calendar">
 											<input type="text" class="day" /> <input type="text"
@@ -79,7 +82,7 @@
 									</div>
 									<div class="user-info">
 										<div class="avatar">
-											<img src="../public/resources/images/img2.gif" alt="#"
+											<img src="../public/resources/images/img2.gif" th:src="@{/resources/images/img2.gif}" alt="#"
 												width="30" height="30" />
 										</div>
 										<span class="name" th:text="${service.employee.username}">Константин
@@ -91,8 +94,11 @@
 									<div class="comment">
 										<textarea cols="30" rows="10"></textarea>
 										<div class="buttom-box">
-											<a href="#" class="save">Сохранить</a> <a href="#"
-												class="delete">Удалить запись</a>
+											<a href="#" class="save">Сохранить</a> 
+											<a href="#" class="delete">
+<!-- 												Удалить запись -->
+												Отменить
+											</a>
 										</div>
 									</div>
 								</div>

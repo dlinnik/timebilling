@@ -80,8 +80,8 @@ public class ProjectsController extends AbstractController {
 	@RequestMapping("/projects-table")
 	public String projectsTable(Model model) {
 
-		Iterable<Project> projects = projectsRepository.findAll();
-		model.addAttribute("projects", projects);
+//		Iterable<Project> projects = projectsRepository.findAll();
+//		model.addAttribute("projects", projects);
 		return "index";
 	}
 

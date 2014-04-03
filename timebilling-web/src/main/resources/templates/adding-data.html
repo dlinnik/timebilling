@@ -118,7 +118,7 @@
 									</div>
 								</div>
 									<div class="user-info">
-										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<div class="avatar"><img src="../public/resources/images/img2.gif" th:src="@{/resources/images/img2.gif}" alt="#" width="30" height="30" /></div>
 										<!-- current user! -->
 										<span class="name" th:text="${@userSessionComponent.getCurrentUser().getUsername()}">Константин Стаканов</span>
 									</div>
@@ -328,8 +328,10 @@
     		initEdit($('.post:not(.add-new-post, .disabled)'));
     		initAddingNewPost();
     		initSortable();
-    		initTabs();    		
-    		loadServices();
+    		initTabs();
+    		
+    		//TODO: call on show specified tab
+    		loadServices(projectId);
     		
     		 $('#newServiceForm').submit(function(event) {
     			 var spentTime = $('#spentTime').val();
@@ -354,7 +356,7 @@
 //     					 xhr.setRequestHeader("Content-Type", "application/json");
 //     				 },
     				 success: function(createdService) {
-    					 loadServices();
+    					 loadServices(projectId);
     					}
     				 });
 				
@@ -362,12 +364,6 @@
 				event.preventDefault();
     		});
     });
-
-    	function loadServices(){
-    		jQuery.get($("#newServiceForm").attr("action"), { project: projectId }, function(data){
-    			$("#servicesTable").html(data);
-    		});
-    	}
     
 /*]]>*/
 </script>	
