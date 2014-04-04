@@ -29,8 +29,8 @@
 		th:src="@{/resources/js/jquery-ui-1.10.4.custom.min.js}"></script>
 	<script src="../public/resources/js/bootstrap.min.js"
 		th:src="@{/resources/js/bootstrap.min.js}"></script>
-<!-- 	<script src="../public/resources/js/main.js" -->
-<!-- 		th:src="@{/resources/js/main.js}"></script>		 -->
+	<script src="../public/resources/js/main.js"
+		th:src="@{/resources/js/main.js}"></script>		
 </head>
 
 
@@ -210,8 +210,10 @@
 <!-- 						</div> -->
 <!--*/-->
 						<span class="bg-posts">&nbsp;</span>
+<!-- 					<a href="#" class="more-posts">Показать предыдущие записи</a> -->
+
 					</div>
-					<a href="#" class="more-posts">Показать предыдущие записи</a>
+					<a href="#" class="more-posts" style="display: none;">Показать предыдущие записи</a>
 				</div>
 				<div id="tab-cash-costs" class="tab-pane">
 					<div class="posts">
@@ -322,6 +324,10 @@
     var projectId = /*[[${project.id}]]*/ '1';
 	var userId = /*[[${@userSessionComponent.getCurrentUser().getId()}]]*/ '1';
     
+	function moreServices(pageNumber){
+		loadServices(projectId, pageNumber);
+	}
+
     
     jQuery(function(){	
     		initDatepicker($('.calendar'));
@@ -365,10 +371,10 @@
     		});
     });
     
+    
 /*]]>*/
 </script>	
-		<script th:inline="javascript" src="../public/resources/js/main.js"
-		th:src="@{/resources/js/main.js}"></script>		
-	
+
+<div id="templates" style="display: none;"></div>	
 </body>
 </html>

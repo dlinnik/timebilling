@@ -13,6 +13,7 @@ import ru.timebilling.core.domain.ServiceDetails;
 import ru.timebilling.persistance.repository.ProjectRepository;
 import ru.timebilling.persistance.repository.ServiceRepository;
 import ru.timebilling.persistance.repository.UserRepository;
+import ru.timebilling.web.component.UserSessionComponent;
 
 @Service
 public class ServiceConverter {
@@ -26,6 +27,8 @@ public class ServiceConverter {
 	@Autowired
 	ServiceRepository servicesRepository;
 	
+	@Autowired
+	UserSessionComponent userInSession;
 	
 	public ServiceDetails toServiceDetails(ru.timebilling.persistance.domain.Service service){
         final SimpleDateFormat dateFormat = createDateFormat();
@@ -40,6 +43,7 @@ public class ServiceConverter {
 		details.setUser(service.getEmployee().getId());
 		details.setUserScreenName(service.getEmployee().getUsername());		
 		details.setProject(service.getProject().getId());
+		details.setEditable(details.getUser().equals(userInSession.getCurrentUser().getId()));
 		return details;
 	}
 	

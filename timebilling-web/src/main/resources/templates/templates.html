@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<div id="template-services" >	
+	{{#content}}
+
+						{{#editable}}
+						<div class="post authorized">
+						{{/editable}}
+						{{^editable}}
+						<div class="post">
+						{{/editable}}						
+							<div class="row-content">
+								<div class="icon">
+									{{#editable}}
+									<a href="#" title="Редактировать">
+										<span class="glyphicon glyphicon-pencil">
+										</span>&nbsp;
+									</a>
+									{{/editable}}
+								</div>
+								<div class="date" data-selected-date="{{date}}">{{date}}</div>
+								<div class="user-info">
+									<div class="holder">
+<!--										
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+-->
+										<span class="name">{{userScreenName}}</span>
+									</div>
+								</div>
+								<div class="value">
+									<span class="time">{{spentTime}}</span>
+									<span class="cost">1200P</span>
+								</div>
+								<div class="comment">{{comment}}</div>
+							</div>
+							
+							{{#editable}}
+							<div class="row-form">
+								<input type="hidden" value="{{id}}" />
+								<div class="date">
+									<div class="calendar">
+										<input type="text" class="day"/>
+										<input type="text" class="month"/>
+										<input type="text" class="year"/>
+										<a href="#" class="icon-calendar">календарь</a>
+										<div class="calendar-holder">											
+										</div>
+									</div>
+								</div>
+									<div class="user-info">
+										<div class="avatar"><img src="../public/resources/images/img2.gif" alt="#" width="30" height="30" /></div>
+										<span class="name">{{userScreenName}}</span>
+									</div>
+								<div class="time-field">
+									<input type="text" />
+								</div>
+								<div class="comment">
+									<textarea cols="30" rows="10"></textarea>
+									<div class="buttom-box">
+										<a href="#" class="save">Сохранить</a>
+										<a href="#" class="delete">Отменить</a>
+									</div>
+								</div>
+							</div>
+							{{/editable}}
+
+						</div>
+	{{/content}}</div>
+</html>

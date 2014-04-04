@@ -39,7 +39,7 @@
 					</div>
 
 					<div th:fragment="servicesTableFragment">
-						<th:block th:each="service : ${services}" 
+						<th:block th:each="service : ${services.content}" 
 							th:with="editable = ${service.employee.id} == ${@userSessionComponent.getCurrentUser().getId()}">
 							<div th:class="${editable} ? 'post authorized' : 'post'">
 								<div class="row-content">

@@ -24,6 +24,8 @@
 		<thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
 		<dandelion-datatables-thymeleaf.version>0.9.3</dandelion-datatables-thymeleaf.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<guava.version>r09</guava.version>
+		
 	</properties>
 
 	<parent>
@@ -116,6 +118,12 @@
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
+        
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

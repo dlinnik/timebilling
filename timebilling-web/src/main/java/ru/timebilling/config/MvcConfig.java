@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -21,6 +24,7 @@ import ru.timebilling.web.interceptor.JPAFilterInterceptor;
 
 @Configuration
 //@EnableWebMvc
+//@EnableSpringDataWebSupport
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	
@@ -40,6 +44,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         
     	registry.addViewController("/403").setViewName("/denied");
         registry.addViewController("/login").setViewName("/login");
+    	registry.addViewController("/templates").setViewName("/templates");
        
 
 
@@ -71,6 +76,20 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         //do your customizations here...
         return converter;
     }
+
+	@Override
+	public void addArgumentResolvers(
+			List<HandlerMethodArgumentResolver> argumentResolvers) {
+//		super.addArgumentResolvers(argumentResolvers);
+		argumentResolvers.add(new PageableHandlerMethodArgumentResolver());		
+	}
+	
+//	@Bean
+//	PageableHandlerMethodArgumentResolver getPageableHandlerMethodArgumentResolver(){
+//		return new PageableHandlerMethodArgumentResolver();
+//	}
+	
+	
     
     
 

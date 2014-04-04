@@ -1,10 +1,41 @@
-function loadServices(projectId) {
+function loadServices(projectId, pageNumber){
+	pageNumber = pageNumber == null ? 0 : pageNumber;
 	jQuery.get($("#newServiceForm").attr("action"), {
-		project : projectId
+		project : projectId,
+		page : pageNumber,
+		size : 5
 	}, function(data) {
-		$("#servicesTable").html(data);
 
-		initEdit($('.post:not(.add-new-post, .disabled)'));
+		$("#templates").load("/templates #template-services",function(){
+	          	var template = document.getElementById('template-services').innerHTML;
+		  		Mustache.parse(template);   // optional, speeds up future uses
+				var rendered = Mustache.render(template, data);
+				
+				if(data.firstPage){
+					$("#servicesTable").html(rendered);
+				}else{
+					$("#servicesTable").append(rendered);
+				}
+
+				initEdit($('.post:not(.add-new-post, .disabled)'));
+				
+				var moreAction = $("#tab-spent > .more-posts");		
+				moreAction.off();
+				
+				if(data.lastPage){
+					moreAction.hide();
+				}else{					
+					moreAction.on('click',
+							function(e) {
+								loadServices(projectId, data.number + 1);
+								e.preventDefault();
+							});
+					moreAction.show();
+
+				}
+				
+		});
+		
 
 	});
 }

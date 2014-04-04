@@ -45,6 +45,8 @@ public class ServiceDetails implements Serializable{
 	private Long project;
 	
 	private String comment;
+	
+	private boolean editable;
 
 	public Long getId() {
 		return id;
@@ -125,8 +127,13 @@ public class ServiceDetails implements Serializable{
 	public void setUserScreenName(String userScreenName) {
 		this.userScreenName = userScreenName;
 	}
-	
-	
 
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
 	
 }
