@@ -3,6 +3,7 @@ function loadServices(projectId, pageNumber){
 	jQuery.get($("#newServiceForm").attr("action"), {
 		project : projectId,
 		page : pageNumber,
+		sort : "date,desc",
 		size : 5
 	}, function(data) {
 
