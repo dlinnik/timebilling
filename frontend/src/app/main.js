@@ -3,6 +3,7 @@
 
     // Modules configuration
     requirejs.config({
+        // Lib paths
         paths: {
             // Common libs
             'jquery': '../lib/jquery',
@@ -21,6 +22,7 @@
             'angular-cookies': '../lib/angular/angular-cookies'
         },
 
+        // Non-AMD libs exports and deps
         shim: {
             'jquery': {exports: ['$', 'jQuery']},
             'underscore': {exports: '_'},
@@ -32,13 +34,12 @@
             'angular-animate': {deps: ['angular']},
             'angular-cookies': {deps: ['angular']}
         }
-
     });
 
     // Application init
     requirejs(
-        ['less', 'jquery', 'underscore', 'angular', 'angular-resource', 'angular-route'],
-        function() {
+        ['angular', 'less', 'jquery', 'underscore', 'angular-resource', 'angular-route'],
+        function(angular) {
             'use strict';
         }
     );
