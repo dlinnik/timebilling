@@ -1,9 +1,9 @@
-// define(
-//     ['less', 'jquery', 'underscore', 'angular', 'angular-resource', 'angular-route'],
-//     function() {
-//         'use strict';
-//     }
-// );
+define(
+    ['angular', '', 'less', 'jquery', 'underscore', 'angular-resource', 'angular-route'],
+    function() {
+        'use strict';
+    }
+);
 
 
 // define([
