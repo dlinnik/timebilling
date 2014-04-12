@@ -1,23 +1,14 @@
 define(
-    ['angular', '', 'less', 'jquery', 'underscore', 'angular-resource', 'angular-route'],
-    function() {
+    [
+        'angular',
+        'pages/pages_index',
+        'common/directives/directives'
+    ],
+    function(angular) {
         'use strict';
+        return angular.module('TimeBilling', [
+            'ngRoute',
+            'TimeBilling.Pages'
+        ]);
     }
 );
-
-
-// define([
-//     'angular',
-//     './controllers/index',
-//     './directives/index',
-//     './filters/index',
-//     './services/index'
-// ], function (ng) {
-//     'use strict';
-//     return ng.module('TB', [
-//         'TB.services',
-//         'TB.controllers',
-//         'TB.filters',
-//         'TB.directives'
-//     ]);
-// });
