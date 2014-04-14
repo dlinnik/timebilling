@@ -52,8 +52,8 @@ public class ProjectsController extends AbstractController {
 		Project project = projectsRepository.findOne(id);
 		if (project != null) {
 			model.addAttribute("project", project);
-			model.addAttribute("services",
-					servicesRepository.findByProject(project));
+//			model.addAttribute("services",
+//					servicesRepository.findByProject(project));
 		}
 		return "adding-data";
 	}
@@ -70,8 +70,8 @@ public class ProjectsController extends AbstractController {
 		
 		if (project != null) {
 			model.addAttribute("project", projectsRepository.findOne(id));
-			model.addAttribute("services",
-					servicesRepository.findByProject(project));
+//			model.addAttribute("services",
+//					servicesRepository.findByProject(project));
 		}
 		return "adding-data";
 	}

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import ru.timebilling.service.conversion.CustomObjectMapper;
 import ru.timebilling.service.conversion.DateFormatter;
 import ru.timebilling.web.interceptor.AppInterceptor;
 import ru.timebilling.web.interceptor.JPAFilterInterceptor;
@@ -34,8 +35,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	JPAFilterInterceptor filterInterceptor;
 	
-	@Autowired
-	DateFormatter dateFormatter;
+//	@Autowired
+//	DateFormatter dateFormatter;
 	
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -45,6 +46,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     	registry.addViewController("/403").setViewName("/denied");
         registry.addViewController("/login").setViewName("/login");
     	registry.addViewController("/templates").setViewName("/templates");
+    	registry.addViewController("/tester").setViewName("/tester");
        
 
 
@@ -58,7 +60,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addFormatter(dateFormatter);
+//		registry.addFormatter(dateFormatter);
 	}
 	
 	
@@ -73,7 +75,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Bean
     MappingJackson2HttpMessageConverter converter() {
     	MappingJackson2HttpMessageConverter  converter = new MappingJackson2HttpMessageConverter ();
-        //do your customizations here...
+    	converter.setObjectMapper(new CustomObjectMapper());
         return converter;
     }
 

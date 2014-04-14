@@ -324,20 +324,26 @@
     var projectId = /*[[${project.id}]]*/ '1';
 	var userId = /*[[${@userSessionComponent.getCurrentUser().getId()}]]*/ '1';
     
-	function moreServices(pageNumber){
-		loadServices(projectId, pageNumber);
-	}
-
-    
     jQuery(function(){	
+
     		initDatepicker($('.calendar'));
     		initEdit($('.post:not(.add-new-post, .disabled)'));
     		initAddingNewPost();
-    		initSortable();
+    		initSortable();    		    	
     		initTabs();
     		
-    		//TODO: call on show specified tab
-    		loadServices(projectId);
+    		
+    		$('.tab-list a').on('shown.bs.tab', function (e) {
+    			  //e.target // activated tab
+    			  //e.relatedTarget // previous tab
+    			  var tabId = getTabId($('.tab-list .active a'));//getTabId(e.target);
+    			  if('tab-spent' == tabId){
+    				  loadServices(getTabId($('.tab-list .active a')), projectId);
+    			  }
+    		});
+    		
+    		loadServices(getTabId($('.tab-list .active a')), projectId);
+    		
     		
     		 $('#newServiceForm').submit(function(event) {
     			 var spentTime = $('#spentTime').val();
@@ -362,7 +368,7 @@
 //     					 xhr.setRequestHeader("Content-Type", "application/json");
 //     				 },
     				 success: function(createdService) {
-    					 loadServices(projectId);
+    					 loadServices(getTabId($('.tab-list .active a')), projectId);
     					}
     				 });
 				

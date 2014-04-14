@@ -51,23 +51,23 @@
           
 			<table id="prjs" dt:table="true" dt:theme="bootstrap2"
            		class="table table-striped table-bordered table-condensed"
-           		dt:sort="true" dt:export="csv">
+           		dt:url="@{/projectsREST}">
                      
 <!--             <table class="table table-striped"> -->
               <thead>
                 <tr>
-                  <th>Название</th>
-                  <th>Описание</th>
+                  <th dt:property="'name'">Название</th>
+                  <th dt:property="'description'">Описание</th>
                 </tr>
               </thead>
-				<tbody>
-                    <tr th:each="projectItem : ${projects}">
-                        <td>
-                        	<a href="projectDetails.html" th:href="@{|/projects/${projectItem.id}|}"
-               				th:text="${projectItem.name}">Проект 1</a></td>
-                        <td th:text="${projectItem.description}">Описание проекта 1</td>
-                    </tr>
-				</tbody>
+<!-- 				<tbody> -->
+<!--                     <tr th:each="projectItem : ${projects}"> -->
+<!--                         <td> -->
+<!--                         	<a href="projectDetails.html" th:href="@{|/projects/${projectItem.id}|}" -->
+<!--                				th:text="${projectItem.name}">Проект 1</a></td> -->
+<!--                         <td th:text="${projectItem.description}">Описание проекта 1</td> -->
+<!--                     </tr> -->
+<!-- 				</tbody> -->
 			</table>
 		</div>
 <!-- </div> -->

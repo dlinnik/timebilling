@@ -2,7 +2,6 @@ package ru.timebilling;
 
 import java.util.Arrays;
 
-
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,12 +13,17 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.context.annotation.Import;
+
+import ru.timebilling.config.RepositoryConfig;
 
 import com.github.dandelion.datatables.core.web.servlet.DatatablesServlet;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@Import(RepositoryConfig.class)
 public class Application {
 
 	public static void main(String[] args) {

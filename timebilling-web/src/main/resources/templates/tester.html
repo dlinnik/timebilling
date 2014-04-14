@@ -1,0 +1,19 @@
+<!doctype html>
+<html ng-app xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Tester for AngularJS</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script src="../public/resources/js/test-angular.js"
+		th:src="@{/resources/js/test-angular.js}"></script>	
+	</head>
+
+	<body>
+	<div ng-controller="Projects">
+		<div ng-repeat="project in projects">
+	 		{{project.name}}
+		</div>
+	</div>
+
+	</body>
+</html>

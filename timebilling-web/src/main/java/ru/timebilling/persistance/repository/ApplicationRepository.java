@@ -1,13 +1,17 @@
 package ru.timebilling.persistance.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import ru.timebilling.persistance.domain.Application;
 
-
-public interface ApplicationRepository extends CrudRepository<Application, Long>{
+@RepositoryRestResource(collectionResourceRel = "app", path = "app")
+public interface ApplicationRepository extends PagingAndSortingRepository<Application, Long>{
 	
-	public Application findByName(String name);
+	public Application findByName(@Param("name") String name);
 
 
 }

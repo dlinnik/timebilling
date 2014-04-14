@@ -15,6 +15,9 @@ public class Project extends AppAwareBaseEntity{
 	private String name;
 	@Column(name = "description", nullable = true, length = 1024)
 	private String description;
+
+	@Column(name = "client", nullable = true, length = 1024)
+	private String client;
 	
 	
 	public Project() {
@@ -50,6 +53,16 @@ public class Project extends AppAwareBaseEntity{
 		return new ProjectDetails(id, name, description);				
 	}
 	
+	
+	
+	public String getClient() {
+		return client;
+	}
+
+	public void setClient(String client) {
+		this.client = client;
+	}
+
 	public static Project fromProjectDetails(ProjectDetails d){
 		Project p = new Project();
 		p.name = d.getName();

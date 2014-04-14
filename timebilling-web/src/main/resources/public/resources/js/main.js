@@ -1,4 +1,8 @@
-function loadServices(projectId, pageNumber){
+function getTabId(a){
+	return a.attr('href').substr(1);
+}
+
+function loadServices(tabId, projectId, pageNumber){
 	pageNumber = pageNumber == null ? 0 : pageNumber;
 	jQuery.get($("#newServiceForm").attr("action"), {
 		project : projectId,
@@ -28,7 +32,7 @@ function loadServices(projectId, pageNumber){
 				}else{					
 					moreAction.on('click',
 							function(e) {
-								loadServices(projectId, data.number + 1);
+								loadServices(tabId, projectId, data.number + 1);
 								e.preventDefault();
 							});
 					moreAction.show();
