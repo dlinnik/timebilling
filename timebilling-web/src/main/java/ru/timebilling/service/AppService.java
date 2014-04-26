@@ -26,11 +26,9 @@ public class AppService {
     	if(appContext.getApplication() == null){
     		//вычитываем данные о приложении из БД
     		appContext.setApplication(reposittory.findByName(appName));
+            logger.debug("appcontext = [" + appContext.getApplication().getName() + "][" + appContext.getApplication().getScreenName() + "]");
     	}
-    	if(appContext.getApplication()!=null){
-    		
-            logger.info("appcontext = " + appContext.getApplication().getName() + "]");
-
+    	if(appContext.getApplication()!=null){    		
 	    	//всегда обновляем данные о приложении в статическом контексте (для multitentancy поддержки на уровне JPA)
 	    	AppNameSupplier.setAppName(appContext.getApplication().getName());
     	}

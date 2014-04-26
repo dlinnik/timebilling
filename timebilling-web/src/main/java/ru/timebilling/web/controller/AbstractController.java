@@ -23,10 +23,10 @@ public class AbstractController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/")
-    public String projects(Model model) {
-		return buildRedirectUrl("/projects");
-	}
+//	@RequestMapping("/")
+//    public String projects(Model model) {
+//		return buildRedirectUrl("/index.html");
+//	}
 
 	
 	/**
