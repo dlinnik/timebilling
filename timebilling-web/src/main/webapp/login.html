@@ -1,62 +1,73 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
 
 <head>
 
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
-    <title>Timebilling webapp</title>
+<title>Timebilling webapp</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"></link>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet"></link>
 
-    <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet"></link>
+<!-- Custom styles for this template -->
+<link href="css/signin.css" rel="stylesheet"></link>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>    
-  
-  <body>
 
-    <div class="container">
-    
-    
-<!-- 	<div th:if="${param.error}" class="alert alert-danger"> -->
-<!-- 	<strong>Ошибка!</strong> -->
-<!-- 	Неверный логин или пароль. -->
-<!-- 	</div> -->
 
-<!--     <div th:if="${param.logout}" class="alert alert-info"> -->
-<!--         Вы вышли из системы. -->
-<!--     </div> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+<script>
+	angular.module('myApp', [], function($locationProvider) {
+		$locationProvider.html5Mode(true);
+	});
 
-      <form class="form-signin" role="form" action="login.html" method="post">
-        <h2 class="form-signin-heading">Вход в систему</h2>
-        <input name="username" type="email" class="form-control" placeholder="Email адрес" required="true" autofocus="true"/>
-        <input name="password" type="password" class="form-control" placeholder="Пароль" required="true" />
-<!--  
+	function QueryCntl($scope, $location) {
+		$scope.error = $location.search()['error'];
+	}
+</script>
+</head>
+
+<body ng-controller="QueryCntl">
+
+	<div class="container">
+
+		<div ng-show="error" class="alert alert-danger">
+			<strong>Ошибка!</strong> Неверный логин или пароль.
+		</div>
+
+		<form class="form-signin" role="form" action="login.html"
+			method="post">
+			<h2 class="form-signin-heading">Вход в систему</h2>
+			<input name="username" type="email" class="form-control"
+				placeholder="Email адрес" required="true" autofocus="true" /> <input
+				name="password" type="password" class="form-control"
+				placeholder="Пароль" required="true" />
+			<!--  
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
         -->
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-      </form>
 
-    </div> <!-- /container -->
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+		</form>
+
+	</div>
+	<!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  </body>
-  
+	<!-- Placed at the end of the document so the pages load faster -->
+</body>
+
 </html>

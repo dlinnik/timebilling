@@ -19,7 +19,6 @@ import ru.timebilling.persistance.domain.User;
 import ru.timebilling.persistance.domain.UserRoleEnum;
 import ru.timebilling.persistance.repository.UserRepository;
 import ru.timebilling.web.component.UserSessionComponent;
-import ru.timebilling.web.interceptor.AppInterceptor;
 
 
 @Service
