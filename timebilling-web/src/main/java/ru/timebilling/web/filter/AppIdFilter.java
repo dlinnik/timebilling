@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import ru.timebilling.service.AppService;
+import ru.timebilling.model.service.AppService;
 import ru.timebilling.web.component.AppContext;
 
 /**

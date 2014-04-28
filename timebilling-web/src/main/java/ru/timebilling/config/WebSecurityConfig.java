@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import ru.timebilling.service.UserDetailsServiceImpl;
+import ru.timebilling.model.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvcSecurity

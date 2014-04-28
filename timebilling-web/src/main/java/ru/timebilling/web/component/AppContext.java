@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
-import ru.timebilling.persistance.domain.Application;
+import ru.timebilling.model.domain.Application;
 
 /**
  * Содержит информацию о текущем приложении в сессии.

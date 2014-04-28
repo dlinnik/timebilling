@@ -1,4 +1,4 @@
-package ru.timebilling.service.conversion;
+package ru.timebilling.model.service.conversion;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.timebilling.persistance.domain;
+package ru.timebilling.model.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

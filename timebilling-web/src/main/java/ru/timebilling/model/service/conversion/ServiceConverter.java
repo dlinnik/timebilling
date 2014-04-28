@@ -1,4 +1,4 @@
-package ru.timebilling.service.conversion;
+package ru.timebilling.model.service.conversion;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -9,10 +9,10 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ru.timebilling.core.domain.ServiceDetails;
-import ru.timebilling.persistance.repository.ProjectRepository;
-import ru.timebilling.persistance.repository.ServiceRepository;
-import ru.timebilling.persistance.repository.UserRepository;
+import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.model.repository.ServiceRepository;
+import ru.timebilling.model.repository.UserRepository;
+import ru.timebilling.rest.domain.ServiceDetails;
 import ru.timebilling.web.component.UserSessionComponent;
 
 @Service
@@ -30,7 +30,7 @@ public class ServiceConverter {
 	@Autowired
 	UserSessionComponent userInSession;
 	
-	public ServiceDetails toServiceDetails(ru.timebilling.persistance.domain.Service service){
+	public ServiceDetails toServiceDetails(ru.timebilling.model.domain.Service service){
         final SimpleDateFormat dateFormat = createDateFormat();
         final DecimalFormat dFormat = createDecimalFormat();
 
@@ -47,11 +47,11 @@ public class ServiceConverter {
 		return details;
 	}
 	
-	public ru.timebilling.persistance.domain.Service fromServiceDetails(ServiceDetails sd) throws ParseException{
+	public ru.timebilling.model.domain.Service fromServiceDetails(ServiceDetails sd) throws ParseException{
         final SimpleDateFormat dateFormat = createDateFormat();
         final DecimalFormat dFormat = createDecimalFormat();
         
-		ru.timebilling.persistance.domain.Service service = null;
+		ru.timebilling.model.domain.Service service = null;
 		
 		if(sd.getId()!=null){
 			//update
@@ -61,7 +61,7 @@ public class ServiceConverter {
 			service.setSpentTime(new BigDecimal(dFormat.parse(sd.getSpentTime()).doubleValue()));
 		}else{
 			//create
-			service = new ru.timebilling.persistance.domain.Service();
+			service = new ru.timebilling.model.domain.Service();
 			service.setId(sd.getId());
 			service.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
 			service.setComment(sd.getComment());

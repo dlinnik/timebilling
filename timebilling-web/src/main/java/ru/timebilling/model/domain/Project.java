@@ -1,12 +1,7 @@
-package ru.timebilling.persistance.domain;
+package ru.timebilling.model.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import ru.timebilling.core.domain.ProjectDetails;
 
 @Entity
 public class Project extends AppAwareBaseEntity{
@@ -49,11 +44,7 @@ public class Project extends AppAwareBaseEntity{
 		this.description = description;
 	}
 
-	public ProjectDetails toProjectDetails(){
-		return new ProjectDetails(id, name, description);				
-	}
-	
-	
+
 	
 	public String getClient() {
 		return client;
@@ -62,15 +53,5 @@ public class Project extends AppAwareBaseEntity{
 	public void setClient(String client) {
 		this.client = client;
 	}
-
-	public static Project fromProjectDetails(ProjectDetails d){
-		Project p = new Project();
-		p.name = d.getName();
-		p.description = d.getDescription();
-		p.id = d.getId();
-		return p;
-	}
-	
-
 
 }

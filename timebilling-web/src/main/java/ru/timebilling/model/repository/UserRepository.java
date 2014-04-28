@@ -1,8 +1,8 @@
-package ru.timebilling.persistance.repository;
+package ru.timebilling.model.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ru.timebilling.persistance.domain.User;
+import ru.timebilling.model.domain.User;
 
 
 public interface UserRepository extends CrudRepository<User, Long>{

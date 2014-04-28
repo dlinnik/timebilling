@@ -1,4 +1,4 @@
-package ru.timebilling.core.domain;
+package ru.timebilling.rest.domain;
 
 import java.io.Serializable;
 

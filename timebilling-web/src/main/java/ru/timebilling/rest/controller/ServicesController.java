@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ru.timebilling.core.domain.ServiceDetails;
-import ru.timebilling.persistance.domain.Service;
-import ru.timebilling.service.ProjectServicesService;
+import ru.timebilling.model.domain.Service;
+import ru.timebilling.model.service.ProjectServicesService;
+import ru.timebilling.rest.domain.ServiceDetails;
 
 @Controller
 @RequestMapping(value="/services")

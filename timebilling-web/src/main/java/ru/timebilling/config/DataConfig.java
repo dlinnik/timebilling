@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:/hibernate-db.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "ru.timebilling.persistance.repository")
+@EnableJpaRepositories(basePackages = "ru.timebilling.model.repository")
 public class DataConfig implements DisposableBean {
 	static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
@@ -76,7 +76,7 @@ public class DataConfig implements DisposableBean {
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("ru.timebilling.persistance.domain");
+		factory.setPackagesToScan("ru.timebilling.model.domain");
 		factory.setPersistenceUnitName("TimebillingPU");
 		factory.setDataSource(dataSource());
 

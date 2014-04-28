@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ru.timebilling.service.AppService;
+import ru.timebilling.model.service.AppService;
 import ru.timebilling.web.component.AppContext;
 
 @Component

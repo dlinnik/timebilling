@@ -1,12 +1,12 @@
-package ru.timebilling.service;
+package ru.timebilling.model.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ru.timebilling.persistance.AppNameSupplier;
-import ru.timebilling.persistance.repository.ApplicationRepository;
+import ru.timebilling.model.AppNameSupplier;
+import ru.timebilling.model.repository.ApplicationRepository;
 import ru.timebilling.web.component.AppContext;
 
 @Service

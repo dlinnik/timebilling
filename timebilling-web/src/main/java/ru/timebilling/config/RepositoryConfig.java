@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
-import ru.timebilling.persistance.domain.Project;
+import ru.timebilling.model.domain.Project;
 
 @Configuration
 public class RepositoryConfig extends

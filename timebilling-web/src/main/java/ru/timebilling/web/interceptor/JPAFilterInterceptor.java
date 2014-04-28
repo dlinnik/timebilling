@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import ru.timebilling.persistance.AppNameSupplier;
+import ru.timebilling.model.AppNameSupplier;
 import ru.timebilling.web.component.UserSessionComponent;
 
 //TODO: change to filter since MVC interceptor isn't supposed to handle all cases?

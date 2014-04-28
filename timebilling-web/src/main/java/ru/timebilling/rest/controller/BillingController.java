@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ru.timebilling.persistance.domain.Project;
-import ru.timebilling.persistance.repository.ProjectRepository;
+import ru.timebilling.model.domain.Project;
+import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.model.service.UserDetailsServiceImpl;
 import ru.timebilling.rest.domain.Billing;
 import ru.timebilling.rest.domain.BillingGroupBy;
 import ru.timebilling.rest.domain.BillingItem;
-import ru.timebilling.service.UserDetailsServiceImpl;
 import static ru.timebilling.rest.domain.BillingGroupBy.monthly;
 import static ru.timebilling.rest.domain.BillingGroupBy.quarterly;
 

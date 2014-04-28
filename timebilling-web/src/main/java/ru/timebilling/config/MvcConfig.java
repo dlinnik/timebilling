@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import ru.timebilling.service.conversion.CustomObjectMapper;
+import ru.timebilling.model.service.conversion.CustomObjectMapper;
 import ru.timebilling.web.interceptor.JPAFilterInterceptor;
 
 

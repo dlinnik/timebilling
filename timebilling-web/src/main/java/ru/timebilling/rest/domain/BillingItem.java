@@ -2,7 +2,7 @@ package ru.timebilling.rest.domain;
 
 import java.util.Date;
 
-import ru.timebilling.persistance.domain.Project;
+import ru.timebilling.model.domain.Project;
 
 /**
  * Запись (период) в биллинге по проекту

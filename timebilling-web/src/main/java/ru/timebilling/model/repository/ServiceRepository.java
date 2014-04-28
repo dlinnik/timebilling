@@ -1,13 +1,13 @@
-package ru.timebilling.persistance.repository;
+package ru.timebilling.model.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import ru.timebilling.persistance.domain.Project;
-import ru.timebilling.persistance.domain.Service;
-import ru.timebilling.persistance.domain.User;
+import ru.timebilling.model.domain.Project;
+import ru.timebilling.model.domain.Service;
+import ru.timebilling.model.domain.User;
 
 @RepositoryRestResource(collectionResourceRel = "srv", path = "srv")
 public interface ServiceRepository extends PagingAndSortingRepository<Service, Long>{

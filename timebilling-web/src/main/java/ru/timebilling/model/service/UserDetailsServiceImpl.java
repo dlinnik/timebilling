@@ -1,4 +1,4 @@
-package ru.timebilling.service;
+package ru.timebilling.model.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,10 +14,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ru.timebilling.persistance.AppNameSupplier;
-import ru.timebilling.persistance.domain.User;
-import ru.timebilling.persistance.domain.UserRoleEnum;
-import ru.timebilling.persistance.repository.UserRepository;
+import ru.timebilling.model.AppNameSupplier;
+import ru.timebilling.model.domain.User;
+import ru.timebilling.model.domain.UserRoleEnum;
+import ru.timebilling.model.repository.UserRepository;
 import ru.timebilling.web.component.UserSessionComponent;
 
 

@@ -15,10 +15,10 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 
-import ru.timebilling.persistance.domain.Project;
-import ru.timebilling.persistance.domain.Service;
-import ru.timebilling.persistance.repository.ProjectRepository;
-import ru.timebilling.persistance.repository.ServiceRepository;
+import ru.timebilling.model.domain.Project;
+import ru.timebilling.model.domain.Service;
+import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.model.repository.ServiceRepository;
 import ru.timebilling.web.component.UserSessionComponent;
 
 @Controller

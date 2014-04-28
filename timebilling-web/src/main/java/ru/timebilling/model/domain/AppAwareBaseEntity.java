@@ -1,4 +1,4 @@
-package ru.timebilling.persistance.domain;
+package ru.timebilling.model.domain;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -13,7 +13,7 @@ import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.Filter;
 
-import ru.timebilling.persistance.AppNameSupplier;
+import ru.timebilling.model.AppNameSupplier;
 
 /**
  * Базовый класс для всех сущностей, специфичных для приложения

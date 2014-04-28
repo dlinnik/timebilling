@@ -1,4 +1,4 @@
-package ru.timebilling.persistance;
+package ru.timebilling.model;
 
 /**
  * хранит текущее значение appName в ThreadLocal

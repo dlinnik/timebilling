@@ -1,4 +1,4 @@
-package ru.timebilling.service;
+package ru.timebilling.model.service;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;

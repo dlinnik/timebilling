@@ -1,4 +1,4 @@
-package ru.timebilling.persistance.domain;
+package ru.timebilling.model.domain;
 
 public enum UserRoleEnum {
 	 

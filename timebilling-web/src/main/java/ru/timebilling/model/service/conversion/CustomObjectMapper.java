@@ -1,4 +1,4 @@
-package ru.timebilling.service.conversion;
+package ru.timebilling.model.service.conversion;
 
 import java.text.SimpleDateFormat;
 
