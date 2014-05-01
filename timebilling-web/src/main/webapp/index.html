@@ -1,18 +1,48 @@
 <!doctype html>
-<html ng-app>
-
-	<head>
-		<title>Tester for AngularJS</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-	<script src="js/test-angular.js"></script>	
-	</head>
-
-	<body>
-	<div ng-controller="Projects">
-		<div ng-repeat="project in projects">
-	 		{{project.name}}
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Time billing</title>
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/bootstrap-glyphicons.css" />
+  <link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  
+  <script src="js/lib/jquery-1.10.2.js"></script>
+  <script src="js/lib/jquery-ui-1.10.4.custom.min.js"></script>
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/angular-route.min.js"></script>
+  <script src="js/lib/angular-resource.min.js"></script>
+  
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</head>
+<body>
+	<header id="header">
+		<div class="holder" ng-controller="indexCtrl">
+			<div id="logo">
+				<a href="#" title="time-billing">time-billing</a>
+				<span>ООО «Кибернетика лимитед»</span>
+			</div>
+			<a href="#/project" ng-click="onProjects()" class="project" ng-class="{'active': activePage == 'projects'}">
+				Проекты<sup>{{totalProjects}}</sup>
+			</a>
+			<a href="#/billing" ng-click="onBilling()" class="title" ng-class="{'active': activePage == 'billing'}">
+				Биллинг и отчеты
+			</a>
+			<a href="#/user" class="user">
+				<div class="avatar"><img src="images/img1.gif" alt="#" width="50" height="50" /></div>
+				<dl>
+					<dd>{{user}}</dd>
+					<dt>{{role}}</dt>
+				</dl>
+			</a>
 		</div>
-	</div>
-
-	</body>
+	</header>
+  <div ng-view></div>
+</body>
 </html>
