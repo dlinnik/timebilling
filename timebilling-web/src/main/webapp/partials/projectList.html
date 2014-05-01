@@ -1,0 +1,31 @@
+<div id="main">
+	<div class="button-panel">
+		<div class="switch">
+			<a href="#" class="active">Активные проекты<sup>4</sup></a> <a
+				href="#">Архивные<sup>2</sup></a>
+		</div>
+		<a href="#" class="new-project" title="Добавить новый проект">Добавить
+			новый проект</a>
+	</div>
+	<div class="project-items">
+		<div ng_repeat="project in projects" class="item">
+			<a href="#project/{{project.id}}" class="name-project">{{project.name}}</a>
+			<div class="info-project">
+				<dl>
+					<dt class="people">people</dt>
+					<dd>{{project.size}} чел.</dd>
+				</dl>
+				<dl>
+					<dt class="time">time</dt>
+					<dd>{{project.totalTime}} ч.</dd>
+				</dl>
+				<dl>
+					<dt class="cost">cost</dt>
+					<dd>{{project.totalMoney}} Р</dd>
+				</dl>
+			</div>
+			<a href="#" class="setting-project" title="Настройка модуля">Настройка
+				модуля</a> <a href="#" class="sorting">сортировка</a>
+		</div>
+	</div>
+</div>

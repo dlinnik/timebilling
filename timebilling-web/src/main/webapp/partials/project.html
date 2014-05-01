@@ -1,0 +1,129 @@
+
+<div id="main">
+	<ul class="breadcrumbs">
+		<li><a href="">Проекты</a></li>
+		<li>Развод семьи Путиных</li>
+	</ul>
+	<div class="page-title">
+		<h1>{{projectId}}</h1>
+		<a href="" class="change-project"><span
+			class="glyphicon glyphicon-pencil"></span>Изменить</a>
+	</div>
+	<div class="information-panel">
+		<span class="payment-method">Почасовая оплата</span> <span
+			class="persons">Заняты 4 чел.</span> <span class="reports"><a
+			href="">Сформировано 2 отчета</a></span>
+		<dl class="client">
+			<dt>Клиент:</dt>
+			<dd>
+				Владимир Путин и его жена. <a href="#">Подробнее о клиенте</a>
+			</dd>
+		</dl>
+	</div>
+	<div id="tabs" ng-init="spentTab();">
+		<div class="holder">
+			<a href="" class="add-record" ng-class="{'money': mode.selected == 'cost'}" ng-click="onAdd()">Добавить запись</a>
+			<ul class="tab-list">
+				<li ng-class="{'active' : mode.selected == 'spent' }"><a href=""
+					ng-click="spentTab()">Затраченное время</a></li>
+				<li ng-class="{'active' : mode.selected == 'cost' }"><a href=""
+					ng-click="costTab()">Денежные затраты</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="posts">
+					<div class="post-title">
+						<span class="date">Дата</span> 
+						<span class="time" ng-show="mode.selected == 'spent'">Время, ч.</span>
+						<span class="time" ng-show="mode.selected == 'cost'">Сумма, Р</span>		
+						<span class="comment">Комментарий</span>
+					</div>
+					<div class="post add-new-post" ng-show="mode.adding">
+						<div class="row-form">
+							<div class="date">
+								<div class="calendar" datapicker>
+									<input type="text" class="day" ng-model="day"/> 
+									<input type="text" class="month" ng-model="month"/> 
+								    <input type="text" class="year" ng-model="year"/> 
+								    <a href="" class="icon-calendar">календарь</a>
+									<div class="calendar-holder"></div>
+								</div>
+							</div>
+							<div class="user-info">
+								<div class="avatar">
+									<img src="images/img2.gif" alt="#" width="30" height="30" />
+								</div>
+								<span class="name">Дмитрий Линник</span>
+							</div>
+							<div class="time-field">
+								<input type="text" ng-model="valueAdd"/>
+							</div>	
+							<div class="comment">
+								<textarea cols="30" rows="10"
+									placeholder="Напишите комментарий (обязательно)"
+									onfocus="placeholder='';" ng-model="commentAdd"></textarea>
+								<div class="buttom-box">
+									<a href="" class="save" ng_click="onAddRecord()">Добавить запись</a> 
+									<a href="" class="delete" ng_click="onCancel()">Отменить</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="post" ng-repeat="record in records" ng-controller="recordCntl"
+						ng-class="{'authorized' : record.auth, 'disabled' : record.disable}">
+						<div class="row-content" ng-show="mode.editId != record.id">
+							<div class="icon">
+								<a href="" title="Редактировать" ng-click="onEdit(record)" ng-show="!record.disable && record.auth">
+									<span class="glyphicon glyphicon-pencil"></span>&nbsp;</a>
+								<span class="not-edit" ng-show="record.disable">не редактировать</span>								
+							</div>
+							<div class="date" data-selected-date="12/02/2014">{{record.date.toDateString()}}</div>
+							<div class="user-info">
+								<div class="holder">
+									<div class="avatar">
+										<img src="images/img2.gif" alt="#" width="30" height="30" />
+									</div>
+									<span class="name">{{record.name}}</span>
+								</div>
+							</div>
+							<div class="value">
+								<span class="time">{{record.value}}</span>
+							</div>		
+							<div class="comment">{{record.comment}}</div>
+						</div>
+						<div class="row-form" ng-show="mode.editId == record.id">
+							<div class="date">
+								<div class="calendar" datapicker>
+									<input type="text" class="day" ng-model="day"/> 
+									<input type="text" class="month" ng-model="month"/> 
+									<input type="text" class="year" ng-model="year"/> 
+									<a href="" class="icon-calendar">календарь</a><div class="calendar-holder"></div>
+								</div>
+							</div>
+							<div class="user-info">
+								<div class="avatar">
+									<img src="images/img2.gif" alt="#" width="30" height="30" />
+								</div>
+								<span class="name">{{nameEdit}}</span>
+							</div>
+							<div class="time-field">
+								<input ng-model="valueEdit" type="text" />
+							</div>
+							<div class="comment">
+								<textarea ng-model="commentEdit" cols="30" rows="10"></textarea>
+								<div class="buttom-box">
+									<a href="" ng-click="onUpdateRecord(record)" class="save">Сохранить</a> 
+									<a href="" ng-click="onCancel()" class="delete">Отменить</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="bg-posts">&nbsp;</span>
+				</div>
+				<a href="#" class="more-posts">Показать предыдущие записи</a>
+			</div>
+		</div>
+	</div>
+</div>
+
