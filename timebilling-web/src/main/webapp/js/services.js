@@ -3,6 +3,12 @@
 /* Services */
 
 angular.module('myApp.services', ['ngResource'])
+	.factory('currentUserFactory', function($resource) {
+		return $resource('api/current_user', {}, {
+			query : {method : 'GET',	isArray : false }	
+		});
+	})
+
 	.factory('projectFactory', function($resource) {
 		return $resource('api/projects', {}, {
 			query : {method : 'GET',	isArray : true }	

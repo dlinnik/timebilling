@@ -21,9 +21,6 @@ public class ProjectsRestController extends BaseAPIController{
 	@Autowired
 	ProjectRepository projectsRepository;
 	
-	@Autowired
-	UserSessionComponent userInSession;
-
 	  
     @RequestMapping("/projects")
     @ResponseBody

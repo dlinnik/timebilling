@@ -26,7 +26,7 @@
 		<div class="holder" ng-controller="indexCtrl">
 			<div id="logo">
 				<a href="#" title="time-billing">time-billing</a>
-				<span>ООО «Кибернетика лимитед»</span>
+				<span>{{appName}}</span>
 			</div>
 			<a href="#/project" ng-click="onProjects()" class="project" ng-class="{'active': activePage == 'projects'}">
 				Проекты<sup>{{totalProjects}}</sup>

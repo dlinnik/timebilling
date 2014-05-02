@@ -3,10 +3,22 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-	.controller('indexCtrl', function($scope, projectFactory){
-		$scope.totalProjects = projectFactory.query().lenght;
-		$scope.user = 'Дмитрий Линник';
-		$scope.role = 'Администратор';
+	.controller('indexCtrl', function($scope, projectFactory, currentUserFactory){
+		$scope.projects = 
+		projectFactory.query(function(){
+			$scope.totalProjects = $scope.projects.length;
+		});
+
+		$scope.user_details = currentUserFactory.query(function(){
+			$scope.appName = $scope.user_details.appScreenName;
+			$scope.user = $scope.user_details.username;
+			if($scope.user_details.role == 1){
+				$scope.role = 'Администратор';				
+			}else{
+				$scope.role = 'Пользователь';
+			}
+		});
+		
 		$scope.activePage = 'projects';
 		
 		$scope.onProjects = function(){
