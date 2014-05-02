@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,15 @@ public class ProjectsRestController extends BaseAPIController{
 //    	return pds;
     }
     
+	@RequestMapping(value = "/project/{projectId}", 
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Project project(Model model, @PathVariable("projectId") Long id) {
+		return projectsRepository.findOne(id);
+	}
+
+    
 	@RequestMapping(value="/projects/search", method=RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -48,7 +58,5 @@ public class ProjectsRestController extends BaseAPIController{
 	{
 		return projectsRepository.findByNameStartingWithOrClientStartingWith(name, name);
 	}
-
-    
-    
+	
 }
