@@ -4,7 +4,7 @@
 
 angular.module('myApp.services', ['ngResource'])
 	.factory('projectFactory', function($resource) {
-		return $resource('/timebilling/api/projects', {}, {
+		return $resource('api/projects', {}, {
 			query : {method : 'GET',	isArray : true }	
 		});
 	})

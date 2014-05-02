@@ -1,0 +1,1 @@
+update assignment set appname = 'app1';

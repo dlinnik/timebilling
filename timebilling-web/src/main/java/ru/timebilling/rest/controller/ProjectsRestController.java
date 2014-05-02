@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.timebilling.model.domain.Project;
 import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.web.component.UserSessionComponent;
 
 @Controller
 public class ProjectsRestController extends BaseAPIController{
@@ -18,12 +19,18 @@ public class ProjectsRestController extends BaseAPIController{
 
 	@Autowired
 	ProjectRepository projectsRepository;
+	
+	@Autowired
+	UserSessionComponent userInSession;
+
 	  
     @RequestMapping("/projects")
     @ResponseBody
     public Iterable<Project> projects() {
     	
-    	return projectsRepository.findAll();
+//    	return projectsRepository.findAll();
+    	return projectsRepository.findAssigned(userInSession.getCurrentUser().getId());
+
     	
 //    	Iterable<Project> projects = projectsRepository.findAll();
 //    	List<ProjectDetails> pds = new ArrayList<ProjectDetails>();
