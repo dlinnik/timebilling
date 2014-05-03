@@ -3,6 +3,7 @@ package ru.timebilling.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class RecordsController extends BaseAPIController{
 	@ResponseBody
 	public Page<Record> allServicesForProject(
 			Model model, @RequestParam("project") Long projectId, 
-			@PageableDefault(value = 5) Pageable pageable)
+			@PageableDefault(value = 5,  sort = "date", direction = Direction.DESC) Pageable pageable)
 	{
 		return projectServicesService.getServices(projectId, pageable);
 	}
@@ -40,7 +41,7 @@ public class RecordsController extends BaseAPIController{
 	@ResponseBody
 	public Page<Record> allExpensesForProject(
 			Model model, @RequestParam("project") Long projectId, 
-			@PageableDefault(value = 5) Pageable pageable)
+			@PageableDefault(value = 5, sort = "date", direction = Direction.DESC) Pageable pageable)
 	{
 		return projectExpensesService.getExpenses(projectId, pageable);
 	}
