@@ -42,18 +42,29 @@ angular.module('myApp.controllers', [])
 				selected: 'spent' // Таб, который открыт
 		};
 		
-		$scope.spentTab = function() {
+		$scope.spentTab = function(page) {
 			$scope.onCancel();
-			$scope.records = recordFactory.getSpents();
+			$scope.loadRecords(recordFactory.getSpents($routeParams.projectId, page), page);
 			$scope.mode.selected = 'spent';
 		};
 	
-		$scope.costTab = function() {
+		$scope.costTab = function(page) {
 			$scope.onCancel();
-			$scope.records = recordFactory.getCosts();
+			$scope.loadRecords(recordFactory.getCosts($routeParams.projectId, page), page);
 			$scope.mode.selected = 'cost';
 		};
 	
+		$scope.loadRecords = function(resource, page) {
+			$scope.page = resource.query(function(){
+				if(page){
+					//add to already loaded records
+					$scope.records = $scope.records.concat($scope.page.content);
+				}else{
+					$scope.records = $scope.page.content;					
+				}
+			});
+		}
+
 		$scope.onAdd = function() {
 			var curDate = new Date();
 			$scope.day = curDate.getDate();
@@ -92,9 +103,11 @@ angular.module('myApp.controllers', [])
 	})
 	.controller('recordCntl', function($scope, recordFactory, utils) {
 		$scope.onEdit = function($record) {
+			
 			$scope.day = $record.date.getDate();
 			$scope.month = utils.monthForField($record.date.getMonth());
 			$scope.year = $record.date.getFullYear();
+			
 			$scope.valueEdit = $record.value;
 			$scope.commentEdit = $record.comment;
 			$scope.nameEdit = $record.name;

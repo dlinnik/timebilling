@@ -14,7 +14,7 @@ import ru.timebilling.model.repository.ProjectRepository;
 import ru.timebilling.model.repository.ServiceRepository;
 import ru.timebilling.model.service.conversion.PageConverter;
 import ru.timebilling.model.service.conversion.ServiceConverter;
-import ru.timebilling.rest.domain.ServiceDetails;
+import ru.timebilling.rest.domain.Record;
 
 @Service
 public class ProjectServicesService {
@@ -28,7 +28,7 @@ public class ProjectServicesService {
 	@Autowired
 	ServiceConverter converter;
 
-	public Page<ServiceDetails> getServices(Long projectId, Pageable pageable) {
+	public Page<Record> getServices(Long projectId, Pageable pageable) {
 		Project project = projectsRepository.findOne(projectId);
 		if (project != null) {
 
@@ -37,22 +37,23 @@ public class ProjectServicesService {
 
 			return PageConverter
 					.convert(page)
-					.using(new Function<ru.timebilling.model.domain.Service, ServiceDetails>() {
+					.using(new Function<ru.timebilling.model.domain.Service, Record>() {
 						@Override
-						public ServiceDetails apply(
+						public Record apply(
 								ru.timebilling.model.domain.Service service) {
-							return converter.toServiceDetails(service);
+							Record r = converter.toRecord(service);
+							return r;
 						}
 					});
 		}
 		return null;
 	}
 
-	public ServiceDetails save(ServiceDetails details) throws ParseException {
-		ru.timebilling.model.domain.Service service = converter
-				.fromServiceDetails(details);
-		service = servicesRepository.save(service);
-		return converter.toServiceDetails(service);
-	}
+//	public Record save(Record details) throws ParseException {
+//		ru.timebilling.model.domain.Service service = converter
+//				.fromServiceDetails(details);
+//		service = servicesRepository.save(service);
+//		return converter.toServiceDetails(service);
+//	}
 
 }
