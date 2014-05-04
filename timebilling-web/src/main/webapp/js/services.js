@@ -16,16 +16,28 @@ angular.module('myApp.services', ['ngResource'])
 	})
 	.factory('recordFactory', function($resource) {
 		return {
-			getSpents: function(projectId, pageNumber){
+			getSpents: function(){
 //				return SPENT_BASE;				
-				return $resource('api/services', {project : projectId, page : pageNumber}, {
+				return $resource('api/services', {}, {
 					query : {method : 'GET',	isArray : false }	
 				});
 			},
-			getCosts: function(projectId, pageNumber){
+			getCosts: function(){
 //				return COST_BASE;					
-				return $resource('api/expenses', {project : projectId, page : pageNumber}, {
+				return $resource('api/expenses', {}, {
 					query : {method : 'GET',	isArray : false }	
+				});
+			},
+			spent: function(){
+				return $resource('api/service', {}, {
+					create : {method : 'POST'},	
+					update : {method : 'PUT'}	
+				});
+			},
+			cost: function(){
+				return $resource('api/expense', {}, {
+					create : {method : 'POST'},
+					update : {method : 'PUT'}	
 				});
 			}
 		};

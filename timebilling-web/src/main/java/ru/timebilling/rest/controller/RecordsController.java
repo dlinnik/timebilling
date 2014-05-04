@@ -1,5 +1,7 @@
 package ru.timebilling.rest.controller;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,22 +49,29 @@ public class RecordsController extends BaseAPIController{
 		return projectExpensesService.getExpenses(projectId, pageable);
 	}
 	
-//	@RequestMapping(value = "", method = RequestMethod.GET)
-//	public String servicesTable(Model model, @RequestParam("project") Long projectId, Pageable pageable) {
-//		model.addAttribute("services", projectServicesService.getServices(projectId, pageable));
-//		return "tables :: servicesTableFragment";
-//	}
+	@RequestMapping(value="service", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Record createService(@RequestBody Record record) throws ParseException {    
+		return projectServicesService.save(record);
+	}
+
+	@RequestMapping(value="service", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Record updateService( @RequestBody Record record) throws ParseException {    
+		return projectServicesService.save(record);
+	}
 	
-//	@RequestMapping(value="", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
-//	@ResponseBody
-//	public Record create( @RequestBody Record serviceDetails) throws ParseException {    
-//		return projectServicesService.save(serviceDetails);
-//	}
-//
-//	@RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
-//	@ResponseBody
-//	public Record update( @RequestBody Record serviceDetails) throws ParseException {    
-//		return projectServicesService.save(serviceDetails);
-//	}
+	@RequestMapping(value="expense", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Record createExpense(@RequestBody Record record) throws ParseException {    
+		return projectExpensesService.save(record);
+	}
+
+	@RequestMapping(value="expense", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Record updateExpense( @RequestBody Record record) throws ParseException {    
+		return projectExpensesService.save(record);
+	}
+
 	
 }

@@ -13,4 +13,11 @@ public class ExpenseConverter extends AbstractRecordConverter<Expense>{
 		record.setValue(t.getSpentMoney());
 	}
 
+	@Override
+	protected void setAdditionalFields(Expense t, Record record) {
+		t.setSpentMoney(record.getValue());
+	}
+	
+	
+
 }

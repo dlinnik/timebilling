@@ -44,18 +44,18 @@ angular.module('myApp.controllers', [])
 		
 		$scope.spentTab = function(page) {
 			$scope.onCancel();
-			$scope.loadRecords(recordFactory.getSpents($routeParams.projectId, page), page);
+			$scope.loadRecords(recordFactory.getSpents(), page);
 			$scope.mode.selected = 'spent';
 		};
 	
 		$scope.costTab = function(page) {
 			$scope.onCancel();
-			$scope.loadRecords(recordFactory.getCosts($routeParams.projectId, page), page);
+			$scope.loadRecords(recordFactory.getCosts(), page);			
 			$scope.mode.selected = 'cost';
 		};
 	
 		$scope.loadRecords = function(resource, page) {
-			$scope.page = resource.query(function(){
+			$scope.page = resource.query({project : $routeParams.projectId, page : page}, function(){
 				if(page){
 					//add to already loaded records
 					$scope.records = $scope.records.concat($scope.page.content);
@@ -83,17 +83,36 @@ angular.module('myApp.controllers', [])
 			var name = "Дмитрий Линник";
 			var comment = $scope.commentAdd;
 			var value = $scope.valueAdd;
-			item = {
-				id : id,
-				disable : 0,
-				auth : 1,
-				name : name,
-				date : date,
-				value : value,
-				comment : comment
-			};
-			$scope.records.splice(0, 0, item);
+			if($scope.mode.selected == 'spent'){
+				$scope.newitem = recordFactory.spent().create({
+					date : date,
+					value : value,
+					comment : comment,
+					project : $scope.projectId
+				}, function(){
+					$scope.records.splice(0, 0, $scope.newitem);					
+				});
+			}else{
+				$scope.newitem = recordFactory.cost().create({
+					date : date,
+					value : value,
+					comment : comment,
+					project : $scope.projectId
+				}, function(){
+					$scope.records.splice(0, 0, $scope.newitem);					
+				});
+			}
 			
+//			item = {
+//				id : id,
+//				disable : 0,
+//				auth : 1,
+//				name : name,
+//				date : date,
+//				value : value,
+//				comment : comment
+//			};
+//			$scope.records.splice(0, 0, item);
 			$scope.mode.adding = 0;
 		};
 	

@@ -49,11 +49,14 @@ public class ProjectServicesService {
 		return null;
 	}
 
-//	public Record save(Record details) throws ParseException {
-//		ru.timebilling.model.domain.Service service = converter
-//				.fromServiceDetails(details);
-//		service = servicesRepository.save(service);
-//		return converter.toServiceDetails(service);
-//	}
+	public Record save(Record details) throws ParseException {
+		ru.timebilling.model.domain.Service service = new ru.timebilling.model.domain.Service();
+		if(!details.isNew()){
+			service = servicesRepository.findOne(details.getId());
+		}
+		service = converter.fromRecord(service, details);
+		service = servicesRepository.save(service);
+		return converter.toRecord(service);
+	}
 
 }

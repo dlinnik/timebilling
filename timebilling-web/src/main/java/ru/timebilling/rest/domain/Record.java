@@ -115,4 +115,8 @@ public class Record implements Serializable{
 		this.auth = auth;
 	}
 	
+	public boolean isNew(){
+		return getId() == null;
+	}
+	
 }

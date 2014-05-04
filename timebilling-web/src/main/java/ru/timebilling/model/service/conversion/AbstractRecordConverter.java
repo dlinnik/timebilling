@@ -1,11 +1,13 @@
 package ru.timebilling.model.service.conversion;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ru.timebilling.model.domain.BaseRecordEntity;
+import ru.timebilling.model.repository.ProjectRepository;
 import ru.timebilling.rest.domain.Record;
 import ru.timebilling.web.component.UserSessionComponent;
 
@@ -14,15 +16,27 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 	@Autowired
 	UserSessionComponent userInSession;
 	
+	@Autowired
+	ProjectRepository projectsRepository;
+
+	
 	public Record toRecord(T t){
 		Record r = toRecordInternal(t);
 		setAdditionalFields(r, t);
 		return r;
 	}
 	
+	public T fromRecord(T t, Record r) throws ParseException{
+		t = fromRecordInternal(t, r);
+		setAdditionalFields(t, r);
+		return t;
+	}
+
+	
+	
 	protected abstract void setAdditionalFields(Record record, T t);
-
-
+	protected abstract void setAdditionalFields(T t, Record record);
+	
 
 	protected Record toRecordInternal(T t){
         final SimpleDateFormat dateFormat = createDateFormat();
@@ -42,6 +56,16 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		return details;
 	}
 	
+	protected T fromRecordInternal(T t, Record r) throws ParseException{
+		//TODO: date!
+//		t.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
+		t.setComment(r.getComment());
+		
+		t.setEmployee(userInSession.getCurrentUser());
+		t.setProject(projectsRepository.findOne(r.getProject()));
+		
+		return t;
+	}
 		
     protected SimpleDateFormat createDateFormat() {
     	final String format = "dd/MM/yyyy";

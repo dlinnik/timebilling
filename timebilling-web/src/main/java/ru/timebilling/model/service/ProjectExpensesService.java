@@ -1,5 +1,7 @@
 package ru.timebilling.model.service;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +47,16 @@ public class ProjectExpensesService {
 					});
 		}
 		return null;
+	}
+
+	public Record save(Record details) throws ParseException {
+		Expense e = new Expense();
+		if(!details.isNew()){
+			e = expenseRepository.findOne(details.getId());
+		}
+		e = converter.fromRecord(e, details);
+		e = expenseRepository.save(e);
+		return converter.toRecord(e);
 	}
 
 
