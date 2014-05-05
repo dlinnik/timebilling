@@ -3,6 +3,8 @@ package ru.timebilling.model.service.conversion;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -59,6 +61,7 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 	protected T fromRecordInternal(T t, Record r) throws ParseException{
 		//TODO: date!
 //		t.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
+		t.setDate(convertToSQLDate(r.getDate()));
 		t.setComment(r.getComment());
 		
 		t.setEmployee(userInSession.getCurrentUser());
@@ -78,6 +81,16 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
     	final String format = "#,##";
     	final DecimalFormat dFormat = new DecimalFormat(format);
     	return dFormat;
+  }
+    
+  protected java.sql.Date convertToSQLDate(Date date){
+	  java.util.Calendar cal = Calendar.getInstance();
+	  cal.setTime(date);
+	  cal.set(Calendar.HOUR_OF_DAY, 0);
+	  cal.set(Calendar.MINUTE, 0);
+	  cal.set(Calendar.SECOND, 0);
+	  cal.set(Calendar.MILLISECOND, 0);    
+	  return new java.sql.Date(cal.getTime().getTime());
   }
 
 

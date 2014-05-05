@@ -59,5 +59,9 @@ public class ProjectExpensesService {
 		return converter.toRecord(e);
 	}
 
+	public void delete(Long id){
+		expenseRepository.delete(id);
+	}
+
 
 }

@@ -58,5 +58,9 @@ public class ProjectServicesService {
 		service = servicesRepository.save(service);
 		return converter.toRecord(service);
 	}
+	
+	public void delete(Long id){
+		servicesRepository.delete(id);
+	}
 
 }

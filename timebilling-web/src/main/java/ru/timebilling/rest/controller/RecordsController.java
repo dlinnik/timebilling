@@ -60,6 +60,13 @@ public class RecordsController extends BaseAPIController{
 	public Record updateService( @RequestBody Record record) throws ParseException {    
 		return projectServicesService.save(record);
 	}
+
+	@RequestMapping(value="service", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteService(@RequestParam("id") Long id) throws ParseException {    
+		projectServicesService.delete(id);
+	}
+	
 	
 	@RequestMapping(value="expense", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
@@ -72,6 +79,13 @@ public class RecordsController extends BaseAPIController{
 	public Record updateExpense( @RequestBody Record record) throws ParseException {    
 		return projectExpensesService.save(record);
 	}
+	
+	@RequestMapping(value="expense", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteExpense(@RequestParam("id") Long id) throws ParseException {    
+		projectExpensesService.delete(id);
+	}
+
 
 	
 }

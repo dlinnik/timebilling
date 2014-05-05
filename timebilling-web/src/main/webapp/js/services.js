@@ -54,6 +54,13 @@ angular.module('myApp.services', ['ngResource'])
 				
 				monthForDate: function(month){
 					return month -1;
+				},
+				
+				parseDate: function(strDate){
+					if(strDate){
+						var dateParts = strDate.split("-");
+						return new Date(dateParts[0], (dateParts[1] - 1), dateParts[2]);
+					}
 				}
 		};			
 	});

@@ -83,6 +83,7 @@ angular.module('myApp.controllers', [])
 			var name = "Дмитрий Линник";
 			var comment = $scope.commentAdd;
 			var value = $scope.valueAdd;
+			
 			if($scope.mode.selected == 'spent'){
 				$scope.newitem = recordFactory.spent().create({
 					date : date,
@@ -122,23 +123,50 @@ angular.module('myApp.controllers', [])
 	})
 	.controller('recordCntl', function($scope, recordFactory, utils) {
 		$scope.onEdit = function($record) {
-			
-			$scope.day = $record.date.getDate();
-			$scope.month = utils.monthForField($record.date.getMonth());
-			$scope.year = $record.date.getFullYear();
+			var date = utils.parseDate($record.date);
+			if(date){
+				$scope.day = date.getDate();
+				$scope.month = utils.monthForField(date.getMonth());
+				$scope.year = date.getFullYear();
+			}
 			
 			$scope.valueEdit = $record.value;
 			$scope.commentEdit = $record.comment;
-			$scope.nameEdit = $record.name;
+			$scope.nameEdit = $record.userScreenName;
 			
 			$scope.mode.editId = $record.id;
 		};
 	
 		$scope.onUpdateRecord = function($record) {
-			$record.value = $scope.valueEdit;
-			$record.comment = $scope.commentEdit;
+			
+			var value = $scope.valueEdit;
+			var comment = $scope.commentEdit;
 			var m = utils.monthForDate($scope.month);
-			$record.date = new Date($scope.year, m, $scope.day);
+			var date = new Date($scope.year, m, $scope.day);
+			
+			var r = {
+					id : $record.id,
+					date : date,
+					value : value,
+					comment : comment,
+					project : $scope.projectId
+				};
+			 
+			
+			if($scope.mode.selected == 'spent'){
+				$scope.updateditem = recordFactory.spent().update(r, function(){
+					$record.date = $scope.updateditem.date;
+					$record.value = $scope.updateditem.value;
+					$record.comment = $scope.updateditem.comment;
+				});
+			}else{
+				$scope.updateditem = recordFactory.cost().update(r, function(){
+					$record.date = $scope.updateditem.date;
+					$record.value = $scope.updateditem.value;
+					$record.comment = $scope.updateditem.comment;
+				});
+			}
+			
 			
 			$scope.mode.editId = -1;
 		};
