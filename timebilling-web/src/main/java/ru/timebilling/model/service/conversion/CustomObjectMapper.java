@@ -9,7 +9,7 @@ public class CustomObjectMapper extends ObjectMapper{
 	
 	public CustomObjectMapper() {
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);            
-        setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        //setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
     }
 
 }
