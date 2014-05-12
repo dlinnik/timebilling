@@ -61,6 +61,10 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 	protected T fromRecordInternal(T t, Record r) throws ParseException{
 		//TODO: date!
 //		t.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
+		
+		Date d1 = r.getDate();
+		Date d2 = Calendar.getInstance().getTime();
+		
 		t.setDate(convertToSQLDate(r.getDate()));
 		t.setComment(r.getComment());
 		
