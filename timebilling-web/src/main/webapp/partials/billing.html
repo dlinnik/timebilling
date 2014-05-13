@@ -1,0 +1,31 @@
+<div id="main">
+	<div class="button-panel">
+		<div class="switch">
+			<a href="#" class="active">Биллинг</a> <a href="#">Отчеты</a>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Проект/Клиент</th>
+					<th>Услуг</th>
+					<th>Затрат</th>
+					<th>К оплате</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="record in billing.items">
+					<td>{{record.project.name}}/{{record.project.client}}</td>
+					<td>{{record.timeSum}}</td>
+					<td>{{record.expSum}}</td>
+					<td>{{record.timeSum + record.expSum}}</td>
+					<td><a href="#">Создать отчет</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
