@@ -33,14 +33,15 @@ angular.module('myApp.controllers', [])
 	.controller('projectListCtrl', function($scope, projectListFactory) {
 				$scope.projects = projectListFactory.query();
 	})
-	.controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {
-		$scope.project = projectFactory.get({projectId: $routeParams.projectId});
-		
+	.controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {		
 		$scope.mode = {
+				projectId: $routeParams.projectId,
 				adding: 0,  // Поле добавления новой записи
 				editId: -1, // Запись, которая редактируется
 				selected: 'spent' // Таб, который открыт
 		};
+		
+		$scope.project = projectFactory.get({projectId: $scope.mode.projectId});
 		
 		$scope.spentTab = function(page) {
 			$scope.onCancel();
@@ -55,7 +56,7 @@ angular.module('myApp.controllers', [])
 		};
 	
 		$scope.loadRecords = function(resource, page) {
-			$scope.page = resource.query({project : $routeParams.projectId, page : page}, function(){
+			$scope.page = resource.query({project : $scope.mode.projectId, page : page}, function(){
 				if(page){
 					//add to already loaded records
 					$scope.records = $scope.records.concat($scope.page.content);
@@ -63,24 +64,23 @@ angular.module('myApp.controllers', [])
 					$scope.records = $scope.page.content;					
 				}
 			});
-		}
+		};
 
 		$scope.onAdd = function() {
 			var curDate = new Date();
 			$scope.day = curDate.getDate();
 			$scope.month = utils.monthForField(curDate.getMonth());
 			$scope.year = curDate.getFullYear();
+			$scope.valueAdd = null;
+			$scope.commentAdd = '';
 			
 			$scope.mode.editId = -1;
 			$scope.mode.adding = true;
 		};
 	
 		$scope.onAddRecord = function() {
-			var item;
-			var id = $scope.records.length + 1;
 			var m = utils.monthForField($scope.month);
 			var date = new Date($scope.year, m, $scope.day);
-			var name = "Дмитрий Линник";
 			var comment = $scope.commentAdd;
 			var value = $scope.valueAdd;
 			
@@ -89,7 +89,7 @@ angular.module('myApp.controllers', [])
 					date : date,
 					value : value,
 					comment : comment,
-					project : $scope.projectId
+					project : $scope.mode.projectId
 				}, function(){
 					$scope.records.splice(0, 0, $scope.newitem);					
 				});
@@ -98,7 +98,7 @@ angular.module('myApp.controllers', [])
 					date : date,
 					value : value,
 					comment : comment,
-					project : $scope.projectId
+					project : $scope.mode.projectId
 				}, function(){
 					$scope.records.splice(0, 0, $scope.newitem);					
 				});
@@ -108,6 +108,7 @@ angular.module('myApp.controllers', [])
 	
 		$scope.onCancel = function() {
 			$scope.mode.adding = 0;
+			$scope.mode.editId = -1;
 		};
 	})
 	.controller('recordCntl', function($scope, recordFactory, utils) {
@@ -138,7 +139,7 @@ angular.module('myApp.controllers', [])
 					date : date,
 					value : value,
 					comment : comment,
-					project : $scope.projectId
+					project : $scope.mode.projectId
 				};
 			 
 			
@@ -154,9 +155,7 @@ angular.module('myApp.controllers', [])
 					$record.value = $scope.updateditem.value;
 					$record.comment = $scope.updateditem.comment;
 				});
-			}
-			
-			
+			}				
 			$scope.mode.editId = -1;
 		};
 		
