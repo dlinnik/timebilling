@@ -5,18 +5,18 @@
 		<li>Развод семьи Путиных</li>
 	</ul>
 	<div class="page-title">
-		<h1>{{projectId}}</h1>
+		<h1>{{project.name}}</h1>
 		<a href="" class="change-project"><span
 			class="glyphicon glyphicon-pencil"></span>Изменить</a>
 	</div>
 	<div class="information-panel">
 		<span class="payment-method">Почасовая оплата</span> <span
-			class="persons">Заняты 4 чел.</span> <span class="reports"><a
-			href="">Сформировано 2 отчета</a></span>
+			class="persons">Заняты {{project.size}} чел.</span> <span class="reports"><a
+			href="">Сформировано {{project.reportsCount}} отчета</a></span>
 		<dl class="client">
 			<dt>Клиент:</dt>
 			<dd>
-				Владимир Путин и его жена. <a href="#">Подробнее о клиенте</a>
+				{{project.client}}<a href="#">Подробнее о клиенте</a>
 			</dd>
 		</dl>
 	</div>

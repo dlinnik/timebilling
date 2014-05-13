@@ -30,11 +30,11 @@ angular.module('myApp.controllers', [])
 		};
 		    
 	})
-	.controller('projectListCtrl', function($scope, projectFactory) {
-				$scope.projects = projectFactory.query();
+	.controller('projectListCtrl', function($scope, projectListFactory) {
+				$scope.projects = projectListFactory.query();
 	})
 	.controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {
-		$scope.projectId = $routeParams.projectId;
+		$scope.project = projectFactory.get({projectId: $routeParams.projectId});
 		
 		$scope.mode = {
 				adding: 0,  // Поле добавления новой записи
@@ -103,17 +103,6 @@ angular.module('myApp.controllers', [])
 					$scope.records.splice(0, 0, $scope.newitem);					
 				});
 			}
-			
-//			item = {
-//				id : id,
-//				disable : 0,
-//				auth : 1,
-//				name : name,
-//				date : date,
-//				value : value,
-//				comment : comment
-//			};
-//			$scope.records.splice(0, 0, item);
 			$scope.mode.adding = 0;
 		};
 	
