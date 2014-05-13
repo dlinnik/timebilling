@@ -18,6 +18,11 @@ angular.module('myApp.services', ['ngResource'])
 			query : {method : 'GET',	isArray : true }	
 		});
 	})
+	.factory('billingFactory', function($resource) {
+		return $resource('api/billing', {}, {
+			query : {method : 'GET',	isArray : false}	
+		});
+	})
 	.factory('recordFactory', function($resource) {
 		return {
 			getSpents: function(){			

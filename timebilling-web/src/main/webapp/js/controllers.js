@@ -3,9 +3,9 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-	.controller('indexCtrl', function($scope, projectFactory, currentUserFactory){
+	.controller('indexCtrl', function($scope, projectListFactory, currentUserFactory){
 		$scope.projects = 
-		projectFactory.query(function(){
+		projectListFactory.query(function(){
 			$scope.totalProjects = $scope.projects.length;
 		});
 
@@ -32,6 +32,8 @@ angular.module('myApp.controllers', [])
 	})
 	.controller('projectListCtrl', function($scope, projectListFactory) {
 				$scope.projects = projectListFactory.query();
+	})
+	.controller('addProjectCtrl', function($scope, projectFactory) {
 	})
 	.controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {		
 		$scope.mode = {
@@ -164,6 +166,6 @@ angular.module('myApp.controllers', [])
 		};
 		
 	})
-	.controller('billingCtrl', [ function() {
-	
-	} ]);
+	.controller('billingCtrl', function($scope, billingFactory) {
+		$scope.billing = billingFactory.query();
+	});
