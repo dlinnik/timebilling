@@ -26,6 +26,8 @@ public class Record implements Serializable{
 	private String comment;
 	
 	private boolean auth;
+	
+	private boolean disable;
 
 	public Long getId() {
 		return id;
@@ -118,5 +120,15 @@ public class Record implements Serializable{
 	public boolean isNew(){
 		return getId() == null;
 	}
+
+	public boolean isDisable() {
+		return disable;
+	}
+
+	public void setDisable(boolean disable) {
+		this.disable = disable;
+	}
+	
+	
 	
 }

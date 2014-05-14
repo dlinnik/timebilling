@@ -33,8 +33,7 @@ public class Project extends AppAwareBaseEntity {
 	@Formula("(select sum(s.spentMoney) from expense s where s.project_id = id)")
 	private BigDecimal totalMoney;
 	
-	//TODO: implement me!
-	@Formula("(select 2)")
+	@Formula("(select count(r.id) from billingreport r where r.project_id = id)")
 	private int reportsCount;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")

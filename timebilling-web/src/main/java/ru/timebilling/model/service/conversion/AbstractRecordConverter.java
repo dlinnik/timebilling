@@ -55,6 +55,7 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		details.setUserScreenName(t.getEmployee().getUsername());		
 		details.setProject(t.getProject().getId());
 		details.setAuth(details.getUser().equals(userInSession.getCurrentUser().getId()));
+		details.setDisable(t.getReport()!=null);
 		return details;
 	}
 	
@@ -65,7 +66,7 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		Date d1 = r.getDate();
 		Date d2 = Calendar.getInstance().getTime();
 		
-		t.setDate(convertToSQLDate(r.getDate()));
+		t.setDate(ConversionUtils.convertToSQLDate(r.getDate()));
 		t.setComment(r.getComment());
 		
 		t.setEmployee(userInSession.getCurrentUser());
@@ -87,15 +88,6 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
     	return dFormat;
   }
     
-  protected java.sql.Date convertToSQLDate(Date date){
-	  java.util.Calendar cal = Calendar.getInstance();
-	  cal.setTime(date);
-	  cal.set(Calendar.HOUR_OF_DAY, 0);
-	  cal.set(Calendar.MINUTE, 0);
-	  cal.set(Calendar.SECOND, 0);
-	  cal.set(Calendar.MILLISECOND, 0);    
-	  return new java.sql.Date(cal.getTime().getTime());
-  }
 
 
 }

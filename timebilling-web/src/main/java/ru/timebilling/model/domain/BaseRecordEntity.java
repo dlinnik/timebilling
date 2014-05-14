@@ -26,6 +26,10 @@ public class BaseRecordEntity extends AppAwareBaseEntity{
 	
 	@Column(name = "comment", nullable = false, length = 1024)
 	private String comment;
+	
+	@ManyToOne
+	private BillingReport report;
+
 
 	public Date getDate() {
 		return date;
@@ -58,6 +62,16 @@ public class BaseRecordEntity extends AppAwareBaseEntity{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public BillingReport getReport() {
+		return report;
+	}
+
+	public void setReport(BillingReport report) {
+		this.report = report;
+	}
+	
+	
 
 
 }

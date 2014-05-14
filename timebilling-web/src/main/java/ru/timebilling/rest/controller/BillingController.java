@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ru.timebilling.model.domain.BillingReport;
 import ru.timebilling.model.domain.Project;
 import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.model.service.BillingService;
 import ru.timebilling.model.service.UserDetailsServiceImpl;
 import ru.timebilling.rest.domain.Billing;
 import ru.timebilling.rest.domain.BillingGroupBy;
@@ -33,7 +35,8 @@ public class BillingController extends BaseAPIController{
 	
 	static final Logger logger = LoggerFactory.getLogger(BillingController.class);
 
-	
+	@Autowired
+	BillingService billingService;
 	
 	@Autowired
 	ProjectRepository projectsRepository;
@@ -64,6 +67,19 @@ public class BillingController extends BaseAPIController{
 		}
     	return result;
     }
+    
+    @RequestMapping(value="/billing", method=RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public BillingReport createBillingReport(
+    		@RequestParam(value="from", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
+    		@RequestParam(value="to", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate, 
+    		@RequestParam(value="project", required=true) Long projectId) {
+    	
+    	return billingService.create(projectId, fromDate, toDate);
+    	
+    }
+
 
 	private Billing getBilling(Date fromDate, Date toDate,
 			Long projectId, BillingGroupBy groupBy) {
