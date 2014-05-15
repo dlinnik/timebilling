@@ -3,6 +3,7 @@ package ru.timebilling.model.domain;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;

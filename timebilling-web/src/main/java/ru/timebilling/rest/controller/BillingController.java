@@ -11,9 +11,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +32,7 @@ import ru.timebilling.model.service.UserDetailsServiceImpl;
 import ru.timebilling.rest.domain.Billing;
 import ru.timebilling.rest.domain.BillingGroupBy;
 import ru.timebilling.rest.domain.BillingItem;
+import ru.timebilling.rest.domain.Record;
 import static ru.timebilling.rest.domain.BillingGroupBy.monthly;
 import static ru.timebilling.rest.domain.BillingGroupBy.quarterly;
 
@@ -68,7 +74,7 @@ public class BillingController extends BaseAPIController{
     	return result;
     }
     
-    @RequestMapping(value="/billing", method=RequestMethod.POST,
+    @RequestMapping(value="/billing/report", method=RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public BillingReport createBillingReport(
@@ -79,6 +85,22 @@ public class BillingController extends BaseAPIController{
     	return billingService.create(projectId, fromDate, toDate);
     	
     }
+    
+	@RequestMapping(value="/billing/reports", method=RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Page<BillingReport> allExpensesForProject(
+			@PageableDefault(value = 5, sort = "creationDate", direction = Direction.DESC) Pageable pageable)
+	{
+		return billingService.getAllReports(pageable);
+	}
+
+	@RequestMapping(value="/billing/report", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteBillingReport(@RequestParam("id") Long id) throws ParseException {    
+		billingService.delete(id);
+	}
+
 
 
 	private Billing getBilling(Date fromDate, Date toDate,

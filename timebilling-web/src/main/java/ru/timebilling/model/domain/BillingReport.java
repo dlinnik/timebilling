@@ -1,13 +1,18 @@
 package ru.timebilling.model.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
+
+import org.hibernate.annotations.Formula;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -24,6 +29,7 @@ public class BillingReport extends AppAwareBaseEntity{
 	private Date creationDate;
 	  
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
+	
 	@JsonBackReference
 	private Set<Service> serviceList;
 	
@@ -33,6 +39,16 @@ public class BillingReport extends AppAwareBaseEntity{
 	  
     @OneToOne	
 	private Project project;
+    
+	@Formula("(select sum(s.spentMoney) from expense s where s.report_id = id)")
+	private BigDecimal totalExpensesMoney;
+
+	@Formula("(select sum(s.spentMoney) from service s where s.report_id = id)")
+	private BigDecimal totalServicesMoney;
+	
+//	@Formula("(select totalExpensesMoney + totalServicesMoney)")
+//	private BigDecimal totalMoney;
+
 
 	public Date getStartDate() {
 		return startDate;
@@ -81,6 +97,32 @@ public class BillingReport extends AppAwareBaseEntity{
 	public void setProject(Project project) {
 		this.project = project;
 	}
+
+	public BigDecimal getTotalExpensesMoney() {
+		return totalExpensesMoney;
+	}
+
+	public BigDecimal getTotalServicesMoney() {
+		return totalServicesMoney;
+	}
+
+	public BigDecimal getTotalMoney() {
+		BigDecimal a = totalExpensesMoney == null ? BigDecimal.ZERO : totalExpensesMoney;
+		BigDecimal b = totalServicesMoney == null ? BigDecimal.ZERO : totalServicesMoney;
+		return a.add(b);
+	}
+	
+	@PreRemove
+	private void preRemove() {
+	    for (Expense e : getExpenseList()) {
+	        e.setReport(null);
+	    }
+	    for (Service e : getServiceList()) {
+	        e.setReport(null);
+	    }
+	}
+	
+	
     
     
 

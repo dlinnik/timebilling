@@ -6,6 +6,8 @@ import java.util.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ru.timebilling.model.domain.BillingReport;
@@ -68,8 +70,17 @@ public class BillingService {
 		}
 		
 		
-		return report;
+		return report;		
+	}
+	
+	public Page<BillingReport> getAllReports(Pageable pageable){
 		
+		return billingReportRepository.findAll(pageable);
+		
+	}
+
+	public void delete(Long id) {
+		billingReportRepository.delete(id);
 	}
 
 
