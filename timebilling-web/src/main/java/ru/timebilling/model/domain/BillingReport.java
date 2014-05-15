@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,8 +27,7 @@ public class BillingReport extends AppAwareBaseEntity{
 	@Column(name = "creationdate")
 	private Date creationDate;
 	  
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")	
 	@JsonBackReference
 	private Set<Service> serviceList;
 	

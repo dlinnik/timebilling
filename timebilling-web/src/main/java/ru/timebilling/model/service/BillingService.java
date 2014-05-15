@@ -3,12 +3,19 @@ package ru.timebilling.model.service;
 import java.util.Date;
 import java.util.Calendar;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 import ru.timebilling.model.domain.BillingReport;
 import ru.timebilling.model.domain.Expense;
@@ -36,9 +43,13 @@ public class BillingService {
 	@Autowired
 	ProjectRepository projectsRepository;
 	
+    @PersistenceContext
+    private EntityManager entityManager;
+
+	
 	public BillingReport create(Long projectId,  Date fromDate,  Date toDate){
 		
-		BillingReport report = new BillingReport();
+		final BillingReport report = new BillingReport();
 		java.sql.Date start = ConversionUtils.convertToSQLDate(fromDate);
 		java.sql.Date end = ConversionUtils.convertToSQLDate(toDate);
 		
@@ -48,29 +59,37 @@ public class BillingService {
 		Project project = projectsRepository.findOne(projectId);
 		report.setProject(project);
 		
-		report = billingReportRepository.save(report);
-		
-		//вычисляем услуги и затраты для попадания в отчет
-		//TODO: оптимизировать (помянять на UPDATE)
-		
 		Iterable<ru.timebilling.model.domain.Service> services = serviceRepository.findToBill(projectId, 
 				start, end);		
-		for(ru.timebilling.model.domain.Service e : services){
-			logger.debug("bill service [" + e.getId() + "]");
-			e.setReport(report);
-			serviceRepository.save(e);
-		}
-
 		Iterable<Expense> expenses = expenseRepository.findToBill(projectId, 
 				start, end);		
-		for(Expense e : expenses){
-			logger.debug("bill expense [" + e.getId() + "]");
-			e.setReport(report);
-			expenseRepository.save(e);
-		}
 		
+		report.setServiceList(Sets.newHashSet(Iterables.transform(services, 
+				new Function<ru.timebilling.model.domain.Service, ru.timebilling.model.domain.Service>(){
+
+			@Override
+			public ru.timebilling.model.domain.Service apply(ru.timebilling.model.domain.Service input) {
+				input.setReport(report);				
+				return input;
+			}
+			
+		})));
 		
-		return report;		
+		report.setExpenseList(Sets.newHashSet(Iterables.transform(expenses, 
+				new Function<Expense, Expense>(){
+
+			@Override
+			public Expense apply(Expense input) {
+				input.setReport(report);				
+				return input;
+			}
+			
+		})));
+
+		BillingReport result = billingReportRepository.save(report);	
+		//рефрешим объект для обновления калькулируемых полей
+		entityManager.refresh(result);
+		return result;
 	}
 	
 	public Page<BillingReport> getAllReports(Pageable pageable){
