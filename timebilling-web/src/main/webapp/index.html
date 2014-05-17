@@ -24,14 +24,14 @@
 <body>
 	<header id="header">
 		<div class="holder" ng-controller="indexCtrl">
-			<div id="logo">
+			<div class="logo">
 				<a href="#" title="time-billing">time-billing</a>
 				<span>{{appName}}</span>
 			</div>
-			<a href="#/project" ng-click="onProjects()" class="project" ng-class="{'active': activePage == 'projects'}">
+			<a href="#/project" ng-click="onProjects()" class="top-menu-button" ng-class="{'active': activePage == 'projects'}">
 				Проекты<sup>{{totalProjects}}</sup>
 			</a>
-			<a href="#/billing" ng-click="onBilling()" class="title" ng-class="{'active': activePage == 'billing'}">
+			<a href="#/billing" ng-click="onBilling()" class="top-menu-button" ng-class="{'active': activePage == 'billing'}">
 				Биллинг и отчеты
 			</a>
 			<a href="#/user" class="user">
