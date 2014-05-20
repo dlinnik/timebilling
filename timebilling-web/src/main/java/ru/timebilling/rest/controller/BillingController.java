@@ -19,6 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,8 +84,19 @@ public class BillingController extends BaseAPIController{
     		@RequestParam(value="project", required=true) Long projectId) {
     	
     	return billingService.create(projectId, fromDate, toDate);
+    }
+    
+    @RequestMapping(value="/billing/report/{reportId}", method=RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public BillingReport updateBillingReport(@PathVariable("reportId") Long id,
+    		@RequestParam(value="from", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
+    		@RequestParam(value="to", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate) {
+    	
+    	return billingService.update(id, fromDate, toDate);
     	
     }
+    
     
 	@RequestMapping(value="/billing/reports", method=RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -94,6 +106,16 @@ public class BillingController extends BaseAPIController{
 	{
 		return billingService.getAllReports(pageable);
 	}
+	
+	@RequestMapping(value = "/billing/report/{reportId}", 
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public BillingReport report(Model model, @PathVariable("reportId") Long id) {
+		return billingService.getReport(id);
+	}
+
+	
 
 	@RequestMapping(value="/billing/report", method = RequestMethod.DELETE)
 	@ResponseBody
