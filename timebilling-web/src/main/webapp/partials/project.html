@@ -1,11 +1,11 @@
-<div id="main">
+<div id="main" class="view-page">
 	<ul class="breadcrumbs">
 		<li><a href="#/project">Проекты</a></li>
 		<li>{{project.name}}</li>
 	</ul>
 	<div class="page-title">
 		<h1>{{project.name}}</h1>
-		<a href="" class="change-project"><span
+		<a href="" class="change-project red-btn"><span
 			class="glyphicon glyphicon-pencil"></span>Изменить</a>
 	</div>
 	<div class="information-panel">
@@ -21,7 +21,7 @@
 	</div>
 	<div id="tabs" ng-init="spentTab();">
 		<div class="holder">
-			<a href="" class="add-record" ng-class="{'money': mode.selected == 'cost'}" ng-click="onAdd()">Добавить запись</a>
+			<a href="" class="add-record gr-btn" ng-class="{'money': mode.selected == 'cost'}" ng-click="onAdd()">Добавить запись</a>
 			<ul class="tab-list">
 				<li ng-class="{'active' : mode.selected == 'spent' }"><a href=""
 					ng-click="spentTab()">Затраченное время</a></li>
@@ -63,8 +63,8 @@
 									placeholder="Напишите комментарий (обязательно)"
 									onfocus="placeholder='';" ng-model="commentAdd"></textarea>
 								<div class="buttom-box">
-									<a href="" class="save" ng_click="onAddRecord()">Добавить запись</a> 
-									<a href="" class="delete" ng_click="onCancel()">Отменить</a>
+									<a href="" class="save gr-btn" ng_click="onAddRecord()">Добавить запись</a> 
+									<a href="" class="delete red-btn" ng_click="onCancel()">Отменить</a>
 								</div>
 							</div>
 						</div>
@@ -112,8 +112,8 @@
 							<div class="comment">
 								<textarea ng-model="commentEdit" cols="30" rows="10"></textarea>
 								<div class="buttom-box">
-									<a href="" ng-click="onUpdateRecord(record)" class="save">Сохранить</a> 
-									<a href="" ng-click="onCancel()" class="delete">Отменить</a>
+									<a href="" ng-click="onUpdateRecord(record)" class="save gr-btn">Сохранить</a> 
+									<a href="" ng-click="onCancel()" class="delete red-btn">Отменить</a>
 								</div>
 							</div>
 						</div>

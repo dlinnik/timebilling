@@ -31,7 +31,10 @@ angular.module('myApp.controllers', [])
 		    
 	})
 	.controller('projectListCtrl', function($scope, projectListFactory) {
-				$scope.projects = projectListFactory.query();
+				/* $scope.projects = projectListFactory.query(); */
+				$scope.projects = [];
+				$scope.projects.lenght = 0;
+				
 	})
 	.controller('addProjectCtrl', function($scope, projectFactory) {
 	})
@@ -127,6 +130,7 @@ angular.module('myApp.controllers', [])
 			$scope.nameEdit = $record.userScreenName;
 			
 			$scope.mode.editId = $record.id;
+			$scope.mode.adding = 0;
 		};
 	
 		$scope.onUpdateRecord = function($record) {
