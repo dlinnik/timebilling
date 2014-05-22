@@ -110,9 +110,9 @@ public class BillingService {
 				report.setEndDate(end);
 				
 				//исключаем записи не попадающие больше в период
-				excludeRecordsFromReport(start, end, report.getServiceList());
-				excludeRecordsFromReport(start, end, report.getExpenseList());
-	
+				removeRecordsFromReport(start, end, report.getServiceList());
+				removeRecordsFromReport(start, end, report.getExpenseList());
+				
 				//находим записи которые теперь попадают в новый период
 				Iterable<ru.timebilling.model.domain.Service> services = serviceRepository.findToBill(report.getProject().getId(), 
 						start, end);					
@@ -128,8 +128,25 @@ public class BillingService {
 			}
 		}
 		
-
 		return report;
+	}
+	
+	public void excludeServiceFromReport(Long reportId, Long recordId, Boolean exclude){
+		ru.timebilling.model.domain.Service record = serviceRepository.findOne(recordId);
+		if(record!=null && 
+				record.getReport()!=null && reportId.equals(record.getReport().getId())){
+			record.setExcluded(exclude);
+			serviceRepository.save(record);
+		}
+	}
+
+	public void excludeExpenseFromReport(Long reportId, Long recordId, Boolean exclude){
+		Expense record = expenseRepository.findOne(recordId);
+		if(record!=null && 
+				record.getReport()!=null && reportId.equals(record.getReport().getId())){
+			record.setExcluded(exclude);
+			expenseRepository.save(record);
+		}
 	}
 	
 	protected <T extends BaseRecordEntity> Set<T> prepareRecordsToReport(final BillingReport report, Iterable<T> t){
@@ -143,13 +160,14 @@ public class BillingService {
 		}));
 	}
 	
-	protected <T extends BaseRecordEntity> Set<T> excludeRecordsFromReport(final java.sql.Date from, final java.sql.Date to, Iterable<T> t){
+	protected <T extends BaseRecordEntity> Set<T> removeRecordsFromReport(final java.sql.Date from, final java.sql.Date to, Iterable<T> t){
 		return Sets.newHashSet(Iterables.transform(t, 
 				new Function<T, T>(){
 			@Override
 			public T apply(T input) {
-				if(input.getDate().compareTo(from) < 0 || input.getDate().compareTo(to) > 0){
+				if(input.getDate().compareTo(from) < 0 || input.getDate().compareTo(to) > 0){					
 					input.setReport(null);
+					input.setExcluded(false);
 				}
 				return input;
 			}

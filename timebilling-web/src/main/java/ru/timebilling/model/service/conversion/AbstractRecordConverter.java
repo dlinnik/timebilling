@@ -9,7 +9,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ru.timebilling.model.domain.BaseRecordEntity;
+import ru.timebilling.model.repository.BillingReportRepository;
 import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.model.repository.UserRepository;
 import ru.timebilling.rest.domain.Record;
 import ru.timebilling.web.component.UserSessionComponent;
 
@@ -20,6 +22,12 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 	
 	@Autowired
 	ProjectRepository projectsRepository;
+	
+	@Autowired
+	UserRepository usersRepository;
+	
+	@Autowired
+	BillingReportRepository billingReportRepository;
 
 	
 	public Record toRecord(T t){
@@ -56,6 +64,8 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		details.setProject(t.getProject().getId());
 		details.setAuth(details.getUser().equals(userInSession.getCurrentUser().getId()));
 		details.setDisable(t.getReport()!=null);
+		details.setExcludedFromReport(t.isExcluded());
+		details.setReport(t.getReport()!=null ? t.getReport().getId() : null);
 		return details;
 	}
 	
@@ -68,8 +78,14 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		
 		t.setDate(ConversionUtils.convertToSQLDate(r.getDate()));
 		t.setComment(r.getComment());
-		
-		t.setEmployee(userInSession.getCurrentUser());
+		if(r.getUser()!=null){
+			t.setEmployee(usersRepository.findOne(r.getUser()));
+		}else{
+			t.setEmployee(userInSession.getCurrentUser());
+		}
+		if(r.getReport()!=null){
+			t.setReport(billingReportRepository.findOne(r.getReport()));
+		}
 		t.setProject(projectsRepository.findOne(r.getProject()));
 		
 		return t;

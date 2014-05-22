@@ -28,6 +28,9 @@ public class Record implements Serializable{
 	private boolean auth;
 	
 	private boolean disable;
+	
+	private Boolean excludedFromReport;
+	private Long report;
 
 	public Long getId() {
 		return id;
@@ -128,6 +131,26 @@ public class Record implements Serializable{
 	public void setDisable(boolean disable) {
 		this.disable = disable;
 	}
+
+	public Boolean isExcludedFromReport() {
+		return excludedFromReport;
+	}
+
+	public void setExcludedFromReport(Boolean excludedFromReport) {
+		this.excludedFromReport = excludedFromReport;
+	}
+
+	public Long getReport() {
+		return report;
+	}
+
+	public void setReport(Long report) {
+		this.report = report;
+	}
+	
+	
+	
+	
 	
 	
 	

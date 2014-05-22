@@ -38,13 +38,14 @@ public class BillingReport extends AppAwareBaseEntity{
     @OneToOne	
 	private Project project;
     
-	@Formula("(select sum(s.spentMoney) from expense s where s.report_id = id)")
+	@Formula("(select sum(s.spentMoney) from expense s where s.report_id = id "
+			+ "and (s.excluded = 0 OR s.excluded IS NULL))")
 	private BigDecimal totalExpensesMoney;
 
-	@Formula("(select sum(s.spentMoney) from service s where s.report_id = id)")
+	@Formula("(select sum(s.spentMoney) from service s where s.report_id = id "
+			+ "and (s.excluded = 0 OR s.excluded IS NULL))")
 	private BigDecimal totalServicesMoney;
 	
-//	@Formula("(select totalExpensesMoney + totalServicesMoney)")
 //	private BigDecimal totalMoney;
 
 

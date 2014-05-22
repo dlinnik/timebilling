@@ -1,9 +1,7 @@
 package ru.timebilling.model.domain;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -30,6 +28,10 @@ public class BaseRecordEntity extends AppAwareBaseEntity{
 	
 	@ManyToOne
 	private BillingReport report;
+	
+	@Column(name = "excluded")
+    private Boolean excluded = Boolean.FALSE;
+
 
 
 	public Date getDate() {
@@ -71,6 +73,16 @@ public class BaseRecordEntity extends AppAwareBaseEntity{
 	public void setReport(BillingReport report) {
 		this.report = report;
 	}
+
+	public Boolean isExcluded() {
+		return excluded;
+	}
+
+	public void setExcluded(Boolean excluded) {
+		this.excluded = excluded;
+	}
+	
+	
 	
 	
 

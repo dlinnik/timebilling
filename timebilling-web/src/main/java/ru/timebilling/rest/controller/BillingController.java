@@ -96,6 +96,30 @@ public class BillingController extends BaseAPIController{
     	return billingService.update(id, fromDate, toDate);
     	
     }
+
+    @RequestMapping(value="/billing/report/{reportId}/exclude/service/{recordId}", 
+    		method=RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void excludeService(@PathVariable("reportId") Long reportId,
+    		@PathVariable("recordId") Long recordId,
+    		@RequestParam(value="exclude", required=true) Boolean exclude) {
+    	
+    	billingService.excludeServiceFromReport(reportId, recordId, exclude);    	
+    }
+    
+    @RequestMapping(value="/billing/report/{reportId}/exclude/expense/{recordId}", 
+    		method=RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void excludeExpense(@PathVariable("reportId") Long reportId,
+    		@PathVariable("recordId") Long recordId,
+    		@RequestParam(value="exclude", required=true) Boolean exclude) {
+    	
+    	billingService.excludeExpenseFromReport(reportId, recordId, exclude);
+    	
+    }
+    
     
     
 	@RequestMapping(value="/billing/reports", method=RequestMethod.GET,
