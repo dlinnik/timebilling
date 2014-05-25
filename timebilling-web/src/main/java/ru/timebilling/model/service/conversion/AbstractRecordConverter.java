@@ -73,16 +73,18 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		//TODO: date!
 //		t.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
 		
-		Date d1 = r.getDate();
-		Date d2 = Calendar.getInstance().getTime();
+//		Date d1 = r.getDate();
+//		Date d2 = Calendar.getInstance().getTime();
 		
 		t.setDate(ConversionUtils.convertToSQLDate(r.getDate()));
 		t.setComment(r.getComment());
+		
 		if(r.getUser()!=null){
 			t.setEmployee(usersRepository.findOne(r.getUser()));
 		}else{
 			t.setEmployee(userInSession.getCurrentUser());
 		}
+		
 		if(r.getReport()!=null){
 			t.setReport(billingReportRepository.findOne(r.getReport()));
 		}

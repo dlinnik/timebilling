@@ -11,9 +11,6 @@ public class Record implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long id;
-//	private String day;
-//	private String month;
-//	private String year;
 	private Date date;
 	  
 	private BigDecimal value;
@@ -39,30 +36,6 @@ public class Record implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-//	public String getDay() {
-//		return day;
-//	}
-//
-//	public void setDay(String day) {
-//		this.day = day;
-//	}
-//
-//	public String getMonth() {
-//		return month;
-//	}
-//
-//	public void setMonth(String month) {
-//		this.month = month;
-//	}
-//
-//	public String getYear() {
-//		return year;
-//	}
-//
-//	public void setYear(String year) {
-//		this.year = year;
-//	}
 
 	public BigDecimal getValue() {
 		return value;

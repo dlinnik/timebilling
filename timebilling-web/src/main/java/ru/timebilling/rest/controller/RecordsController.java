@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ru.timebilling.model.service.ApplicationException;
 import ru.timebilling.model.service.ProjectExpensesService;
 import ru.timebilling.model.service.ProjectServicesService;
 import ru.timebilling.rest.domain.Record;
@@ -51,13 +52,13 @@ public class RecordsController extends BaseAPIController{
 	
 	@RequestMapping(value="service", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public Record createService(@RequestBody Record record) throws ParseException {    
+	public Record createService(@RequestBody Record record) throws ParseException, ApplicationException {    
 		return projectServicesService.save(record);
 	}
 
 	@RequestMapping(value="service", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public Record updateService( @RequestBody Record record) throws ParseException {    
+	public Record updateService( @RequestBody Record record) throws ParseException, ApplicationException {    
 		return projectServicesService.save(record);
 	}
 
@@ -70,13 +71,13 @@ public class RecordsController extends BaseAPIController{
 	
 	@RequestMapping(value="expense", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public Record createExpense(@RequestBody Record record) throws ParseException {    
+	public Record createExpense(@RequestBody Record record) throws ParseException, ApplicationException {    
 		return projectExpensesService.save(record);
 	}
 
 	@RequestMapping(value="expense", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public Record updateExpense( @RequestBody Record record) throws ParseException {    
+	public Record updateExpense( @RequestBody Record record) throws ParseException, ApplicationException {    
 		return projectExpensesService.save(record);
 	}
 	

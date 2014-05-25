@@ -17,7 +17,7 @@ import ru.timebilling.model.service.conversion.ServiceConverter;
 import ru.timebilling.rest.domain.Record;
 
 @Service
-public class ProjectServicesService {
+public class ProjectServicesService extends BaseRecordService<ru.timebilling.model.domain.Service>{
 
 	@Autowired
 	ServiceRepository servicesRepository;
@@ -49,10 +49,11 @@ public class ProjectServicesService {
 		return null;
 	}
 
-	public Record save(Record details) throws ParseException {
+	public Record save(Record details) throws ParseException, ApplicationException {
 		ru.timebilling.model.domain.Service service = new ru.timebilling.model.domain.Service();
 		if(!details.isNew()){
 			service = servicesRepository.findOne(details.getId());
+			canUpdateRecord(service, details);
 		}
 		service = converter.fromRecord(service, details);
 		service = servicesRepository.save(service);

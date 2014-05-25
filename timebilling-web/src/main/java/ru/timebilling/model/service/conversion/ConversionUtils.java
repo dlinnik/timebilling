@@ -19,6 +19,6 @@ public class ConversionUtils {
 		  cal.set(Calendar.MILLISECOND, 0);    
 		  return new java.sql.Date(cal.getTime().getTime());
 	  }
-
+	  
 
 }

@@ -18,7 +18,7 @@ import ru.timebilling.rest.domain.Record;
 import com.google.common.base.Function;
 
 @Service
-public class ProjectExpensesService {
+public class ProjectExpensesService extends BaseRecordService<Expense>{
 
 	@Autowired
 	ExpenseRepository expenseRepository;
@@ -49,10 +49,12 @@ public class ProjectExpensesService {
 		return null;
 	}
 
-	public Record save(Record details) throws ParseException {
+	public Record save(Record details) throws ParseException, ApplicationException {
 		Expense e = new Expense();
 		if(!details.isNew()){
 			e = expenseRepository.findOne(details.getId());
+			canUpdateRecord(e, details);
+
 		}
 		e = converter.fromRecord(e, details);
 		e = expenseRepository.save(e);
