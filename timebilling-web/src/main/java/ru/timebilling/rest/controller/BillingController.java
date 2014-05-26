@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,16 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.timebilling.model.domain.BillingReport;
-import ru.timebilling.model.domain.Project;
 import ru.timebilling.model.repository.ProjectRepository;
+import ru.timebilling.model.service.ApplicationException;
 import ru.timebilling.model.service.BillingService;
-import ru.timebilling.model.service.UserDetailsServiceImpl;
 import ru.timebilling.rest.domain.Billing;
 import ru.timebilling.rest.domain.BillingGroupBy;
 import ru.timebilling.rest.domain.BillingItem;
-import ru.timebilling.rest.domain.Record;
-import static ru.timebilling.rest.domain.BillingGroupBy.monthly;
-import static ru.timebilling.rest.domain.BillingGroupBy.quarterly;
 
 @Controller
 public class BillingController extends BaseAPIController{
@@ -81,7 +76,7 @@ public class BillingController extends BaseAPIController{
     public BillingReport createBillingReport(
     		@RequestParam(value="from", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
     		@RequestParam(value="to", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate, 
-    		@RequestParam(value="project", required=true) Long projectId) {
+    		@RequestParam(value="project", required=true) Long projectId) throws ApplicationException{
     	
     	return billingService.create(projectId, fromDate, toDate);
     }
@@ -91,7 +86,7 @@ public class BillingController extends BaseAPIController{
     @ResponseBody
     public BillingReport updateBillingReport(@PathVariable("reportId") Long id,
     		@RequestParam(value="from", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
-    		@RequestParam(value="to", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate) {
+    		@RequestParam(value="to", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate) throws ApplicationException{
     	
     	return billingService.update(id, fromDate, toDate);
     	

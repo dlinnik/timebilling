@@ -2,6 +2,7 @@ package ru.timebilling.model.service;
 
 import java.util.Date;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -31,6 +32,9 @@ import ru.timebilling.model.service.conversion.ConversionUtils;
 @Service
 public class BillingService {
 	
+	public static final String VALIDATION_ERROR_REPORTS_PERIOD_CONFLICT = 
+			"Период отчета пересекается с созданным ранее отчетом";
+	
 	static final Logger logger = LoggerFactory.getLogger(BillingService.class);
 	
 	@Autowired
@@ -49,7 +53,7 @@ public class BillingService {
     private EntityManager entityManager;
 
 	
-	public BillingReport create(Long projectId,  Date fromDate,  Date toDate){
+	public BillingReport create(Long projectId,  Date fromDate,  Date toDate) throws ApplicationException{
 		
 		final BillingReport report = new BillingReport();
 		java.sql.Date start = ConversionUtils.convertToSQLDate(fromDate);
@@ -60,6 +64,8 @@ public class BillingService {
 		report.setEndDate(end);
 		Project project = projectsRepository.findOne(projectId);
 		report.setProject(project);
+		
+		validate(report);
 		
 		//вычисляем услуги и затраты для попадания в отчет 
 		//(условие: e.project.id = :projectId AND e.report IS NULL AND e.date >= :startDate AND e.date <= :endDate)
@@ -81,6 +87,25 @@ public class BillingService {
 		return result;
 	}
 	
+	protected void validate(BillingReport report) throws ApplicationException{
+		Iterable<BillingReport> existingReports = billingReportRepository.findByProjectAndPeriod(
+				report.getProject().getId(), report.getStartDate(), report.getEndDate());
+		Iterator<BillingReport> all = existingReports.iterator();
+		
+		if(report.isNew() && all.hasNext()){
+			throw new ApplicationException(VALIDATION_ERROR_REPORTS_PERIOD_CONFLICT);
+		}
+		
+		while (all.hasNext()) {
+			BillingReport r = all.next();
+			if(!r.getId().equals(report.getId())){
+				throw new ApplicationException(VALIDATION_ERROR_REPORTS_PERIOD_CONFLICT);
+			}
+			
+		}
+		
+	}
+
 	public Page<BillingReport> getAllReports(Pageable pageable){
 		
 		return billingReportRepository.findAll(pageable);
@@ -95,7 +120,7 @@ public class BillingService {
 		return billingReportRepository.findOne(id);
 	}
 
-	public BillingReport update(Long id, Date fromDate, Date toDate) {
+	public BillingReport update(Long id, Date fromDate, Date toDate) throws ApplicationException{
 		
 		BillingReport report = billingReportRepository.findOne(id);
 
@@ -108,7 +133,9 @@ public class BillingService {
 			if(report.getStartDate().compareTo(start)!=0 || report.getEndDate().compareTo(end)!=0){
 				report.setStartDate(start);
 				report.setEndDate(end);
-				
+
+				validate(report);
+
 				//исключаем записи не попадающие больше в период
 				removeRecordsFromReport(start, end, report.getServiceList());
 				removeRecordsFromReport(start, end, report.getExpenseList());
