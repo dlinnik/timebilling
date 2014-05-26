@@ -3,111 +3,110 @@
 .project-items{
 	margin-left: -45px;
 	position: relative;
-}
 
-.project-items .item{
-	float: left;
-	width: 310px;
-	height: 210px;
-	padding: 20px 10px;
-	background-color: #fff;
-	margin: 0 0 40px 45px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	position: relative;
-}
+	.item{
+		float: left;
+		width: 310px;
+		height: 210px;
+		padding: 20px 10px;
+		background-color: #fff;
+		margin: 0 0 40px 45px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+		position: relative;
+		
+		/* подсвечивать красным шрифтом, при наведении на item */
+		 &:hover .name-project{
+			color: #ff4940;
+		}
+	}
 
-/* название проекта */
-.project-items .name-project{
-	text-decoration: none;
-	display: table-cell;
-	width: 310px;
-	height: 160px;
-	vertical-align: middle;
-	text-align: center;
-	color: #2781ec;
-	font: 30px/36px 'open_sanssemibold', sans-serif;
-	padding-bottom: 17px;
-}
+	/* название проекта */
+	.name-project{
+		text-decoration: none;
+		display: table-cell;
+		width: 310px;
+		height: 160px;
+		vertical-align: middle;
+		text-align: center;
+		color: #2781ec;
+		font: 30px/36px 'open_sanssemibold', sans-serif;
+		padding-bottom: 17px;
+	}
 
-.project-items .item:hover .name-project{
-	color: #ff4940;
-}
+	/* данные проекта */
+	.info-project{
+		border-top: 2px solid #e3e3e3;
+		dl{
+			float: left;
+			width: 103px;
+			text-align: center;
+			font: 13px/18px Arial, Helvetica, sans-serif;
+			color: #393a44;
+		}
 
+		dt{
+			text-indent: -9999px;
+			margin: -12px auto 0;
+			background: url(../images/icon-info.gif) no-repeat;
+			width: 26px;
+			height: 20px;
+			margin-bottom: 8px;
+		}
 
-/* данные проекта */
-.project-items .info-project{
-	border-top: 2px solid #e3e3e3;
-}
+		.time{
+			background-position: 0 -20px;
+		}
 
-.project-items .info-project dl{
-	float: left;
-	width: 103px;
-	text-align: center;
-	font: 13px/18px Arial, Helvetica, sans-serif;
-	color: #393a44;
-}
+		.cost{
+			background-position: 0 -40px;
+		}
 
-.project-items .info-project dt{
-	text-indent: -9999px;
-	margin: -12px auto 0;
-	background: url(../images/icon-info.gif) no-repeat;
-	width: 26px;
-	height: 20px;
-	margin-bottom: 8px;
-}
+		&:after{
+			content: '';
+			display: block;
+			clear: both;
+		}
+	}
+	
+	/* Элемент, если нет ни одного проекта */
+	.no-projects{
+		background: none;
+		border: 1px dashed #a8aaaa;
+		width: 308px;
+		height: 208px;
+	}
 
-.project-items .info-project .time{
-	background-position: 0 -20px;
-}
-
-.project-items .info-project .cost{
-	background-position: 0 -40px;
-}
-
-.project-items .info-project:after{
-	content: '';
-	display: block;
-	clear: both;
-}
-
-/* Элемент, если нет ни одного проекта */
-.project-items .no-projects{
-	background: none;
-	border: 1px dashed #a8aaaa;
-	width: 308px;
-	height: 208px;
-}
-
-.project-items .message-system{
-	position: absolute;
-	top: 50px;
-	left: 180px;
-	width: 720px;
-	height: 110px;
-	background-color: #fff;
-	font: 30px/42px 'open_sanslight', sans-serif;
-	text-align: center;
-	padding-top: 22px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
+	.message-system{
+		position: absolute;
+		top: 50px;
+		left: 180px;
+		width: 720px;
+		height: 110px;
+		background-color: #fff;
+		font: 30px/42px 'open_sanslight', sans-serif;
+		text-align: center;
+		padding-top: 22px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
 
 /* настройка модуля проекта */
-.project-items .setting-project{
-	position: absolute;
-	top: 9px;
-	right: 11px;
-	width: 20px;
-	height: 20px;
-	background: url(../images/icon-tuning.gif) no-repeat;
-	text-indent: -9999px;
-}
-
-.project-items .setting-project:hover{
-	background-position: 0 -20px;
+	.setting-project{
+		position: absolute;
+		top: 9px;
+		right: 11px;
+		width: 20px;
+		height: 20px;
+		background: url(../images/icon-tuning.gif) no-repeat;
+		text-indent: -9999px;
+		
+		&:hover{
+			background-position: 0 -20px;
+		}
+	}
 }
 
 /* сортировка проектов
