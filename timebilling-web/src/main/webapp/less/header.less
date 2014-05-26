@@ -1,0 +1,121 @@
+/* ШАПКА ПРИЛОЖЕНИЯ*/
+
+#header{
+	background-color: #6a768e;
+	height: 80px;
+	margin-bottom: 67px;
+ 
+    .holder{
+		width: 1080px;
+		margin: 0 auto;
+		vertical-align: middle;
+		color: #fff;
+	}
+	
+	/* логотип */
+	.logo {
+		float: left;
+		margin: 17px 100px 0 0;
+		
+		a {
+			display: block;
+			width: 157px;
+			height: 22px;
+			background: url(../images/logo.png) no-repeat;
+			overflow: hidden;
+			text-indent: -9999px;
+			margin-bottom: 7px;
+		}
+
+		span {
+			display: block;
+			font: 13px/18px 'open_sansbold_italic', sans-serif;
+		}
+	}		
+
+	/* -кнопки верхнего меню */
+	.top-menu-button{
+		float: left;
+		width: 200px;
+		line-height: 50px;
+		font-size: 16px;
+		text-align: center;
+		color: #fff;
+		text-decoration: none;
+		margin: 15px 80px 0 0;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+		
+		sup{
+			padding-left: 5px;
+		}
+
+		&:hover{
+			background-color: #7a87a4;
+			-webkit-box-shadow: inset 0px -2px 0px #6e7993;
+			-moz-box-shadow: inset 0px -2px 0px #6e7993;
+			box-shadow: inset 0px -2px 0px #6e7993;
+		}
+
+		&.active{
+			background-color: #596378;
+			-webkit-box-shadow: inset 0px 2px 0px #4b596d;
+			-moz-box-shadow: inset 0px 2px 0px #4b596d;
+			box-shadow: inset 0px 2px 0px #4b596d;
+		}		
+	}
+
+	/* панель пользователя */
+	.user{
+		float: right;
+		padding: 12px 22px 0 0;
+		color: #fff;
+		
+		dl{
+			width: 176px;
+			display: inline-block;
+			vertical-align: middle;
+			margin: 0 0 0 -17px;
+			padding: 5px 30px;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+		}
+		
+		dt{
+			font: 11px/18px 'open_sansitalic', sans-serif;
+		}
+
+		dd{
+			font: 13px/18px 'open_sansbold', sans-serif;
+		}
+						
+		&:hover{
+			color: #fff;
+			
+			dl{
+				background-color: #7a87a4;
+				-webkit-box-shadow: inset 0px -2px 0px #6e7993;
+				-moz-box-shadow: inset 0px -2px 0px #6e7993;
+				box-shadow: inset 0px -2px 0px #6e7993;
+			}
+		}
+		
+		.avatar{
+				position:relative;
+				z-index: 1;
+				display: inline-block;
+				vertical-align: middle;
+				width: 54px;
+				height: 54px;
+				border: 3px solid #fff;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+				overflow: hidden;
+				background-color: #fff;
+		}
+	}
+}
+
