@@ -251,8 +251,11 @@
 }
 
 /* поле пользователя */
-.project-page .user-info{
+.project-page .user{
 	width: 275px;
+}
+
+.project-page .row-content .user{
 	background: url(../../images/bg-date.gif) repeat-x 0 23px;
 }
 
@@ -269,6 +272,9 @@
 /* поле значения */
 .project-page .value{
 	width: 125px;
+}
+
+.project-page .row-content .value{
 	background: url(../../images/bg-date.gif) repeat-x 0 23px;
 }
 
@@ -278,7 +284,7 @@
 }
 
 /* поле комментария */
-.project-page .comment{
+.project-page .post .comment{
 	width: 420px;
 	padding: 8px 0 0 10px;
 	line-height: 21px;
@@ -297,17 +303,9 @@
 	vertical-align: top;
 }
 
-.project-page .user-form{
-	width: 275px;
-}
-
-.project-page .row-form .date{
-	width: 204px;
-}
-
-.row-form input[type="text"],
-.row-form textarea,
-.row-form .date .calendar{
+.project-page .row-form input[type="text"],
+.project-page .row-form textarea,
+.project-page .calendar{
 	margin: 0;
 	padding: 10px 0;
 	border: 1px solid #bcbcbc;
@@ -319,21 +317,20 @@
 	font: 15px/18px Arial, Helvetica, sans-serif;
 }
 
-.row-form .date .calendar{
+/* дата */
+.project-page .row-form .date{
+	width: 204px;
+}
+
+/* Блок текстовой части календаря*/
+.project-page .calendar{
 	width: 168px;
 	padding: 9px 0;
 	height: 20px;
 	position: relative;
 }
 
-.row-form .date .calendar-holder{
-	display: none;
-	position: absolute;
-	top: 38px;
-	left: 50px;
-}
-
-.row-form .date .calendar input[type="text"]{
+.project-page .calendar input[type="text"]{
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
@@ -345,15 +342,16 @@
 	text-align: center;
 }
 
-.row-form .date .calendar .day{
-	font-weight: bold;
-}
-
-.row-form .date .calendar input[type="text"]:first-child{
+.project-page .calendar input[type="text"]:first-child{
 	border:none;
 }
 
-.row-form .date .calendar .icon-calendar{
+.project-page .calendar .day{
+	font-weight: bold;
+}
+
+/* Кнопки открытия календаря */
+.project-page .icon-calendar{
 	width: 21px;
 	height: 20px;
 	background: url(../../images/icon-calendar.gif) no-repeat;
@@ -361,11 +359,16 @@
 	text-indent: -9999px;
 }
 
-.project-page .time-field{
-	width: 125px;
+/* Блок календаря */
+.project-page .calendar-holder{
+	display: none;
+	position: absolute;
+	top: 38px;
+	left: 50px;
 }
 
-.row-form .time-field input[type="text"]{
+/* редактируемое поле значения */
+.project-page .row-form .value input[type="text"]{
 	width: 88px;
 	text-align: center;
 }
@@ -383,7 +386,8 @@
 	margin-bottom: 10px;
 }
 
-.project-page .row-form .comment .buttom-box a{
+/* блок с кнопками */
+.project-page .buttom-box a{
 	height: 50px;
 	color: #fff;
 	font: 16px/50px 'open_sansregular', sans-serif;
@@ -415,19 +419,21 @@
 }
 
 /* пользователем является автор */
-.post.authorized .user-info .avatar{
+.project-page .authorized .user .avatar{
 	border: 2px solid #ff7b4e;
 	padding: 2px;
 }
-.post.authorized .user-info .name{
+
+.project-page .authorized .user .name{
 	font-weight: bold;
 }
 
-.post.disabled .date{
+/* запись не может редактироваться */
+.project-page .disabled .date{
 	color: #3b850e;
 }
 
-.post.disabled .icon .not-edit{
+.project-page .disabled .icon .not-edit{
 	display: inline-block;
 	margin: 5px 0 0 4px;
 	width: 28px;
@@ -436,15 +442,15 @@
 	text-indent: -9999px;
 }
 
-.post.editing .row-content{
+.project-page .editing .row-content{
 	display: none;
 }
 
-.post.editing .row-form{
+.project-page .editing .row-form{
 	display: table;
 }
 
-.more-posts{
+.project-page .more-posts{
 	display: inline-block;
 	padding: 20px 0 0 58px;
 }
