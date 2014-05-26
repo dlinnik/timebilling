@@ -31,10 +31,7 @@ angular.module('myApp.controllers', [])
 		    
 	})
 	.controller('projectListCtrl', function($scope, projectListFactory) {
-				/* $scope.projects = projectListFactory.query(); */
-				$scope.projects = [];
-				$scope.projects.lenght = 0;
-				
+				$scope.projects = projectListFactory.query();				
 	})
 	.controller('addProjectCtrl', function($scope, projectFactory) {
 	})

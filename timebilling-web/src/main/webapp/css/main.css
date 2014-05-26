@@ -188,35 +188,32 @@ a:hover{
 	height: 48px;	
 }
 
-/* Остальные страницы */
 
-
-.project-items .info-project:after,
-.page-title:after,
-.row-form .comment .buttom-box:after{
-	content: '';
-	display: block;
-	clear: both;
-}
-
-
+/* хлебные крошки */
 .breadcrumbs{
 	overflow: hidden;
 	list-style: none;
 	padding: 0;
 	margin: 0 0 33px;
 }
+
 .breadcrumbs li{
 	float: left;
 	background: url(../images/arrow.png) no-repeat 0 50%;
 	padding: 0 8px 0 21px;
 	font: 15px/21px Arial, Helvetica, sans-serif;
 }
+
 .breadcrumbs li:first-child{
 	background: none;
 	padding-left: 0;
 }
-.page-title{margin-bottom: 7px;}
+
+/* название текущей страницы */
+.page-title{
+	margin-bottom: 7px;
+}
+
 .page-title h1{
 	float: left;
 	font-size: 40px;
@@ -226,377 +223,12 @@ a:hover{
 	margin: 0;
 }
 
-#main .change-project{
-	float: right;
-	position: relative;
-	width: 148px;
-	height: 48px;
-	padding-left: 12px;
-}
-
-#main .change-project span{
-	position: absolute;
-	top: 17px;
-	left: 22px;
-    padding-right: 9px;
- }
-
-.information-panel{
-	font: 13px/18px Arial, Helvetica, sans-serif;
-	vertical-align: middle;
-	margin-bottom: 30px;
-}
-.information-panel span,
-.information-panel dl,
-.information-panel dt,
-.information-panel dd{
-	display: inline-block;
-}
-.payment-method{
-	background-color: #e3d5ce;
-	line-height: 30px;
-	padding: 0 15px;
-	color: #393b44;
-	margin-right: 16px;
-}
-.information-panel .persons,
-.information-panel .reports{
-	padding-left: 30px;
-	background: url(../images/icon-information.png) no-repeat;
-	padding-right: 34px;
-}
-
-.information-panel .reports{background-position: 0 -18px;
-}
-
-
-/* ТАБЫ на странице ввода данных */
-
-#tabs{
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-#tabs > .holder{
-	overflow: hidden;
-	background-color: #e4e4e4;
-	height: 80px;
-	padding: 0 20px;
-}
-
-/* панель выбора табов */
-#tabs .tab-list{
-	margin: 0;
-	padding: 10px 65px 0 0;
-	float: right;
-}
-
-#tabs .tab-list li{
-	position: relative;
-	list-style: none;
-	float: left;
-	width: 317px;
-	height: 70px;
-	background: url(../images/bg-tabset.png) no-repeat;
-	font-size: 20px;
-	line-height: 70px;
-	padding-right: 8px;
-	text-align: center;
-	font-weight: bold;
-}
-
-#tabs .tab-list li:first-child{margin-right: -25px;}
-
-#tabs .tab-list li a{
+/* блочный элемент */
+.clearblock:after{
+	content: '';
 	display: block;
-	height: 100%;
+	clear: both;
 }
-
-#tabs .tab-list li:hover a{
-	color: #ff4940;
-	text-decoration: none;
-}
-
-/* панель выбора: активный таб */
-#tabs .tab-list .active{
-	background-position: 0 -70px;
-	z-index: 1;
-}
-
-#tabs .tab-list .active a{
-	color: #393a44;
-}
-
-#tabs .tab-list .active:hover a{
-	color: #393a44;
-}
-
-/* кнопка добавления записи */
-#tabs .add-record{
-	float: left;
-	position:relative;
-	width: 214px;
-	height: 48px;
-	padding-left: 16px;
-	background-image: url(../images/time.png);
-	background-position: 19px 50%; 
-	margin-top: 15px;
-}
-
-#tabs .add-record.money{
-	background-image: url(../images/money.png);
-}
-
-/* Содержимое табов */
-.tab-content{
-	background-color: #fff;
-	padding: 19px 20px;
-}
-
-.tab-content .posts{
-	border-bottom: 3px solid #e3e3e3;
-	position: relative;
-}
-
-.tab-content .posts .bg-posts{
-	position: absolute;
-	bottom: -5px;
-	left: 50px;
-	background: url(../images/bg-posts.gif) no-repeat;
-	width: 67px;
-	height: 9px;
-}
-
-.post-title{
-	padding-left: 53px;
-	margin-bottom: 11px;
-}
-.post-title span{
-	display: inline-block;
-	font-size: 11px;
-	line-height: 20px;
-	background-color: #e4e4e4;
-	padding: 0 9px;
-}
-.post-title .date{margin-right: 383px;}
-.post-title .time{margin-right: 65px;}
-.tab-content .post{
-	margin-bottom: 11px;
-}
-.tab-content .post.editing{
-	z-index: 1000;
-	position: relative;
-}
-.tab-content .post .row-content{display: table;}
-.tab-content .post .row-content > div{
-	display: table-cell;
-	vertical-align: top;
-	line-height: 38px;
-}
-#main .post .icon{
-	width: 57px;
-	vertical-align: middle;
-}
-.post .icon a{
-	margin-top: 5px;
-	display: inline-block;
-	width: 35px;
-	height: 25px;
-	background: #50a1d7;
-	-webkit-box-shadow: inset 0px -2px 0px #4891c1;
-	-moz-box-shadow: inset 0px -2px 0px #4891c1;
-	box-shadow: inset 0px -2px 0px #4891c1;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-.post .icon a span{
-	display: block;
-	color: #fff;
-	text-align: center;
-	width: 35px;
-	padding-top: 4px;
-}
-.post .icon a:hover{
-	background-color: #5ea9dd;
-	-webkit-box-shadow: inset 0px -2px 0px #5498c6;
-	-moz-box-shadow: inset 0px -2px 0px #5498c6;
-	box-shadow: inset 0px -2px 0px #5498c6;
-}
-.post .icon a:active{
-	background-color: #227eb9;
-	-webkit-box-shadow: inset 0px 2px 0px #268cce;
-	-moz-box-shadow: inset 0px 2px 0px #268cce;
-	box-shadow: inset 0px 2px 0px #268cce;
-}
-.post .date{width: 147px;}
-.post .user-info{
-	width: 275px;
-	background: url(../images/bg-date.gif) repeat-x 0 23px;
-}
-.post .row-form .user-info{background: none;}
-.post .user-info .holder{
-	display: inline-block;
-	background-color: #fff;
-	padding-right: 7px;
-}
-.post .user-info .avatar{
-	display: inline-block;
-	padding: 4px;
-	width: 30px;
-	height: 30px;
-	line-height: 28px;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-	overflow: hidden;
-	vertical-align: middle;
-	margin-right: 9px;
-}
-.post .user-info .name{display: inline-block;}
-.post .value,
-.post .time-field{width: 125px;}
-.post .value{
-	background: url(../images/bg-date.gif) repeat-x 0 23px;
-}
-.post .value .time{
-	background-color: #fff;
-	padding: 0 8px;
-}
-#main .post .comment{
-	width: 420px;
-	padding: 8px 0 0 10px;
-	line-height: 21px;
-}
-#main .post .row-form .comment{padding-top: 0;}
-.post .value .cost{
-	display: none;
-	background: #fff url(../images/icon-cost.gif) no-repeat 0 6px;
-	padding: 0 2px 0 13px;
-	margin-left: -4px;
-	color: #999;
-}
-.admin .post .value .cost{
-	display: inline;
-}
-.row-form{
-	width: 100%;
-	border-top: 3px solid #e3e3e3;
-	border-bottom: 3px solid #e3e3e3;
-	padding: 20px 0 22px;
-}
-.row-form > div{
-	display: table-cell;
-	vertical-align: top;
-}
-.row-form .date{width: 204px;}
-.row-form input[type="text"],
-.row-form textarea,
-.row-form .date .calendar{
-	margin: 0;
-	padding: 10px 0;
-	border: 1px solid #bcbcbc;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	outline: none;
-	height: 18px;
-	font: 15px/18px Arial, Helvetica, sans-serif;
-}
-.row-form .date .calendar{
-	width: 168px;
-	padding: 9px 0;
-	height: 20px;
-	position: relative;
-}
-.row-form .date .calendar-holder{
-	display: none;
-	position: absolute;
-	top: 38px;
-	left: 50px;
-}
-.row-form .date .calendar input[type="text"]{
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-	border: none;
-	border-left: 1px solid #bbb;
-	width: 43px;
-	height: 20px;
-	padding: 0;
-	text-align: center;
-}
-.row-form .date .calendar .day{font-weight: bold;}
-.row-form .date .calendar input[type="text"]:first-child{border:none;}
-.row-form .date .calendar .icon-calendar{
-	width: 21px;
-	height: 20px;
-	background: url(../images/icon-calendar.gif) no-repeat;
-	display: inline-block;
-	text-indent: -9999px;
-}
-.row-form .time-field input[type="text"]{
-	width: 88px;
-	text-align: center;
-}
-.row-form .comment textarea{
-	width: 388px;
-	height: 58px;
-	padding: 15px;
-	resize: none;
-	margin-bottom: 10px;
-}
-.row-form .comment .buttom-box a{
-	height: 50px;
-	color: #fff;
-	font: 16px/50px 'open_sansregular', sans-serif;
-	text-align: center;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
-.row-form .comment .buttom-box .save{
-	float: left;
-	width: 190px;
-}
-
-.add-new-post .row-form .comment .buttom-box .save{
-	width: 206px;
-}
-
-.row-form .comment .buttom-box .delete{
-	float: right;
-	width: 180px;
-}
-
-.add-new-post .row-form .comment .buttom-box .delete{
-	width: 160px;
-}
-
-.post.authorized .user-info .avatar{
-	border: 2px solid #ff7b4e;
-	padding: 2px;
-}
-.post.authorized .user-info .name{font-weight: bold;}
-.post.disabled .date{color: #3b850e;}
-.post.disabled .icon .not-edit{
-	display: inline-block;
-	margin: 5px 0 0 4px;
-	width: 28px;
-	height: 21px;
-	background: url(../images/icon-disabled.gif) no-repeat;
-	text-indent: -9999px;
-}
-.post.editing .row-content{display: none;}
-.post.editing .row-form{display: table;}
-.more-posts{
-	display: inline-block;
-	padding: 20px 0 0 58px;
-}
-
-
-
-/* КЛАССЫ ХЕЛПЕРЫ */
 
 /* аватар пользователя */
 .avatar img{
