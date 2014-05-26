@@ -69,12 +69,7 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		return details;
 	}
 	
-	protected T fromRecordInternal(T t, Record r) throws ParseException{
-		//TODO: date!
-//		t.setDate(new java.sql.Date(dateFormat.parse(sd.getDay() + "/" + sd.getMonth() + "/" + sd.getYear()).getTime()));
-		
-//		Date d1 = r.getDate();
-//		Date d2 = Calendar.getInstance().getTime();
+	protected T fromRecordInternal(T t, Record r) /*throws ParseException*/{
 		
 		t.setDate(ConversionUtils.convertToSQLDate(r.getDate()));
 		t.setComment(r.getComment());
@@ -88,7 +83,9 @@ public abstract class AbstractRecordConverter <T extends BaseRecordEntity>{
 		if(r.getReport()!=null){
 			t.setReport(billingReportRepository.findOne(r.getReport()));
 		}
-		t.setProject(projectsRepository.findOne(r.getProject()));
+		if(r.getProject()!=null){
+			t.setProject(projectsRepository.findOne(r.getProject()));
+		}
 		
 		return t;
 	}

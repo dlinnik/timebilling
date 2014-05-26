@@ -53,10 +53,12 @@ public class ProjectExpensesService extends BaseRecordService<Expense>{
 		Expense e = new Expense();
 		if(!details.isNew()){
 			e = expenseRepository.findOne(details.getId());
-			canUpdateRecord(e, details);
-
 		}
 		e = converter.fromRecord(e, details);
+		
+		//validate before save
+		validate(e);
+
 		e = expenseRepository.save(e);
 		return converter.toRecord(e);
 	}

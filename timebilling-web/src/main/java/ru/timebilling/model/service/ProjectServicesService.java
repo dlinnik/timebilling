@@ -53,9 +53,12 @@ public class ProjectServicesService extends BaseRecordService<ru.timebilling.mod
 		ru.timebilling.model.domain.Service service = new ru.timebilling.model.domain.Service();
 		if(!details.isNew()){
 			service = servicesRepository.findOne(details.getId());
-			canUpdateRecord(service, details);
 		}
 		service = converter.fromRecord(service, details);
+		
+		//validate before save
+		validate(service);
+
 		service = servicesRepository.save(service);
 		return converter.toRecord(service);
 	}
