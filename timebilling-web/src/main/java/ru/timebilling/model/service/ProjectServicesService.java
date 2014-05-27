@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 
+import ru.timebilling.model.domain.BillingReport;
 import ru.timebilling.model.domain.Project;
+import ru.timebilling.model.repository.BillingReportRepository;
 import ru.timebilling.model.repository.ProjectRepository;
 import ru.timebilling.model.repository.ServiceRepository;
 import ru.timebilling.model.service.conversion.PageConverter;
@@ -26,6 +28,9 @@ public class ProjectServicesService extends BaseRecordService<ru.timebilling.mod
 	ProjectRepository projectsRepository;
 
 	@Autowired
+	BillingReportRepository reportsRepository;
+	
+	@Autowired
 	ServiceConverter converter;
 
 	public Page<Record> getServices(Long projectId, Pageable pageable) {
@@ -34,19 +39,35 @@ public class ProjectServicesService extends BaseRecordService<ru.timebilling.mod
 
 			Page<ru.timebilling.model.domain.Service> page = servicesRepository
 					.findByProject(project, pageable);
-
-			return PageConverter
-					.convert(page)
-					.using(new Function<ru.timebilling.model.domain.Service, Record>() {
-						@Override
-						public Record apply(
-								ru.timebilling.model.domain.Service service) {
-							Record r = converter.toRecord(service);
-							return r;
-						}
-					});
+			return convertToPageOfRecords(page);
 		}
 		return null;
+	}
+	
+	public Page<Record> getServicesByReport(Long reportId, Pageable pageable) {
+		BillingReport report = reportsRepository.findOne(reportId);
+		if (report != null) {
+
+			Page<ru.timebilling.model.domain.Service> page = servicesRepository
+					.findByReport(report, pageable);
+			return convertToPageOfRecords(page);
+		}
+		return null;
+	}
+
+
+	private Page<Record> convertToPageOfRecords(
+			Page<ru.timebilling.model.domain.Service> page) {
+		return PageConverter
+				.convert(page)
+				.using(new Function<ru.timebilling.model.domain.Service, Record>() {
+					@Override
+					public Record apply(
+							ru.timebilling.model.domain.Service service) {
+						Record r = converter.toRecord(service);
+						return r;
+					}
+				});
 	}
 
 	public Record save(Record details) throws ParseException, ApplicationException {

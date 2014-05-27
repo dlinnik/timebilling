@@ -34,19 +34,28 @@ public class RecordsController extends BaseAPIController{
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Page<Record> allServicesForProject(
-			Model model, @RequestParam("project") Long projectId, 
+			Model model, 
+			@RequestParam(value = "project") Long projectId,
+			@RequestParam(value = "report", required = false) Long reportId,
 			@PageableDefault(value = 5,  sort = "date", direction = Direction.DESC) Pageable pageable)
 	{
+		if(reportId!=null){
+			return projectServicesService.getServicesByReport(reportId, pageable);
+		}
 		return projectServicesService.getServices(projectId, pageable);
 	}
-
+	
 	@RequestMapping(value="/expenses", method=RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Page<Record> allExpensesForProject(
 			Model model, @RequestParam("project") Long projectId, 
+			@RequestParam(value = "report", required = false) Long reportId,
 			@PageableDefault(value = 5, sort = "date", direction = Direction.DESC) Pageable pageable)
 	{
+		if(reportId!=null){
+			return projectExpensesService.getExpensesByReport(reportId, pageable);			
+		}
 		return projectExpensesService.getExpenses(projectId, pageable);
 	}
 	

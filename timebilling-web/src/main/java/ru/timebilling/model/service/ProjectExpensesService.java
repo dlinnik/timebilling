@@ -7,8 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import ru.timebilling.model.domain.BillingReport;
 import ru.timebilling.model.domain.Expense;
 import ru.timebilling.model.domain.Project;
+import ru.timebilling.model.repository.BillingReportRepository;
 import ru.timebilling.model.repository.ExpenseRepository;
 import ru.timebilling.model.repository.ProjectRepository;
 import ru.timebilling.model.service.conversion.ExpenseConverter;
@@ -25,6 +27,9 @@ public class ProjectExpensesService extends BaseRecordService<Expense>{
 	
 	@Autowired
 	ProjectRepository projectsRepository;
+	
+	@Autowired
+	BillingReportRepository reportsRepository;
 
 	@Autowired
 	ExpenseConverter converter;
@@ -35,18 +40,33 @@ public class ProjectExpensesService extends BaseRecordService<Expense>{
 
 			Page<Expense> page = expenseRepository.findByProject(project, pageable);
 
-			return PageConverter
-					.convert(page)
-					.using(new Function<Expense, Record>() {
-						@Override
-						public Record apply(
-								Expense service) {
-							Record r = converter.toRecord(service);
-							return r;
-						}
-					});
+			return convertToPageOfRecords(page);
 		}
 		return null;
+	}
+	
+	public Page<Record> getExpensesByReport(Long reportId, Pageable pageable) {
+		BillingReport report = reportsRepository.findOne(reportId);
+		if (report != null) {
+
+			Page<Expense> page = expenseRepository.findByReport(report, pageable);
+			return convertToPageOfRecords(page);
+		}
+		return null;
+	}
+
+
+	private Page<Record> convertToPageOfRecords(Page<Expense> page) {
+		return PageConverter
+				.convert(page)
+				.using(new Function<Expense, Record>() {
+					@Override
+					public Record apply(
+							Expense service) {
+						Record r = converter.toRecord(service);
+						return r;
+					}
+				});
 	}
 
 	public Record save(Record details) throws ParseException, ApplicationException {

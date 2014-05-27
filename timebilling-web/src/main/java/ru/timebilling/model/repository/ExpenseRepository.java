@@ -8,13 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
+import ru.timebilling.model.domain.BillingReport;
 import ru.timebilling.model.domain.Expense;
 import ru.timebilling.model.domain.Project;
 
 public interface ExpenseRepository extends PagingAndSortingRepository<Expense, Long>{
 
 	public Page<Expense> findByProject(Project project, Pageable pageable);
-	
+
+	public Page<Expense> findByReport(BillingReport report, Pageable pageable);
+
     @Query("SELECT e FROM Expense e WHERE e.project.id = :projectId AND e.report IS NULL AND e.date >= :startDate AND e.date <= :endDate")
     public Iterable<Expense> findToBill(
     		@Param("projectId") Long projectId,
