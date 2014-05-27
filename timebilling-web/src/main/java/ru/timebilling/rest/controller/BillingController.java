@@ -142,6 +142,11 @@ public class BillingController extends BaseAPIController{
 		billingService.delete(id);
 	}
 
+	@RequestMapping(value="/billing/period", method = RequestMethod.GET)
+	@ResponseBody
+	public Date[] getBillingPeriod(@RequestParam(value="projectId", required=false) Long projectId){    
+		return billingService.getAvailableRecordsPeriod(projectId);
+	}
 
 
 	private Billing getBilling(Date fromDate, Date toDate,

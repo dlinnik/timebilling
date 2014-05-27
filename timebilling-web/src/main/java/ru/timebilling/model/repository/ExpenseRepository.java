@@ -1,6 +1,7 @@
 package ru.timebilling.model.repository;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,5 +24,12 @@ public interface ExpenseRepository extends PagingAndSortingRepository<Expense, L
     		@Param("projectId") Long projectId,
     		@Param("startDate") Date startDate,
     		@Param("endDate") Date endDate);
+    
+    @Query(value="SELECT MIN(e.date), MAX(e.date) FROM Expense e WHERE e.report IS NULL")
+    public List<Object[]> findPeriod();
+
+    @Query(value="SELECT MIN(e.date), MAX(e.date) FROM Expense e WHERE e.report IS NULL AND e.project.id = :projectId")
+    public List<Object[]> findPeriodByProject(@Param("projectId") Long projectId);
+
 
 }

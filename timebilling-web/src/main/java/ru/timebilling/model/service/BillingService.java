@@ -3,6 +3,7 @@ package ru.timebilling.model.service;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -27,7 +28,7 @@ import ru.timebilling.model.repository.BillingReportRepository;
 import ru.timebilling.model.repository.ExpenseRepository;
 import ru.timebilling.model.repository.ProjectRepository;
 import ru.timebilling.model.repository.ServiceRepository;
-import ru.timebilling.model.service.conversion.ConversionUtils;
+import static ru.timebilling.model.service.conversion.ConversionUtils.*;
 
 @Service
 public class BillingService {
@@ -56,10 +57,10 @@ public class BillingService {
 	public BillingReport create(Long projectId,  Date fromDate,  Date toDate) throws ApplicationException{
 		
 		final BillingReport report = new BillingReport();
-		java.sql.Date start = ConversionUtils.convertToSQLDate(fromDate);
-		java.sql.Date end = ConversionUtils.convertToSQLDate(toDate);
+		java.sql.Date start = convertToSQLDate(fromDate);
+		java.sql.Date end = convertToSQLDate(toDate);
 		
-		report.setCreationDate(ConversionUtils.convertToSQLDate(Calendar.getInstance().getTime()));
+		report.setCreationDate(convertToSQLDate(Calendar.getInstance().getTime()));
 		report.setStartDate(start);
 		report.setEndDate(end);
 		Project project = projectsRepository.findOne(projectId);
@@ -126,8 +127,8 @@ public class BillingService {
 
 		if(report!=null){
 						
-			java.sql.Date start = ConversionUtils.convertToSQLDate(fromDate);
-			java.sql.Date end = ConversionUtils.convertToSQLDate(toDate);
+			java.sql.Date start = convertToSQLDate(fromDate);
+			java.sql.Date end = convertToSQLDate(toDate);
 			
 			//do only if at least one date changed			
 			if(report.getStartDate().compareTo(start)!=0 || report.getEndDate().compareTo(end)!=0){
@@ -174,6 +175,24 @@ public class BillingService {
 			record.setExcluded(exclude);
 			expenseRepository.save(record);
 		}
+	}
+	
+	public java.sql.Date[] getAvailableRecordsPeriod(Long projectId){
+		Object[] servicesPeriod;
+		Object[] expensesPeriod;
+
+		if(projectId == null){
+			servicesPeriod = serviceRepository.findPeriod().get(0);
+			expensesPeriod = expenseRepository.findPeriod().get(0);
+
+		}else{
+			servicesPeriod = serviceRepository.findPeriodByProject(projectId).get(0);
+			expensesPeriod = expenseRepository.findPeriodByProject(projectId).get(0);
+		}
+		
+		return new java.sql.Date[]{
+				getMinDate((java.sql.Date)servicesPeriod[0], (java.sql.Date)expensesPeriod[0]),
+				getMaxDate((java.sql.Date) servicesPeriod[1], (java.sql.Date)expensesPeriod[1])};
 	}
 	
 	protected <T extends BaseRecordEntity> Set<T> prepareRecordsToReport(final BillingReport report, Iterable<T> t){
