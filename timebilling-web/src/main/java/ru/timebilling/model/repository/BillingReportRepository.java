@@ -20,4 +20,11 @@ public interface BillingReportRepository extends PagingAndSortingRepository<Bill
     		@Param("projectId") Long projectId, 
     		@Param("d1") Date d1, 
     		@Param("d2") Date d2);
+    
+    @Query("SELECT r FROM BillingReport r WHERE r.project.id = :projectId "
+    		+ "AND r.startDate <= :d AND r.endDate >= :d")
+    public Iterable<BillingReport> findByProjectAndDateInReportPeriod(
+    		@Param("projectId") Long projectId, 
+    		@Param("d") Date d);
+    
 }
