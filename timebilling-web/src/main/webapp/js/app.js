@@ -13,7 +13,7 @@ angular.module('myApp', [
   $routeProvider
   .when('/project', {templateUrl: 'partials/projectList.html', controller: 'projectListCtrl'})
   .when('/project/:projectId', {templateUrl: 'partials/project.html', controller: 'projectCtrl'})
-  .when('/billing', {templateUrl: 'partials/billing.html', controller: 'billingCtrl'})
+  .when('/billing', {templateUrl: 'mockups/billingMockup.html', controller: 'billingCtrl'})
   .when('/addProject', {templateUrl: 'partials/addProject.html', controller: 'addProjectCtrl'})
   .otherwise({redirectTo: '/project'});
 }]);
