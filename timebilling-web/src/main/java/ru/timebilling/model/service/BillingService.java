@@ -1,5 +1,10 @@
 package ru.timebilling.model.service;
 
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -28,6 +33,9 @@ import ru.timebilling.model.repository.BillingReportRepository;
 import ru.timebilling.model.repository.ExpenseRepository;
 import ru.timebilling.model.repository.ProjectRepository;
 import ru.timebilling.model.repository.ServiceRepository;
+import ru.timebilling.rest.domain.Billing;
+import ru.timebilling.rest.domain.BillingGroupBy;
+import ru.timebilling.rest.domain.BillingItem;
 import static ru.timebilling.model.service.conversion.ConversionUtils.*;
 
 @Service
@@ -52,6 +60,61 @@ public class BillingService {
 	
     @PersistenceContext
     private EntityManager entityManager;
+    
+	public Billing getBilling(Date fromDate, Date toDate,
+			Long projectId, BillingGroupBy groupBy) {
+		
+		List<Object[]> billingServices = null;
+		List<Object[]> billingExpenses = null;
+		
+		if(projectId!=null){
+			billingServices = serviceRepository.billingByProject(projectId);
+			billingExpenses = expenseRepository.billingByProject(projectId);
+		}else{
+			billingServices = serviceRepository.billing();
+			billingExpenses = expenseRepository.billing();
+		}
+		
+		Billing result = new Billing();
+	
+		for(Object[] o : billingServices){
+			if(o[0] != null && o[2] != null && o[3] != null) //на всякий случай
+				result.add((Project)o[0], 
+						o[1] == null ? BigDecimal.ZERO.floatValue() : ((BigDecimal)o[1]).floatValue(),
+								(Integer)o[2], (Integer)o[3], Billing.BillingType.TIME);
+		}
+
+		for(Object[] o : billingExpenses){
+			if(o[0] != null && o[2] != null && o[3] != null) //на всякий случай
+				result.add((Project)o[0], 
+						o[1] == null ? BigDecimal.ZERO.floatValue() : ((BigDecimal)o[1]).floatValue(),
+								(Integer)o[2], (Integer)o[3], Billing.BillingType.EXP);
+		}
+		
+//		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		List<BillingItem> items = new ArrayList<BillingItem>();
+//		try{
+//			BillingItem item = new BillingItem(projectsRepository.findOne(1L), 
+//					df.parse("2014-03-01"), df.parse("2014-03-31"), new Float(1000), new Float(2000));
+//			items.add(item);
+//			
+//			item = new BillingItem(projectsRepository.findOne(1L), 
+//					df.parse("2014-02-01"), df.parse("2014-02-28"), new Float(3000), new Float(1000));
+//			items.add(item);
+//
+//			item = new BillingItem(projectsRepository.findOne(2L), 
+//					df.parse("2014-03-01"), df.parse("2014-03-15"), new Float(500), new Float(4000));
+//			items.add(item);
+//			
+//		}catch(ParseException e){
+//			logger.error("", e);
+//		}
+//		
+//		return new Billing(fromDate, toDate, items);
+		
+		return result;
+	}
+
 
 	
 	public BillingReport create(Long projectId,  Date fromDate,  Date toDate) throws ApplicationException{

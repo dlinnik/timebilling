@@ -30,6 +30,15 @@ public interface ExpenseRepository extends PagingAndSortingRepository<Expense, L
 
     @Query(value="SELECT MIN(e.date), MAX(e.date) FROM Expense e WHERE e.report IS NULL AND e.project.id = :projectId")
     public List<Object[]> findPeriodByProject(@Param("projectId") Long projectId);
+    
+    @Query(value="SELECT e.project, SUM(e.spentMoney), MONTH(e.date), YEAR(e.date) FROM Expense e WHERE e.report IS NULL "
+    		+ "GROUP BY e.project, MONTH(e.date), YEAR(e.date) ORDER BY e.project.name ASC, MONTH(e.date) DESC, YEAR(e.date) DESC")
+    public List<Object[]> billing();
+
+    @Query(value="SELECT e.project, SUM(e.spentMoney), MONTH(e.date), YEAR(e.date) FROM Expense e WHERE e.report IS NULL AND e.project.id = :projectId "
+    		+ "GROUP BY e.project, MONTH(e.date), YEAR(e.date) ORDER BY e.project.name ASC, MONTH(e.date) DESC, YEAR(e.date) DESC")
+    public List<Object[]> billingByProject(@Param("projectId") Long projectId);
+
 
 
 }
