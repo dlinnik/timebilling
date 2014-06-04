@@ -20,5 +20,29 @@ public class ConversionUtils {
 		  return new java.sql.Date(cal.getTime().getTime());
 	  }
 	  
+	  public static java.sql.Date getMinDate(java.sql.Date d1, java.sql.Date d2){
+		  if(d1 == null){
+			  return d2;
+		  }
+		  
+		  if(d1.compareTo(d2) > 0){
+			  return d2;
+		  }
+		  
+		  return d1;
+	  }
+
+	  public static java.sql.Date getMaxDate(java.sql.Date d1, java.sql.Date d2){
+		  if(d1 == null){
+			  return d2;
+		  }
+		  
+		  if(d1.compareTo(d2) > 0){
+			  return d1;
+		  }
+		  
+		  return d2;
+	  }
+
 
 }

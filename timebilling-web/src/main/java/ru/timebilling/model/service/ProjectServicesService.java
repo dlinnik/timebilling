@@ -27,8 +27,6 @@ public class ProjectServicesService extends BaseRecordService<ru.timebilling.mod
 	@Autowired
 	ProjectRepository projectsRepository;
 
-	@Autowired
-	BillingReportRepository reportsRepository;
 	
 	@Autowired
 	ServiceConverter converter;
@@ -45,7 +43,7 @@ public class ProjectServicesService extends BaseRecordService<ru.timebilling.mod
 	}
 	
 	public Page<Record> getServicesByReport(Long reportId, Pageable pageable) {
-		BillingReport report = reportsRepository.findOne(reportId);
+		BillingReport report = getReportsRepository().findOne(reportId);
 		if (report != null) {
 
 			Page<ru.timebilling.model.domain.Service> page = servicesRepository

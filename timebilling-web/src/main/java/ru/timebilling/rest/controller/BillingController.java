@@ -1,11 +1,7 @@
 package ru.timebilling.rest.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +26,6 @@ import ru.timebilling.model.service.ApplicationException;
 import ru.timebilling.model.service.BillingService;
 import ru.timebilling.rest.domain.Billing;
 import ru.timebilling.rest.domain.BillingGroupBy;
-import ru.timebilling.rest.domain.BillingItem;
 
 @Controller
 public class BillingController extends BaseAPIController{
@@ -47,27 +42,17 @@ public class BillingController extends BaseAPIController{
 			produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Billing billing(
+    		//ignored for Beta
     		@RequestParam(value="from", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
+    		//ignored for Beta
     		@RequestParam(value="to", required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate, 
     		@RequestParam(value="project", required=false) Long projectId,
-    		@RequestParam(value="group_by", required=false, defaultValue="none") BillingGroupBy groupBy) {
+    		//ignored for Beta
+    		@RequestParam(value="group_by", required=false, defaultValue="monthly") BillingGroupBy groupBy) {
     	
-    	Billing result = null;
     	logger.info("request billing from [" + fromDate + "] to [" + toDate + "] by project [" + projectId + "] group by [" + groupBy + "]");
     	
-    	switch (groupBy) {
-		case monthly:
-			
-//			break;
-
-		case quarterly:
-			
-//			break;
-			
-		default:
-			result = getBilling(fromDate, toDate, projectId, groupBy);
-		}
-    	return result;
+    	return billingService.getBilling(fromDate, toDate, projectId, groupBy);
     }
     
     @RequestMapping(value="/billing/report", method=RequestMethod.POST,
@@ -142,34 +127,10 @@ public class BillingController extends BaseAPIController{
 		billingService.delete(id);
 	}
 
-
-
-	private Billing getBilling(Date fromDate, Date toDate,
-			Long projectId, BillingGroupBy groupBy) {
-		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		List<BillingItem> items = new ArrayList<BillingItem>();
-		try{
-			BillingItem item = new BillingItem(projectsRepository.findOne(1L), 
-					df.parse("2014-03-01"), df.parse("2014-03-31"), new Float(1000), new Float(2000));
-			items.add(item);
-			
-			item = new BillingItem(projectsRepository.findOne(1L), 
-					df.parse("2014-02-01"), df.parse("2014-02-28"), new Float(3000), new Float(1000));
-			items.add(item);
-
-			item = new BillingItem(projectsRepository.findOne(2L), 
-					df.parse("2014-03-01"), df.parse("2014-03-15"), new Float(500), new Float(4000));
-			items.add(item);
-			
-		}catch(ParseException e){
-			logger.error("", e);
-		}
-		
-		return new Billing(fromDate, toDate, items);
+	@RequestMapping(value="/billing/period", method = RequestMethod.GET)
+	@ResponseBody
+	public Date[] getBillingPeriod(@RequestParam(value="projectId", required=false) Long projectId){    
+		return billingService.getAvailableRecordsPeriod(projectId);
 	}
-    	    	
-    	
-
 
 }

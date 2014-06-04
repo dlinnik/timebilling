@@ -29,9 +29,6 @@ public class ProjectExpensesService extends BaseRecordService<Expense>{
 	ProjectRepository projectsRepository;
 	
 	@Autowired
-	BillingReportRepository reportsRepository;
-
-	@Autowired
 	ExpenseConverter converter;
 
 	public Page<Record> getExpenses(Long projectId, Pageable pageable) {
@@ -46,7 +43,7 @@ public class ProjectExpensesService extends BaseRecordService<Expense>{
 	}
 	
 	public Page<Record> getExpensesByReport(Long reportId, Pageable pageable) {
-		BillingReport report = reportsRepository.findOne(reportId);
+		BillingReport report = getReportsRepository().findOne(reportId);
 		if (report != null) {
 
 			Page<Expense> page = expenseRepository.findByReport(report, pageable);
