@@ -14,6 +14,7 @@
         width: 240px;
 		height: 40px;
 		background: #fff;
+		border: 1px solid #bbb;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
@@ -21,7 +22,7 @@
 		input {
 		    width: 194px;
 		    height:38px;
-		    line-height: 38px;
+		    font: 15px/38px Arial,Helvetica,sans-serif;
 		    text-indent: 12px;
 		    border: 0;
 		    background: none;
@@ -45,9 +46,7 @@
 	     float: left;
 	     margin-left: 38px;
 	     height: 40px;
-	     line-height: 39px;
-	     font-size: 16px;
-	     font-weight: bold;
+	     font: 16px/39px 'open_sansbold';
 	     color: #393a44;
 	     
 	     .icon-edit {
@@ -79,6 +78,7 @@
     background: #fff;
     box-sizing: border-box;
     font-family: Arial,Helvetica,sans-serif;
+    color: #393944;
 
     // thead
     .thead {
@@ -104,6 +104,7 @@
                 vertical-align: middle;
                 width: 19px;
                 height: 20px;
+                margin-left:16px;
                 }
             .icon-time {
                 background: url(../images/icon-time.png) no-repeat;
@@ -199,7 +200,7 @@
 	padding: 10px 0;
 	width: 168px;
 	height: 20px;
-	border: 1px solid #bcbcbc;
+	border: 1px solid #bbb;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -216,12 +217,13 @@
 		width: 43px;
 		height: 20px;
 		padding: 0;
+		color: #393a44;
 		text-align: center;
 		&:first-child {
 			border:none;
 		    }
 		 &.day {
-		font-weight: bold;
+		    font-weight: bold;
 		    }
 	    }
 		
@@ -305,29 +307,29 @@
     // thead таблицы
     .thead > div:nth-of-type(1),
     .item > .title {
-        width: 450px;
+        width: 445px;
         }
     
     // ширина колонок
     .thead > div:nth-of-type(2),
     .item > .row-content > div:nth-of-type(1) {
-        width: 110px;
+        width: 124px;
         }
     
     .thead > div:nth-of-type(3),
     .item > .row-content > div:nth-of-type(2) {
-        width: 82px;
+        width: 92px;
         }
     
     .thead > div:nth-of-type(4),
     .item > .row-content > div:nth-of-type(3) {
-        width: 82px;
+        width: 92px;
         }
     
     .thead > div:nth-of-type(5),
     .item > .row-content > div:nth-of-type(4) {
-        width: 105px;
-        padding-right: 65px;
+        width: 100px;
+        padding-right: 55px;
         }
     
     .thead > div:nth-of-type(6),
@@ -351,28 +353,51 @@
         > .title {
             float: left;
             padding: 11px 0;
+            background: url(../images/bg-date.gif) repeat-x 0 24px;
+            
+            > span {
+                background: #fff;
+                padding-right: 6px;
+                .title-project {
+                    color: #393a44;
+                    }
+                }
             }
         
         // строки с данными
         > .row-content {
-            width: 590px;
+            width: 595px;
             float: right;
+            background: url(../images/bg-date.gif) repeat-x 0 24px;
             
-            > div:nth-of-type(1),
-            > div:nth-of-type(4) {
-                font-weight: bold;
-                }
-            
-            > div:nth-of-type(2),
-            > div:nth-of-type(3) {
-                 color: #797979;
-                 }
+            > div {
+                &:nth-of-type(1),
+                &:nth-of-type(4) {
+                    font-weight: bold;
+                    }
+                
+                &:nth-of-type(2),
+                &:nth-of-type(3) {
+                     color: #999;
+                     }
+    
+                &:nth-of-type(2),
+                &:nth-of-type(3),
+                &:nth-of-type(4) {
+                    text-align: right;
+                    }
 
-            > div:nth-of-type(2),
-            > div:nth-of-type(3),
-            > div:nth-of-type(4) {
-                text-align: right;
+                &:nth-of-type(5) {
+                    background: #fff;
+                    }
+                
+                > span {
+                    background: #fff;
+                    padding: 0 6px;
+                    }
+                
                 }
+            
             
             .icon-reports {
                 display: inline-block;
