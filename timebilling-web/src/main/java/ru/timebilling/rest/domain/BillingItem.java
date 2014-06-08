@@ -10,7 +10,7 @@ import ru.timebilling.model.domain.Project;
  * @author vshmelev
  *
  */
-public class BillingItem {
+public class BillingItem implements Comparable<BillingItem>{
 	
 	private Project project;
 	private Date periodStartDate;
@@ -120,11 +120,19 @@ public class BillingItem {
 	public void setExpSum(Float expSum) {
 		this.expSum = expSum;
 	}
-	
-	
 
-	
-	
-	
+	@Override
+	public int compareTo(BillingItem o) {
+		//сортируем по:
+		//1. по возрастанию id проекта
+		int projectsCompare = this.getProject().getId().compareTo(o.getProject().getId());
+		//2. по убыванию года
+		int yearsCompare = Integer.compare(o.getYear(), this.getYear());
+		//3. по убыванию месяца
+		int monthCompare = Integer.compare(o.getMonth(), this.getMonth());
+		return projectsCompare !=0 ? projectsCompare : 
+			yearsCompare !=0 ? yearsCompare :
+				monthCompare;
+	}
 	
 }

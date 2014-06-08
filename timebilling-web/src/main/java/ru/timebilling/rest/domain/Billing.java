@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.data.domain.Page;
 
@@ -19,14 +21,14 @@ public class Billing {
 	private Date startDate;
 	private Date endDate;
 	
-	private List<BillingItem> items = new ArrayList<BillingItem>();
+	private Set<BillingItem> items = new TreeSet<BillingItem>();
 	
 	public static enum BillingType{
 		TIME,
 		EXP
 	};
 
-	public Billing(Date startDate, Date endDate, List<BillingItem> items) {
+	public Billing(Date startDate, Date endDate, Set<BillingItem> items) {
 		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -72,7 +74,7 @@ public class Billing {
 		}
 	}
 
-	public List<BillingItem> getItems() {
+	public Set<BillingItem> getItems() {
 		return items;
 	}
 	
