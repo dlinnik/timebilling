@@ -7,155 +7,142 @@
 	height: 40px;
 	padding: 20px;
 	background: #e4e4e4;
-		
 	.search {
-        float: left;
-        position: relative;
-        width: 240px;
+		float: left;
+		position: relative;
+		width: 240px;
 		height: 40px;
 		background: #fff;
 		border: 1px solid #bbb;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
-		
 		input {
-		    width: 194px;
-		    height:38px;
-		    font: 15px/38px Arial,Helvetica,sans-serif;
-		    text-indent: 12px;
-		    border: 0;
-		    background: none;
-		    }
-		 
-		 button {
-		    position: absolute;
-		    right: 0;
-		    top: 0;
-		    margin: 0;
-		    padding: 0;
-		    width: 40px;
-		    height: 40px;
-		    border:0;
-		    background: url(../images/icon-search.png) 9px 11px no-repeat;
-		    }
-		 }
-	
-	.date-period {
-	     position: relative;
-	     float: left;
-	     margin-left: 38px;
-	     height: 40px;
-	     font: 16px/39px 'open_sansbold';
-	     color: #393a44;
-	     
-	     .icon-edit {
-	         margin: -3px 0 0 6px;
-	         }
-	    
-	     .popup {
-	         left:50%;
-	         top:50%;
-	         margin:-55px 0 0 -266px;
-	         white-space: nowrap;
-    	    
-    	    .calendar {
-    	        margin-right: 20px;
-    	        display: inline-block;
-    	        }
-    	    
-    	    .ok-btn {
-    	        margin: -5px 0 -10px;
-    	        }
-	         }
-	    }
-	
+			width: 194px;
+			height: 38px;
+			font: 15px / 38px Arial, Helvetica, sans-serif;
+			text-indent: 12px;
+			border: 0;
+			background: none;
+		}
+
+		button {
+			position: absolute;
+			right: 0;
+			top: 0;
+			margin: 0;
+			padding: 0;
+			width: 40px;
+			height: 40px;
+			border: 0;
+			background: url(../images/icon-search.png) 9px 11px no-repeat;
+		}
 	}
+
+	.date-period {
+		position: relative;
+		float: left;
+		margin-left: 38px;
+		height: 40px;
+		font: 16px / 39px 'open_sansbold';
+		color: #393a44;
+		.icon-edit {
+			margin: -3px 0 0 6px;
+		}
+
+		.popup {
+			left: 50%;
+			top: 50%;
+			margin: -55px 0 0 -266px;
+			white-space: nowrap;
+			.calendar {
+				margin-right: 20px;
+				display: inline-block;
+			}
+
+			.ok-btn {
+				margin: -5px 0 -10px;
+			}
+		}
+	}
+}
 
 // таблица
 .table {
-    padding: 20px;
-    background: #fff;
-    box-sizing: border-box;
-    font-family: Arial,Helvetica,sans-serif;
-    color: #393944;
+	padding: 20px;
+	background: #fff;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #393944;
+	.thead {
+		display: table;
+		width: 100%;
+		> div {
+			display: table-cell;
+			vertical-align: middle;
+			padding-bottom: 8px;
+			.title {
+				display: inline-block;
+				vertical-align: middle;
+				padding: 0 9px;
+				font-size: 11px;
+				line-height: 20px;
+				background: #e4e4e4;
+			}
 
-    // thead
-    .thead {
-         display: table;
-         width: 100%;
-        
-        > div {
-            display: table-cell;
-            vertical-align: middle;
-            padding-bottom: 8px;
-            
-            .title {
-                display: inline-block;
-                vertical-align: middle;
-                padding: 0 9px;
-                font-size: 11px;
-                line-height: 20px;
-                background: #e4e4e4;
-                }
-            
-            [class^="icon-"], [class*=" icon-"] {
-                display: inline-block;
-                vertical-align: middle;
-                width: 19px;
-                height: 20px;
-                margin-left:16px;
-                }
-            .icon-time {
-                background: url(../images/icon-time.png) no-repeat;
-                }
-            .icon-money {
-                background: url(../images/icon-money.png) no-repeat;
-                }
-            }
-        }
+			[class ^= "icon-"] , [class *= " icon-"] {
+				display: inline-block;
+				vertical-align: middle;
+				width: 19px;
+				height: 20px;
+				margin-left: 16px;
+			}
 
-    // строка
-    & .row-content {
-        display: table;
-        width: 100%;
-        
-        & > div {
-            display: table-cell;
-            vertical-align: top;
-            padding:11px 0;
-            }
-        }
-    
-    // фон под таблицей
-    & .bg-table {
-        position: relative;
-        border-bottom: 3px solid #e3e3e3;
-        & > span {
-            position: absolute;
-		    bottom: -5px;
-		    left: 50px;
-		    background: url(../images/bg-posts.gif) no-repeat;
-		    width: 67px;
-		    height: 9px;
-            }
-        }
-    
-    // ссылка "показать еще"
-    & .more-posts{
+			.icon-time {
+				background: url(../images/icon-time.png) no-repeat;
+			}
+
+			.icon-money {
+				background: url(../images/icon-money.png) no-repeat;
+			}
+		}
+	}
+
+	& .row-content {
+		display: table;
+		width: 100%;
+		& > div {
+			display: table-cell;
+			vertical-align: top;
+			padding: 11px 0;
+		}
+	}
+
+	& .bg-table {
+		position: relative;
+		border-bottom: 3px solid #e3e3e3;
+		& > span {
+			position: absolute;
+			bottom: -5px;
+			left: 50px;
+			background: url(../images/bg-posts.gif) no-repeat;
+			width: 67px;
+			height: 9px;
+		}
+	}
+
+	& .more-posts {
 		display: inline-block;
 		padding: 20px 0 0 58px;
-	    }
-	    
-	 // сообщение при отсутствии данных для таблицы
-	 & .table-alert {
-	     padding: 24px 0;
-	     font: 30px/42px 'open_sanslight';
-	     color: #797979;
-	     text-align: center;
-	     }
-    
-    }
+	}
+
+	& .table-alert {
+		padding: 24px 0;
+		font: 30px / 42px 'open_sanslight';
+		color: #797979;
+		text-align: center;
+	}
+}
 
 // иконка редактирования записи
 .icon-edit {
@@ -170,7 +157,6 @@
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	
 	span {
 		display: block;
 		color: #fff;
@@ -178,21 +164,22 @@
 		width: 35px;
 		padding-top: 5px;
 		font-size: 13px;
-		}
-	
-	&:hover{
+	}
+
+	&:hover {
 		background: #5ea9dd;
 		-webkit-box-shadow: inset 0px -2px 0px #5498c6;
 		-moz-box-shadow: inset 0px -2px 0px #5498c6;
 		box-shadow: inset 0px -2px 0px #5498c6;
-		}
-	&:active{
+	}
+
+	&:active {
 		background: #227eb9;
 		-webkit-box-shadow: inset 0px 2px 0px #268cce;
 		-moz-box-shadow: inset 0px 2px 0px #268cce;
 		box-shadow: inset 0px 2px 0px #268cce;
-		}
 	}
+}
 
 // Блок текстовой части календаря
 .calendar {
@@ -206,8 +193,7 @@
 	border-radius: 4px;
 	outline: none;
 	height: 18px;
-	font: 15px/18px Arial, Helvetica, sans-serif;
-		
+	font: 15px / 18px Arial, Helvetica, sans-serif;
 	input[type="text"] {
 		-webkit-border-radius: 0px;
 		-moz-border-radius: 0px;
@@ -220,57 +206,55 @@
 		color: #393a44;
 		text-align: center;
 		&:first-child {
-			border:none;
-		    }
-		 &.day {
-		    font-weight: bold;
-		    }
-	    }
-		
-	// Кнопки открытия календаря
-	.icon-calendar{
+			border: none;
+		}
+
+		&.day {
+			font-weight: bold;
+		}
+	}
+
+	.icon-calendar {
 		width: 21px;
 		height: 20px;
 		background: url(../images/icon-calendar.gif) no-repeat;
 		display: inline-block;
 		vertical-align: middle;
-		margin:-2px 0 2px;
+		margin: -2px 0 2px;
 		text-indent: -9999px;
-	    }
-	
-	// Блок календаря
-	.calendar-holder{
+	}
+
+	.calendar-holder {
 		display: none;
 		position: absolute;
 		top: 38px;
 		left: 50px;
-	    }
 	}
+}
 
 // всплывающее окно
 .popup {
-    position: absolute;
-    z-index: 10;
-    padding: 5px;
-    background: rgba(0,0,0,.3);
+	position: absolute;
+	z-index: 10;
+	padding: 5px;
+	background: rgba(0, 0, 0, .3);
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	
 	> div {
-	    padding: 30px;
-	    background: #fff;
-	    -webkit-border-radius: 4px;
-	    -moz-border-radius: 4px;
-	    border-radius: 4px;
-	    }
-    }
+		padding: 30px;
+		background: #fff;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+}
 
 // синяя кнопка
 .bl-btn {
 	display: inline-block;
 	background: #50a1d7;
-	font: 16px/48px 'open_sansregular', sans-serif;
+	font: 16px / 48px 'open_sansregular', sans-serif;
 	text-align: center;
 	text-decoration: none;
 	color: #fff;
@@ -281,8 +265,7 @@
 	-webkit-box-shadow: inset 0px -2px 0px #4891c1;
 	-moz-box-shadow: inset 0px -2px 0px #4891c1;
 	box-shadow: inset 0px -2px 0px #4891c1;
-
-	&:hover{
+	&:hover {
 		color: #fff;
 		background: #5ea9dd;
 		-webkit-box-shadow: inset 0px -2px 0px #5498c6;
@@ -290,136 +273,114 @@
 		box-shadow: inset 0px -2px 0px #5498c6;
 	}
 
-	&:active{
+	&:active {
 		background: #227eb9;
 		-webkit-box-shadow: inset 0px 2px 0px #268cce;
 		-moz-box-shadow: inset 0px 2px 0px #268cce;
 		box-shadow: inset 0px 2px 0px #268cce;
 	}
-    }
+}
+
 .ok-btn {
-    width: 70px;
-    height: 50px;
-    }
+	width: 70px;
+	height: 50px;
+}
 
 //---------------- правила для этой страницы
 .billing-page {
-    // thead таблицы
-    .thead > div:nth-of-type(1),
-    .item > .title {
-        width: 445px;
-        }
-    
-    // ширина колонок
-    .thead > div:nth-of-type(2),
-    .item > .row-content > div:nth-of-type(1) {
-        width: 124px;
-        }
-    
-    .thead > div:nth-of-type(3),
-    .item > .row-content > div:nth-of-type(2) {
-        width: 92px;
-        }
-    
-    .thead > div:nth-of-type(4),
-    .item > .row-content > div:nth-of-type(3) {
-        width: 92px;
-        }
-    
-    .thead > div:nth-of-type(5),
-    .item > .row-content > div:nth-of-type(4) {
-        width: 100px;
-        padding-right: 55px;
-        }
-    
-    .thead > div:nth-of-type(6),
-    .item > .row-content > div:nth-of-type(5) {
-        width: 146px;
-        }
-    
-    .thead > div:nth-of-type(3),
-    .thead > div:nth-of-type(4) {
-        text-align: center;
-        }
-    
-    .thead > div:nth-of-type(5) {
-        text-align: right;
-        }
-    
-    // запись в таблице проект/клиент
-    .item {
-        padding-bottom: 20px;
-        
-        > .title {
-            float: left;
-            padding: 11px 0;
-            background: url(../images/bg-date.gif) repeat-x 0 24px;
-            
-            > span {
-                background: #fff;
-                padding-right: 6px;
-                .title-project {
-                    color: #393a44;
-                    }
-                }
-            }
-        
-        // строки с данными
-        > .row-content {
-            width: 595px;
-            float: right;
-            background: url(../images/bg-date.gif) repeat-x 0 24px;
-            
-            > div {
-                &:nth-of-type(1),
-                &:nth-of-type(4) {
-                    font-weight: bold;
-                    }
-                
-                &:nth-of-type(2),
-                &:nth-of-type(3) {
-                     color: #999;
-                     }
-    
-                &:nth-of-type(2),
-                &:nth-of-type(3),
-                &:nth-of-type(4) {
-                    text-align: right;
-                    }
+	.thead > div:nth-of-type(1) , .item > .title {
+		width: 445px;
+	}
 
-                &:nth-of-type(5) {
-                    background: #fff;
-                    }
-                
-                > span {
-                    background: #fff;
-                    padding: 0 6px;
-                    }
-                
-                }
-            
-            
-            .icon-reports {
-                display: inline-block;
-                width: 23px;
-                height: 18px;
-                margin-right: 6px;
-                background: url(../images/icon-information.png) 0 -18px no-repeat;
-                vertical-align: middle;
-                margin-top: -4px;
-                }
-            
-            }
-    
-        .title-client {
-            display: block;
-            padding-top: 4px;
-            font-size: 11px;
-            font-style: italic;
-            color: #666;
-            }
-        }
+	.thead > div:nth-of-type(2) , .item > .row-content > div:nth-of-type(1) {
+		width: 124px;
+	}
 
-    }
+	.thead > div:nth-of-type(3) , .item > .row-content > div:nth-of-type(2) {
+		width: 92px;
+	}
 
+	.thead > div:nth-of-type(4) , .item > .row-content > div:nth-of-type(3) {
+		width: 92px;
+	}
+
+	.thead > div:nth-of-type(5) , .item > .row-content > div:nth-of-type(4) {
+		width: 100px;
+		padding-right: 55px;
+	}
+
+	.thead > div:nth-of-type(6) , .item > .row-content > div:nth-of-type(5) {
+		width: 146px;
+	}
+
+	.thead > div:nth-of-type(3) , .thead > div:nth-of-type(4) {
+		text-align: center;
+	}
+
+	.thead > div:nth-of-type(5) {
+		text-align: right;
+	}
+
+	.item {
+		padding-bottom: 20px;
+		> .title {
+			float: left;
+			padding: 11px 0;
+			background: url(../images/bg-date.gif) repeat-x 0 24px;
+			> span {
+				background: #fff;
+				padding-right: 6px;
+				.title-project {
+					color: #393a44;
+				}
+			}
+		}
+
+		> .row-content {
+			width: 595px;
+			float: right;
+			background: url(../images/bg-date.gif) repeat-x 0 24px;
+			> div {
+				&:nth-of-type(1) , &:nth-of-type(4) {
+					font-weight: bold;
+				}
+
+				&:nth-of-type(2) , &:nth-of-type(3) {
+					color: #999;
+				}
+
+				&:nth-of-type(2) , &:nth-of-type(3) , &:nth-of-type(4) {
+					text-align: right;
+				}
+
+				&:nth-of-type(5) {
+					background: #fff;
+				}
+
+				> span {
+					background: #fff;
+					padding: 0 6px;
+				}
+			}
+
+			.icon-reports {
+				display: inline-block;
+				width: 23px;
+				height: 18px;
+				margin-right: 6px;
+				background: url(../images/icon-information.png) 0 -18px no-repeat;
+				vertical-align: middle;
+				margin-top: -4px;
+			}
+		}
+
+		.title-client {
+			display: block;
+			padding-top: 4px;
+			font-size: 11px;
+			font-style: italic;
+			color: #666;
+		}
+	}
+}
 
