@@ -41,16 +41,20 @@
             <div><span class="title">К оплате</span></div>
             <div></div>
         </div>
-        <div ng-repeat="record in billing.items" class="item clearfix">
-            <div class="title">
-                <span class="title-project">{{record.project.name}}</span>
-                <span class="title-client">{{record.project.client}}</span>
+        <div ng-repeat="item in billing.items | orderBy:['year','month'] | groupBy:['project.id']" class="item clearfix">
+            <div ng-if="item.group_by_CHANGED" class="title">
+                <span class="title-project">{{item.project.name}}</span>
+                <span class="title-client">{{item.project.client}}</span>
             </div>
             <div class="row-content">
-                <div><span>{{record.month | monthName}}</span></div>
-                <div><span>{{record.timeSum}} Р</span></div>
-                <div><span>{{record.expSum}} Р</span></div>
-                <div><span>{{record.timeSum + record.expSum}} Р</span></div>
+                <div>
+                    <span>
+                        {{item.month | monthName}} {{item.year !== billing.items[$index - 1].year ? item.year : ''}}
+                    </span>
+                </div>
+                <div><span>{{item.timeSum}} Р</span></div>
+                <div><span>{{item.expSum}} Р</span></div>
+                <div><span>{{item.timeSum + item.expSum}} Р</span></div>
                 <div><span><a href="#"><span class="icon-reports"></span>Создать отчет</a></span></div>
             </div>
         </div>
