@@ -3,6 +3,7 @@ package ru.timebilling.model.domain;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,7 @@ public class Project extends AppAwareBaseEntity {
 	@Formula("(select count(r.id) from billingreport r where r.project_id = id)")
 	private int reportsCount;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade=CascadeType.PERSIST)
     //@JsonManagedReference
 	@JsonBackReference
 	private Set<Assignment> assignments;
@@ -96,4 +97,9 @@ public class Project extends AppAwareBaseEntity {
 		return reportsCount;
 	}
 
+	public void setAssignments(Set<Assignment> assignments) {
+		this.assignments = assignments;
+	}
+
+	
 }
