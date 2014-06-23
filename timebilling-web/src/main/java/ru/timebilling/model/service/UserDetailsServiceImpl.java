@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import ru.timebilling.model.AppNameSupplier;
+import ru.timebilling.model.domain.Role;
 import ru.timebilling.model.domain.User;
 import ru.timebilling.model.domain.UserRoleEnum;
 import ru.timebilling.model.repository.UserRepository;
@@ -107,6 +108,25 @@ public class UserDetailsServiceImpl implements UserDetailsService{
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
+    }
+    
+    public User createNewUser(String userName, String email){
+		User newUser = new User();
+		newUser.setUsername(userName);
+		newUser.setEmail(email);
+		
+		Role r = new Role();
+		r.setRole(2);
+		newUser.setRole(r);
+		
+		//поменять когда будет процедура регистрации
+		newUser.setPassword("passw0rd");
+		newUser.setAccountExpired(false);
+		newUser.setAccountLocked(false);
+		newUser.setEnabled(true);
+		
+		return userRepository.save(newUser);
+
     }
 
 	

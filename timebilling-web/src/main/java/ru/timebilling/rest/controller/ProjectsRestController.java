@@ -60,13 +60,23 @@ public class ProjectsRestController extends BaseAPIController{
 		return projectsRepository.findByNameStartingWithOrClientStartingWith(name, name);
 	}
 	
-	@RequestMapping(value="/project", method = RequestMethod.POST, 
+	@RequestMapping(value="/admin/project", method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public Project createProject(@RequestBody ProjectDetails project) throws ParseException, ApplicationException {    
-		return projectsRepository.save(projectConverter.toEntity(project));
+	public ProjectDetails createProject(@RequestBody ProjectDetails project) throws ApplicationException {    
+		return 
+				projectConverter.toDTO(
+						projectsRepository.save(projectConverter.toEntity(project)));
 	}
 	
+	@RequestMapping(value = "/admin/project/{projectId}", 
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ProjectDetails adminProject(Model model, @PathVariable("projectId") Long id) {
+		return projectConverter.toDTO(projectsRepository.findOne(id));
+	}
+
 	
 	
 }

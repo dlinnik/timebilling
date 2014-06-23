@@ -1,6 +1,7 @@
 package ru.timebilling.model.service.conversion;
 
 import ru.timebilling.model.domain.BaseEntity;
+import ru.timebilling.model.service.ApplicationException;
 
 /**
  * defines contract to convert Entity to DTO and vice versa
@@ -11,7 +12,7 @@ import ru.timebilling.model.domain.BaseEntity;
  */
 public interface Converter <E extends BaseEntity, V>{
 	
-	E toEntity(V v);
+	E toEntity(V v) throws ApplicationException;
 	
 	V toDTO(E e);
 
