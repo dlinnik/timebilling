@@ -37,7 +37,7 @@ public class Project extends AppAwareBaseEntity {
 	@Formula("(select count(r.id) from billingreport r where r.project_id = id)")
 	private int reportsCount;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade=CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade={CascadeType.PERSIST, CascadeType.MERGE})
     //@JsonManagedReference
 	@JsonBackReference
 	private Set<Assignment> assignments;
