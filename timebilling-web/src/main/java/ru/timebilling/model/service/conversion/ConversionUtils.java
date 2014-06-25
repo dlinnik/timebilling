@@ -43,6 +43,11 @@ public class ConversionUtils {
 		  
 		  return d2;
 	  }
+	  
+		public static String wrapForLikeClause(String s){
+			return "%" + s + "%";
+		}
+
 
 
 }
