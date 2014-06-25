@@ -1,0 +1,70 @@
+<div class="view-page report-page">
+    <ul class="breadcrumbs">
+        <li><a href="#/billing">Биллинг и отчеты</a></li>
+        <li>{{report.project.name}}</li>
+    </ul>
+    <div class="page-title clearblock">
+        <div class="report-period">
+            <div>Период отчета (31 день)</div>
+            <div>{{reportDates.startDate}} - {{reportDates.endDate}}</div>
+        </div>
+        <h1>{{report.project.name}}</h1>
+    </div>
+    <div class="content">
+        <div class="report-from">Отчет от {{reportDates.creationDate}} г.</div>
+        <div class="table-header">
+            Оказанные услуги
+        </div>
+        <table class="table table-condensed">
+            <tr >
+                <th class="col-md-2">Дата</th>
+                <th class="col-md-2">Сотрудник</th>
+                <th class="col-md-3">Комментарий</th>
+                <th class="col-md-3" colspan="3">Время (ч.) и стоимость</th>
+            </tr>
+            <tr ng-repeat="item in spents.content">
+                <td class="col-md-2">{{item.date}}</td>
+                <td class="col-md-2 with-underline">
+                    <div class="without-underline">{{item.userScreenName}}</div>
+                </td>
+                <td class="col-md-3 with-underline">
+                    <div class="without-underline">{{item.comment}}</div>
+                </td>
+                <td class="col-md-1 with-underline">
+                    <div class="without-underline">{{item.value}}</div>
+                </td>
+                <td class="col-md-1">0 Р</td>
+                <td class="col-md-1">
+                    <div class="remove-item">×</div>
+                </td>
+            </tr>
+        </table>
+        <div class="total-part-money">Всего указано услуг на сумму: {{report.totalServicesMoney || 0}} Р</div>
+        <div class="table-header">
+            Понесенны расходы
+        </div>
+        <table class="table table-condensed">
+            <tr >
+                <th class="col-md-2">Дата</th>
+                <th class="col-md-2">Сотрудник</th>
+                <th class="col-md-3">Комментарий</th>
+                <th class="col-md-3" colspan="2">Сумма</th>
+            </tr>
+            <tr ng-repeat="item in costs.content">
+                <td class="col-md-2">{{item.date}}</td>
+                <td class="col-md-2 with-underline">
+                    <div class="without-underline">{{item.userScreenName}}</div>
+                </td>
+                <td class="col-md-3 with-underline">
+                    <div class="without-underline">{{item.comment}}</div>
+                </td>
+                <td class="col-md-1">{{item.value}} Р</td>
+                <td class="col-md-1">
+                    <div class="remove-item">×</div>
+                </td>
+            </tr>
+        </table>
+        <div class="total-part-money">Всего понесено расходов: {{report.totalExpensesMoney || 0}} Р</div>
+        <div class="total-money">Итого, к оплате по отчету: {{report.totalMoney}} Р</div>
+    </div>
+</div>

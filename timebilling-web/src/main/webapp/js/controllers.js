@@ -81,8 +81,7 @@ angular.module('myApp.controllers', [])
     };
 
     $scope.onAddRecord = function() {
-      var m = utils.monthForField($scope.month);
-      var date = new Date($scope.year, m, $scope.day);
+      var date = new Date($scope.year, ($scope.month - 1), $scope.day);
       var comment = $scope.commentAdd;
       var value = $scope.valueAdd;
 
@@ -167,6 +166,57 @@ angular.module('myApp.controllers', [])
 		};
 		
 	})
-	.controller('billingCtrl', function($scope, billingFactory) {
+	.controller('billingCtrl', function($location, $scope, billingFactory, reportFactory) {
 		$scope.billing = billingFactory.query();
-	});
+
+    $scope.createReport = function(id, year, month) {
+      reportFactory.create({
+          project: id,
+          from: year + '-' + month + '-' + '01',
+          to: (month == 12 ? year + 1 : year) + '-' + (month == 12 ? '01' : month + 1) + '-' + '01'
+        }, function(report) {
+          $location.path('billing/report/' + report.id);
+        }
+      );
+    }
+	})
+  .controller('reportCtrl', ['$routeParams', '$scope', 'reportFactory', 'recordFactory', 'utils',
+    function($routeParams, $scope, reportFactory, recordFactory, utils) {
+      var id = $routeParams.id;
+
+      reportFactory.query({ id: id }).$promise.then(function(report) {
+        $scope.report = report;
+
+        var reportDatesObjs = {
+          creationDate: new Date(utils.parseDate(report.creationDate)),
+          startDate: new Date(utils.parseDate(report.startDate)),
+          endDate: new Date(utils.parseDate(report.endDate))
+        };
+
+        $scope.reportDates = {
+          creationDate: reportDatesObjs.creationDate.getDate() + ' ' +
+                        $.datepicker.regional['ru'].monthNames[reportDatesObjs.creationDate.getMonth()] + ' ' +
+                        reportDatesObjs.creationDate.getFullYear(),
+          startDate:  reportDatesObjs.startDate.getDate() + ' ' +
+                      $.datepicker.regional['ru'].monthNames[reportDatesObjs.startDate.getMonth()] + ' ' +
+                      reportDatesObjs.startDate.getFullYear(),
+          endDate: reportDatesObjs.endDate.getDate() + ' ' +
+                   $.datepicker.regional['ru'].monthNames[reportDatesObjs.endDate.getMonth()] + ' ' +
+                   reportDatesObjs.endDate.getFullYear()
+        }
+
+
+        recordFactory.getSpents()
+          .query({ project: report.project.id, report: id }).$promise.then(function(spents) {
+            $scope.spents = spents;
+          }
+        );
+        recordFactory.getCosts()
+          .query({ project: report.project.id, report: id }).$promise.then(function(costs) {
+            $scope.costs = costs;
+          }
+        );
+      });
+
+    }
+  ]);

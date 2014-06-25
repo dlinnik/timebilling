@@ -1,0 +1,71 @@
+.report-page {
+  .report-period {
+    float: right;
+  }
+  .content {
+    background: #ffffff;
+    margin: 20px 0 0;
+    padding: 50px 20px;
+    .report-from {
+      font-size: 50px;
+      margin: 0 0 50px;
+      text-align: center;
+    }
+    .table-header {
+      color: #3a3c44;
+      font-size: 20px;
+      text-align: center;
+      overflow: hidden;
+      background-color: #e4e4e4;
+      height: 20px;
+      padding: 30px 20px;
+      margin: 0 0 20px;
+    }
+    .table{
+      tr {
+        td {
+          border-top: none;
+        }
+        .with-underline {
+          background: url(http://app1.localhost:8080/images/bg-date.gif) repeat-x 0 23px;
+          .without-underline {
+            display: inline-block;
+            background: #ffffff;
+            padding: 3px 3px 0 5px;
+            margin: 0 0 0 -5px;
+          }
+        }
+      }
+    }
+    .total-part-money {
+      border-top: 3px solid #e4e4e4;
+      color: #3a3c44;
+      font-size: 20px;
+      text-align: right;
+      margin: 10px 0;
+      padding: 30px 0 40px;
+    }
+    .total-money {
+      border-top: 3px solid #e4e4e4;
+      color: #3a3c44;
+      font-size: 30px;
+      text-align: right;
+      margin: 10px 0 0;
+      padding: 30px 0 0;
+    }
+    .remove-item {
+      color: #999999;
+      cursor: pointer;
+      border: 1px solid #999999;
+      border-radius: 50%;
+      font-size: 20px;
+      text-align: center;
+      height: 27px;
+      width: 27px;
+      &:hover {
+        color: #ff4940;
+        border-color: #ff4940;
+      }
+    }
+  }
+}

@@ -49,13 +49,19 @@
             <div class="row-content">
                 <div>
                     <span>
-                        {{item.month | monthName}} {{item.year !== billing.items[$index - 1].year ? item.year : ''}}
+                        {{(item.month - 1) | monthName}} {{$index !== 0 && item.year !== billing.items[$index - 1].year ? item.year : ''}}
                     </span>
                 </div>
                 <div><span>{{item.timeSum}} Р</span></div>
                 <div><span>{{item.expSum}} Р</span></div>
                 <div><span>{{item.timeSum + item.expSum}} Р</span></div>
-                <div><span><a href="#"><span class="icon-reports"></span>Создать отчет</a></span></div>
+                <div>
+                    <span>
+                        <a ng-click="createReport(item.project.id, item.year, item.month)">
+                            <span class="icon-reports"></span>Создать отчет
+                        </a>
+                    </span>
+                </div>
             </div>
         </div>
 

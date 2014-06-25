@@ -14,6 +14,7 @@ angular.module('myApp', [
     .when('/project/:projectId', {templateUrl: 'partials/project.html', controller: 'projectCtrl'})
     .when('/billing', {templateUrl: 'partials/billing.html', controller: 'billingCtrl'})
     .when('/addProject', {templateUrl: 'partials/addProject.html', controller: 'addProjectCtrl'})
+    .when('/billing/report/:id', {templateUrl: 'partials/report.html', controller: 'reportCtrl'})
     .otherwise({redirectTo: '/project'});
 }]);
 
