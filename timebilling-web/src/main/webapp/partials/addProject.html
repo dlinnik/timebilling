@@ -1,33 +1,33 @@
-<div id="main" class="view-page">
+<div id="main" class="container addproject">
 	<ul class="breadcrumbs">
 		<li><a href="#/project">Проекты</a></li>
 		<li>Создание нового проекта</li>
 	</ul>
-	<div class="panel panel-default">
+	<div class="panel">
 		<div class="panel-body">
-			<div class="form-horizontal">
-				<div class="form-group">
-					<label class="col-md-2 control-label">Название проекта</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control"
-							placeholder="введите имя проекта">
+			<div class="row">
+				<div class="col-md-6 name-column">
+					<div class="name-label">
+						<label class="control-label">Название проекта</label>
 					</div>
+					<div class="desc-label">Название будет использовано только внутри системы и не будет отображаться в отчетах для клиента</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">Клиент</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control"
-							placeholder="укажите клиента">
-					</div>
+				<div class="col-md-6">
+					<input type="text" class="form-control" ng-model="projectName"
+						placeholder="введите имя проекта">
 				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">Тип проекта</label>
-					<div class="col-md-8">
-						<div class="checkbox">
-							<label> <input type="checkbox">Почасовка
-							</label>
-						</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 name-column">
+					<div class="name-label">
+						<label class="control-label">Клиент</label>
 					</div>
+					<div class="desc-label">Данные из этого поля отображаются в отчетах.
+						 Можно выбрать из уже имеющихся клиентов.</div>
+			 	</div>
+				<div class="col-md-6">
+					<input type="text" class="form-control" ng-model="client"
+						placeholder="укажите клиента">
 				</div>
 			</div>
 		</div>
@@ -37,15 +37,67 @@
 			<h3 class="panel-title">Сотрудники</h3>
 		</div>
 		<div class="panel-body">
-			<div class="form-horizontal">
-				<div class="form-group">
-					<div class="col-md-8">
-						<input type="text" class="form-control"
-							placeholder="введите имя проекта">
-					</div>
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-4">
+					<span class="head-label">Имя</span>
 				</div>
+				<div class="col-md-3">
+					<span class="head-label">Электронная почта</span>
+				</div>
+				<div class="col-md-2">
+					<span class="head-label">Ставка в час</span>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="row top10" ng-repeat="person in persons">
+				<div class="col-md-1"></div>
+				<div class="col-md-4">
+					<div class="dashed">
+						<span>{{person.name}}</span>
+					</div>				
+				</div>
+				<div class="col-md-3">
+					<div class="dashed">
+						<span>{{person.email}}</span>
+					</div>					
+				</div>
+				<div class="col-md-2">
+					<div class="dashed">
+						<span>{{person.rate}} р.</span>
+					</div>					
+				</div>
+				<div class="col-md-1">
+					<a href="#">Удалить</a>
+				</div>
+			</div>
+			<div class="row top30">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-4">
+					<input type="text" class="form-control" ng-model="name"
+						placeholder="введите имя сотрудника">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" ng-model="email"
+						placeholder="введите email">
+					<div class="top5">На почту сотрудника прийдет сообщение о добавлении в проект</div>
+				</div>
+				<div class="col-md-2">
+					<input type="text" class="form-control" ng-model="rate"
+						placeholder="ставка">					
+				</div>
+				<div class="col-md-1">
+					<button type="button" class="btn btn-success" ng-click="addPerson()">Добавить</button>
+				</div>			
 			</div>
 		</div>
 	</div>
-	
+	<div class="row btn-bk">
+		<div class="col-md-4"></div>
+		<button type="button" class="btn btn-lg btn-success col-md-4">Создать проект</button>
+		<div class="col-md-2"></div>
+		<button type="button" class="btn btn-lg btn-danger col-md-2">Отменить</button>
+	</div>
+	<div>footer</div>
 </div>
