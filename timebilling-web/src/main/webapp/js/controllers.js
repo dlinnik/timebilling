@@ -33,17 +33,47 @@ angular.module('myApp.controllers', [])
   .controller('projectListCtrl', function($scope, projectListFactory) {
     $scope.projects = projectListFactory.query();
   })
-  .controller('addProjectCtrl', function($scope, $routeParams, projectFactory) {
-	  // Отвечает за создание/редактирование записи	 
-	  $scope.addMode = true;
-	  $scope.persons = [];
+  .controller('manageProjectCtrl', function($scope, $routeParams, $location, projectCreateFactory, projectAdminFactory) { 
+	  $scope.project = [];
+	  $scope.project.id = 0;
+	  $scope.project.assignments = [];
+	  
+	  if ($routeParams.projectId != 0){
+		  $scope.project = projectAdminFactory.get( {projectId: $routeParams.projectId} );
+	  };
 	  
 	  $scope.addPerson = function(){
-		  $scope.persons.push({name: $scope.name, email: $scope.email, rate: $scope.rate});
-		  $scope.name = "";
-		  $scope.email = "";
+		  $scope.project.assignments.push({userName: $scope.userName, userEmail: $scope.userEmail, rate: $scope.rate});
+		  $scope.userName = "";
+		  $scope.userEmail = "";
 		  $scope.rate = "";
 	  };
+	  $scope.deletePerson = function(item){
+		  var index = $scope.project.assignments.indexOf(item);
+		  $scope.project.assignments.splice(index, 1); 	  
+	  };
+	  $scope.addProject = function(){
+		  projectCreateFactory.create({
+	          name : $scope.project.name,
+	          client : $scope.project.client,
+	          assignments : $scope.project.assignments
+		  }, function(data){
+			  $location.path('/project');
+		  });
+	  };
+	  $scope.saveProject = function(){
+		  projectCreateFactory.update({
+			  id : $scope.project.id,
+	          name : $scope.project.name,
+	          client : $scope.project.client,
+	          assignments : $scope.project.assignments
+		  }, function(data){
+			  $location.path('/project');
+		  });
+	  };
+	  $scope.cancel = function(){
+		  $location.path('/project');  
+	  }
   })
   .controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {
     $scope.mode = {
@@ -188,7 +218,7 @@ angular.module('myApp.controllers', [])
           $location.path('billing/report/' + report.id);
         }
       );
-    }
+    };
 	})
   .controller('reportCtrl', ['$routeParams', '$scope', 'reportFactory', 'recordFactory', 'utils',
     function($routeParams, $scope, reportFactory, recordFactory, utils) {
@@ -213,9 +243,7 @@ angular.module('myApp.controllers', [])
           endDate: reportDatesObjs.endDate.getDate() + ' ' +
                    $.datepicker.regional['ru'].monthNames[reportDatesObjs.endDate.getMonth()] + ' ' +
                    reportDatesObjs.endDate.getFullYear()
-        }
-
-
+        };
         recordFactory.getSpents()
           .query({ project: report.project.id, report: id }).$promise.then(function(spents) {
             $scope.spents = spents;

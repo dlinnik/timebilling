@@ -1,7 +1,8 @@
 <div id="main" class="container addproject">
 	<ul class="breadcrumbs">
 		<li><a href="#/project">Проекты</a></li>
-		<li>Создание нового проекта</li>
+		<li ng-show="project.id == 0">Создание нового проекта</li>
+		<li ng-show="project.id != 0">{{project.name}}</li>
 	</ul>
 	<div class="panel">
 		<div class="panel-body">
@@ -13,7 +14,7 @@
 					<div class="desc-label">Название будет использовано только внутри системы и не будет отображаться в отчетах для клиента</div>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" ng-model="projectName"
+					<input type="text" class="form-control" ng-model="project.name"
 						placeholder="введите имя проекта">
 				</div>
 			</div>
@@ -26,7 +27,7 @@
 						 Можно выбрать из уже имеющихся клиентов.</div>
 			 	</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" ng-model="client"
+					<input type="text" class="form-control" ng-model="project.client"
 						placeholder="укажите клиента">
 				</div>
 			</div>
@@ -50,16 +51,16 @@
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="row top10" ng-repeat="person in persons">
+			<div class="row top10" ng-repeat="person in project.assignments">
 				<div class="col-md-1"></div>
 				<div class="col-md-4">
 					<div class="dashed">
-						<span>{{person.name}}</span>
+						<span>{{person.userName}}</span>
 					</div>				
 				</div>
 				<div class="col-md-3">
 					<div class="dashed">
-						<span>{{person.email}}</span>
+						<span>{{person.userEmail}}</span>
 					</div>					
 				</div>
 				<div class="col-md-2">
@@ -68,18 +69,18 @@
 					</div>					
 				</div>
 				<div class="col-md-1">
-					<a href="#">Удалить</a>
+					<a href="" ng-click="deletePerson(record)">Удалить</a>
 				</div>
 			</div>
 			<div class="row top30">
 				<div class="col-md-1">
 				</div>
 				<div class="col-md-4">
-					<input type="text" class="form-control" ng-model="name"
+					<input type="text" class="form-control" ng-model="userName"
 						placeholder="введите имя сотрудника">
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" ng-model="email"
+					<input type="text" class="form-control" ng-model="userEmail"
 						placeholder="введите email">
 					<div class="top5">На почту сотрудника прийдет сообщение о добавлении в проект</div>
 				</div>
@@ -95,9 +96,10 @@
 	</div>
 	<div class="row btn-bk">
 		<div class="col-md-4"></div>
-		<button type="button" class="btn btn-lg btn-success col-md-4">Создать проект</button>
+		<button ng-show="project.id == 0" type="button" class="btn btn-lg btn-success col-md-4" ng-click="addProject()">Создать проект</button>
+		<button ng-show="project.id != 0" type="button" class="btn btn-lg btn-success col-md-4" ng-click="saveProject()">Сохранить проект</button>
 		<div class="col-md-2"></div>
-		<button type="button" class="btn btn-lg btn-danger col-md-2">Отменить</button>
+		<button type="button" class="btn btn-lg btn-danger col-md-2" ng-click="cancel()">Отменить</button>
 	</div>
 	<div>footer</div>
 </div>

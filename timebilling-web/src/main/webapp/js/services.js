@@ -18,6 +18,17 @@ angular.module('myApp.services', ['ngResource'])
       query: { method: 'GET', isArray: true }
     });
   })
+  .factory('projectCreateFactory', function($resource) {
+	return $resource('/api/admin/project', {}, {
+		create: { method: 'POST'},
+		update: { method: 'PUT'}
+	});
+  })
+  .factory('projectAdminFactory', function($resource) {
+	return $resource('/api/admin/project/:projectId', {}, {
+		get: { method: 'GET'},
+	});
+  })
   .factory('billingFactory', function($resource) {
     return $resource('api/billing', {}, {
       query: { method: 'GET',	isArray: false }
