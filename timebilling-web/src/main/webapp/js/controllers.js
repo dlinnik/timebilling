@@ -33,7 +33,17 @@ angular.module('myApp.controllers', [])
   .controller('projectListCtrl', function($scope, projectListFactory) {
     $scope.projects = projectListFactory.query();
   })
-  .controller('addProjectCtrl', function($scope, projectFactory) {
+  .controller('addProjectCtrl', function($scope, $routeParams, projectFactory) {
+	  // Отвечает за создание/редактирование записи	 
+	  $scope.addMode = true;
+	  $scope.persons = [];
+	  
+	  $scope.addPerson = function(){
+		  $scope.persons.push({name: $scope.name, email: $scope.email, rate: $scope.rate});
+		  $scope.name = "";
+		  $scope.email = "";
+		  $scope.rate = "";
+	  };
   })
   .controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {
     $scope.mode = {
