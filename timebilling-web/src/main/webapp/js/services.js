@@ -23,15 +23,21 @@ angular.module('myApp.services', ['ngResource'])
       query: { method: 'GET',	isArray: false }
     });
   })
+  .factory('reportFactory', function($resource) {
+    return $resource('api/billing/report/:id', { }, {
+        create: { method: 'POST', params: { project: '@project', from: '@from', to: '@to' } },
+        query: { method: 'GET', isArray: false }
+    });
+  })
   .factory('recordFactory', function($resource) {
     return {
       getSpents: function() {
-        return $resource('api/services', {}, {
+        return $resource('api/services', { }, {
           query: { method: 'GET',	isArray: false }
         });
       },
       getCosts: function() {
-        return $resource('api/expenses', {}, {
+        return $resource('api/expenses', { }, {
           query: { method: 'GET', isArray: false }
         });
       },

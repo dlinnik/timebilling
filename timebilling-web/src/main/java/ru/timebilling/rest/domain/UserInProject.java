@@ -4,11 +4,18 @@ import java.math.BigDecimal;
 
 public class UserInProject {
 	
+	private Long id;
 	private Long userId;
 	private String userName;
 	private String userEmail;
 	private BigDecimal rate;
-	
+		
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getUserId() {
 		return userId;
 	}
