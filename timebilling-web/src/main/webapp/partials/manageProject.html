@@ -77,11 +77,11 @@
 				</div>
 				<div class="col-md-4">
 					<input type="text" class="form-control" ng-model="userName"
-						placeholder="введите имя сотрудника">
+						placeholder="введите имя сотрудника" typeahead="user.username for user in getUsers($viewValue, null)" typeahead-on-select="userEmail = $item.email">
 				</div>
 				<div class="col-md-3">
 					<input type="text" class="form-control" ng-model="userEmail"
-						placeholder="введите email">
+						placeholder="введите email" typeahead="user.email for user in getUsers(null, $viewValue)" typeahead-on-select="userName = $item.username">
 					<div class="top5">На почту сотрудника прийдет сообщение о добавлении в проект</div>
 				</div>
 				<div class="col-md-2">

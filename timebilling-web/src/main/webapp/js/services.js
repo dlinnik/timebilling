@@ -87,4 +87,14 @@ angular.module('myApp.services', ['ngResource'])
         }
       }
     };
+  })
+  .factory('userFactory', function($http) {
+    return {
+      query: function(name, email) { 
+    	  	return $http.get('api/users/search', {params: { name: name, email: email} })
+    	  				.then( function(result){
+    	  					return result.data;
+    	  				});
+      }
+  	};
   });

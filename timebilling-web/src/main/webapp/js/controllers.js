@@ -29,16 +29,19 @@ angular.module('myApp.controllers', [])
 			$scope.activePage = 'billing';
 		};
 		    
-	})
+  })
   .controller('projectListCtrl', function($scope, projectListFactory) {
     $scope.projects = projectListFactory.query();
   })
-  .controller('manageProjectCtrl', function($scope, $routeParams, $location, projectCreateFactory, projectAdminFactory) { 
-	  $scope.project = [];
-	  $scope.project.id = 0;
-	  $scope.project.assignments = [];
+  .controller('manageProjectCtrl', function($scope, $routeParams, $location, projectCreateFactory, projectAdminFactory, userFactory) { 
+	 	 $scope.project = {
+			  	id: 0,
+			  	name: '',
+			  	client: '',
+			  	assignments: new Array()
+	  };			  	
 	  
-	  if ($routeParams.projectId != 0){
+	  if ($routeParams.projectId != null){
 		  $scope.project = projectAdminFactory.get( {projectId: $routeParams.projectId} );
 	  };
 	  
@@ -73,7 +76,11 @@ angular.module('myApp.controllers', [])
 	  };
 	  $scope.cancel = function(){
 		  $location.path('/project');  
-	  }
+	  };
+	
+	  $scope.getUsers = function(name, email){
+		 return userFactory.query(name, email);
+	  };
   })
   .controller('projectCtrl', function($scope, $routeParams, recordFactory, projectFactory, utils) {
     $scope.mode = {
