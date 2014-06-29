@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,9 +68,18 @@ public class RecordsController extends BaseAPIController{
 
 	@RequestMapping(value="service", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public Record updateService( @RequestBody Record record) throws ParseException, ApplicationException {    
+	@Deprecated
+	public Record updateService(@RequestBody Record record) throws ParseException, ApplicationException {    
 		return projectServicesService.save(record);
 	}
+	
+	@RequestMapping(value="service/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Record updateService(@PathVariable("id") Long id, @RequestBody Record record) throws ParseException, ApplicationException {
+		record.setId(id);
+		return projectServicesService.save(record);
+	}
+
 
 	@RequestMapping(value="service", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -86,10 +96,18 @@ public class RecordsController extends BaseAPIController{
 
 	@RequestMapping(value="expense", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
+	@Deprecated
 	public Record updateExpense( @RequestBody Record record) throws ParseException, ApplicationException {    
 		return projectExpensesService.save(record);
 	}
-	
+
+	@RequestMapping(value="expense/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Record updateExpense(@PathVariable("id") Long id, @RequestBody Record record) throws ParseException, ApplicationException {
+		record.setId(id);	
+		return projectExpensesService.save(record);
+	}
+
 	@RequestMapping(value="expense", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteExpense(@RequestParam("id") Long id) throws ParseException {    

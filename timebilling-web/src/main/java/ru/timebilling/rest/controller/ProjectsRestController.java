@@ -68,11 +68,25 @@ public class ProjectsRestController extends BaseAPIController{
 	@RequestMapping(value="/admin/project", method = RequestMethod.PUT, 
 			produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
 	@ResponseBody
-	public ProjectDetails updateProject(@RequestBody ProjectDetails project) throws ApplicationException {    
+	@Deprecated
+	public ProjectDetails updateProject(@RequestBody ProjectDetails project) throws ApplicationException {   
 		return 
 				projectConverter.toDTO(
 						projectsRepository.save(projectConverter.toEntity(project)));
 	}
+	
+	@RequestMapping(value="/admin/project/{projectId}", method = RequestMethod.PUT, 
+			produces = MediaType.APPLICATION_JSON_VALUE, headers = {"Content-type=application/json"})
+	@ResponseBody
+	public ProjectDetails updateProject(@PathVariable("projectId") Long id, @RequestBody ProjectDetails project) throws ApplicationException {
+		
+		project.setId(id);
+		
+		return 
+				projectConverter.toDTO(
+						projectsRepository.save(projectConverter.toEntity(project)));
+	}
+
 	
 	
 	@RequestMapping(value = "/admin/project/{projectId}", 
