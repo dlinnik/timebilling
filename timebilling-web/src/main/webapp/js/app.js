@@ -15,7 +15,7 @@ angular.module('myApp', [
     .when('/project/:projectId', {templateUrl: 'partials/project.html', controller: 'projectCtrl'})
     .when('/billing', {templateUrl: 'partials/billing.html', controller: 'billingCtrl'})
     .when('/report', {templateUrl: 'partials/reportList.html', controller: 'reportListCtrl'})
-    .when('/billing/report/:id', {templateUrl: 'partials/report.html', controller: 'reportCtrl'})
+    .when('/billing/report/:id', {templateUrl: 'mockups/reportMockup.html', controller: 'reportCtrl'})
     .when('/manageProject', {templateUrl: 'partials/manageProject.html', controller: 'manageProjectCtrl'})
     .when('/manageProject/:projectId', {templateUrl: 'partials/manageProject.html', controller: 'manageProjectCtrl'})
     .otherwise({redirectTo: '/project'});

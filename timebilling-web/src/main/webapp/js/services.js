@@ -37,7 +37,8 @@ angular.module('myApp.services', ['ngResource'])
   .factory('reportFactory', function($resource) {
     return $resource('api/billing/report/:id', {}, {
         create: { method: 'POST', params: { project: '@project', from: '@from', to: '@to' } },
-        query: { method: 'GET', isArray: false }
+        query: { method: 'GET', isArray: false },
+        remove: { method: 'DELETE' }
     });
   })
   .factory('reportListFactory', function($resource) {

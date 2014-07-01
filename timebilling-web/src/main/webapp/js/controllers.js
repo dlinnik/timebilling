@@ -264,6 +264,12 @@ angular.module('myApp.controllers', [])
       });
     }
   ])
-  .controller('reportListCtrl', function($scope, reportListFactory) {
+  .controller('reportListCtrl', function($scope, reportFactory, reportListFactory) {
 	  	$scope.reportList = reportListFactory.query();
+	  	$scope.remove = function(report){
+	  		reportFactory.remove({id: report.id}, function(){
+	  			var index = $scope.reportList.indexOf(report);
+	  			$scope.reportList.splice(index, 1);
+	  		});	
+	  	};
   });
