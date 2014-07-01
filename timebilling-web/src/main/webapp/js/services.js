@@ -35,8 +35,13 @@ angular.module('myApp.services', ['ngResource'])
     });
   })
   .factory('reportFactory', function($resource) {
-    return $resource('api/billing/report/:id', { }, {
+    return $resource('api/billing/report/:id', {}, {
         create: { method: 'POST', params: { project: '@project', from: '@from', to: '@to' } },
+        query: { method: 'GET', isArray: false }
+    });
+  })
+  .factory('reportListFactory', function($resource) {
+    return $resource('api/billing/reports', {}, {
         query: { method: 'GET', isArray: false }
     });
   })

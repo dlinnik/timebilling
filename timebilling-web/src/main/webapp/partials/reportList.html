@@ -1,0 +1,63 @@
+<div id="main" class="container report-list">
+	<div class="button-panel">
+		<div class="switch">
+			<a href="#/billing">Биллинг<sup>4</sup></a> 
+			<a href="#/report" class="active">Отчеты<sup>2</sup></a>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		</div>
+		<div class="panel-body font-arial">
+			<div class="row">
+				<div class="col-md-4">
+					<span class="head-label">Проект и клиент</span>
+				</div>
+				<div class="col-md-1 wd30"></div>
+				<div class="col-md-3">
+					<span class="head-label">Период</span>
+				</div>
+				<div class="col-md-1 wd100">
+					<span class="icon-time"></span>
+				</div>
+				<div class="col-md-1 wd100">
+					<span class="icon-money"></span>
+				</div>
+				<div class="col-md-1 wd100">
+					<span class="head-label">к оплате</span>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="row top20" ng-repeat="report in reportList.content">
+				<div class="col-md-1 wd30">
+					<span class="icon-report"></span>
+				</div>
+				<div class="col-md-4">
+					<div class="dashed">
+						<span class="project">{{report.project.name}}</span>
+					</div>
+					<div> 
+						<span class="client">{{report.project.client}}</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="dashed">
+						<span>{{report.startDate}} - {{report.endDate}}</span>
+					</div>
+				</div>
+				<div class="col-md-1 wd100">
+					<span>{{report.totalServiceMoney}} Р</span>
+				</div>
+				<div class="col-md-1 wd100">
+					<span>{{report.totalExpensesMoney}} Р</span>
+				</div>
+				<div class="col-md-1 wd100">
+					<span><b>{{report.totalMoney}} Р</b></span>
+				</div>
+				<div class="col-md-1">
+					<a href="">Удалить</a>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>

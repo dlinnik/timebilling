@@ -262,6 +262,8 @@ angular.module('myApp.controllers', [])
           }
         );
       });
-
     }
-  ]);
+  ])
+  .controller('reportListCtrl', function($scope, reportListFactory) {
+	  	$scope.reportList = reportListFactory.query();
+  });
