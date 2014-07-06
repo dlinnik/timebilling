@@ -123,9 +123,17 @@ public class BillingController extends BaseAPIController{
 
 	@RequestMapping(value="/billing/report", method = RequestMethod.DELETE)
 	@ResponseBody
+	@Deprecated
 	public void deleteBillingReport(@RequestParam("id") Long id) throws ParseException {    
 		billingService.delete(id);
 	}
+	
+	@RequestMapping(value="/billing/report/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteBillingReportById(@PathVariable("id") Long id) throws ParseException {    
+		billingService.delete(id);
+	}
+	
 
 	@RequestMapping(value="/billing/period", method = RequestMethod.GET)
 	@ResponseBody

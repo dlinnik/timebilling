@@ -83,7 +83,14 @@ public class RecordsController extends BaseAPIController{
 
 	@RequestMapping(value="service", method = RequestMethod.DELETE)
 	@ResponseBody
+	@Deprecated
 	public void deleteService(@RequestParam("id") Long id) throws ParseException {    
+		projectServicesService.delete(id);
+	}
+
+	@RequestMapping(value="service/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteServiceById(@PathVariable("id") Long id) throws ParseException {    
 		projectServicesService.delete(id);
 	}
 	
@@ -110,10 +117,16 @@ public class RecordsController extends BaseAPIController{
 
 	@RequestMapping(value="expense", method = RequestMethod.DELETE)
 	@ResponseBody
+	@Deprecated
 	public void deleteExpense(@RequestParam("id") Long id) throws ParseException {    
 		projectExpensesService.delete(id);
 	}
 
+	@RequestMapping(value="expense/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteExpenseById(@PathVariable("id") Long id) throws ParseException {    
+		projectExpensesService.delete(id);
+	}
 
 	
 }
