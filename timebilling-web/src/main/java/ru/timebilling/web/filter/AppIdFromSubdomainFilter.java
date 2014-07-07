@@ -51,7 +51,9 @@ public class AppIdFromSubdomainFilter implements Filter{
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) 
     		throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
-//        if(!request.getRequestURI().endsWith("/403") && !request.getRequestURI().startsWith("/resources")){
+        logger.info(request.getRequestURI());
+        //TODO: нужен более изящный способ отключить этот фильтр для public api
+        if(!request.getRequestURI().startsWith("/public")){
         
 	        String appId = getAppNameFromRequest(request);
 	        
@@ -65,7 +67,7 @@ public class AppIdFromSubdomainFilter implements Filter{
 	        	HttpServletResponse httpResponse = (HttpServletResponse) res;
 	        	httpResponse.sendRedirect("/403");
 */	        	return;
-//	        }
+	        }
         }
         
         chain.doFilter(req, res);

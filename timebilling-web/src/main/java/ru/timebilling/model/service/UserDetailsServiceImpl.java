@@ -110,13 +110,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         return authorities;
     }
     
-    public User createNewUser(String userName, String email){
+    public User createNewUser(String userName, String email, UserRoleEnum role){
 		User newUser = new User();
 		newUser.setUsername(userName);
 		newUser.setEmail(email);
 		
 		Role r = new Role();
-		r.setRole(2);
+		r.setRole(UserRoleEnum.ROLE_ADMIN.equals(role) ? 1 : 2);
 		newUser.setRole(r);
 		
 		//поменять когда будет процедура регистрации
@@ -126,7 +126,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		newUser.setEnabled(true);
 		
 		return userRepository.save(newUser);
+    	
+    }
 
+    public User createNewUser(String userName, String email){
+		return createNewUser(userName, email, UserRoleEnum.ROLE_USER);
     }
 
 	
