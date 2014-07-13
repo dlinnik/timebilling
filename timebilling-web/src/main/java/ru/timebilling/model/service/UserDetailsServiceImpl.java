@@ -117,10 +117,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		Role r = new Role();
 		r.setRole(UserRoleEnum.ROLE_ADMIN.equals(role) ? 1 : 2);
-		newUser.setRole(r);
+		newUser.setRole(r);		
+		newUser.setPassword(UtUtils.generateRandomString(8));
 		
 		//поменять когда будет процедура регистрации
-		newUser.setPassword("passw0rd");
 		newUser.setAccountExpired(false);
 		newUser.setAccountLocked(false);
 		newUser.setEnabled(true);
