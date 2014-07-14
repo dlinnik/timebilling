@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.timebilling.model.service.ApplicationException;
@@ -26,6 +27,13 @@ public class PublicController {
 			throws ApplicationException {    
 		
 		return appService.createApplication(appRegData);
+	}
+	
+    @RequestMapping(value="/appname", method=RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+	public String suggestAppName(@RequestParam(value="name", required=true) String name){
+    	return appService.suggestAppNameByScreenName(name);
 	}
 
 

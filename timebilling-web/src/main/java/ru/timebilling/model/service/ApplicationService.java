@@ -55,5 +55,17 @@ public class ApplicationService {
 		
 		return appData;
 	}
+	
+	public String suggestAppNameByScreenName(String screenName){
+		String appName = AppNameUtils.prepareAppName(screenName);
+		int ind = 0;
+		String appNameNext = appName;
+		
+		while(appRepository.findByName(appNameNext) != null){			
+			appNameNext = appName + ++ind;
+		}
+		
+		return appNameNext;
+	}
 
 }
