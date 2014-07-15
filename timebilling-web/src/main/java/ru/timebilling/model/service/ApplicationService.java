@@ -58,6 +58,10 @@ public class ApplicationService {
 	
 	public String suggestAppNameByScreenName(String screenName){
 		String appName = AppNameUtils.prepareAppName(screenName);
+		if(appName.length() == 0){
+			return appName;
+		}
+		
 		int ind = 0;
 		String appNameNext = appName;
 		
